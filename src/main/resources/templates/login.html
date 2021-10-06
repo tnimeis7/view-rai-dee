@@ -15,7 +15,7 @@
         </div>
         <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
             <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-                <h1><a th:href="/" >View Raidee</a></h1>
+                <h1><a th:href="@{/}" >View Raidee</a></h1>
             </div>
             <div class="formbg-outer">
                 <div class="formbg">
@@ -23,14 +23,14 @@
                         <span class="padding-bottom--15">login บัญชีของคุณ</span>
                         <form th:action="@{/login}" method="post" id="stripe-login">
                             <div class="field padding-bottom--24">
-                                <input type="text" id="usernameInput" name="username">
+                                <input type="text" id="usernameInput" name="username" placeholder="ชื่อผู้ใช้">
                             </div>
                             <div class="field padding-bottom--24">
 
-                                <input type="password" id="passwordInput" name="password">
+                                <input type="password" id="passwordInput" name="password" placeholder="รหัสผ่าน">
                                 <div class="grid--50-50">
                                     <div class="reset-pass">
-                                        <a th:href="#">ลืมรหัสผ่าน?</a>
+                                        <a class="keep-right padding-top--24" href="#">ลืมรหัสผ่าน?</a>
                                     </div>
                                 </div>
                             </div>
@@ -38,16 +38,18 @@
                                 <input type="submit" name="submit" value="เข้าสู่ระบบ">
                             </div>
                         </form>
-                        <div class="center">
+                        <div class="center label">
                             หรือเข้าสู่ระบบผ่านทาง
                         </div>
                         <div class="field padding-bottom--24">
-                            <a class="btn btn-primary" th:href="@{/oauth2/authorization/google}">Google</a>
-                            <a class="btn btn-primary">Facebook</a>
-                        </div>
-                        <hr>ถ้าคุณยังไม่มีบัญชี
-                        <div class="field padding-bottom--24">
-                            <a class="btn btn-primary" th:href="@{/signUp}">สมัครบัญชี</a>
+                            <button type="button" class="btn btn-primary" th:href="@{/oauth2/authorization/google}">Google</button>
+                            <button type="button" class="btn btn-primary" th:href="@{/oauth2/authorization/facebook}">Facebook</button>
+                        </div >
+                        <div class="center">
+                            <hr class="center label">ถ้าคุณยังไม่มีบัญชี
+                            <div class="field padding-bottom--24">
+                                <button type="button" class="btn btn-primary" th:href="@{/signUp}">สมัครบัญชี</button>
+                            </div>
                         </div>
                     </div>
                 </div>

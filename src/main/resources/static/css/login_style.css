@@ -166,3 +166,9 @@
       font-weight: 600;
       margin: 0 10px;
   }
+  .keep-right {
+      text-align: right;
+  }
+  .center {
+      text-align: center;
+  }
