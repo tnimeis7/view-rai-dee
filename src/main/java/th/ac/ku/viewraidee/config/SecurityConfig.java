@@ -14,8 +14,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 //หน้าเว็บไหนไม่ต้องล้อคอินก็เข้าได้มาเพิ่มตรงนี้ด้วย
-                .antMatchers("/", "/css/**", "/js/**").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers("/", "/css/**", "/js/**","/login","/signUp").permitAll()
+                .anyRequest().authenticated()
+
+        .and()
+                .oauth2Login()
+                .defaultSuccessUrl("/").permitAll()
+
+        .and()
+                .logout()
+                .logoutSuccessUrl("/").permitAll();
+
     }
 }
 
