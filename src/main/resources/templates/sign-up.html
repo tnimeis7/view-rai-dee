@@ -20,16 +20,24 @@
             <div class="formbg-outer">
                 <div class="formbg">
                     <div class="formbg-inner padding-horizontal--48">
-                        <center><h1><a th:href="@{/}" >View Raidee</a></h1></center>
+                        <div class="padding-bottom--24">
+                            <center><h1><a th:href="@{/}" >View Raidee</a></h1></center>
+                        </div>
                         <form th:action="@{/login}" method="post" id="stripe-login">
-                            <div class="field padding-bottom--24">
+                            <div class="field padding-bottom--15">
                                 <input type="text" id="usernameInput" name="username" placeholder="ชื่อผู้ใช้">
+                            </div>
+                            <div class="field padding-bottom--15">
                                 <input type="email" id="emailInput" name="email" placeholder="อีเมล">
+                            </div>
+                            <div class="field padding-bottom--15">
                                 <input type="password" id="passwordInput" name="password" placeholder="รหัสผ่าน">
+                            </div>
+                            <div class="field padding-bottom--24">
                                 <input type="password" id="confirmPasswordInput" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน">
                             </div>
                             <div class="field padding-bottom--15">
-                                <a type="button" class="btn btn-primary button--100" th:href="@{/}">สมัครบัญชี</a>
+                                <a type="button" class="btn button btn-login button--100" th:href="@{/}">สมัครบัญชี</a>
                             </div>
                         </form>
                     </div>

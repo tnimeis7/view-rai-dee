@@ -163,13 +163,20 @@
   transition-duration: 0.4s;
   cursor: pointer;
   }
-  .btn-pink {
+  .btn-login {
   background-color: rgb(222, 0, 107);
   }
-  .btn-pink:hover {
+  .btn-login:hover {
   background-color: rgb(168, 0, 81);
   color: white;
   }
+  .btn-sign-in {
+    background-color: rgb(77, 77, 77);
+    }
+    .btn-sign-in:hover {
+    background-color: rgb(168, 0, 81);
+    color: white;
+    }
   .btn-gg {
     background-color: rgb(38, 38, 38); 
     color: white; 
@@ -179,6 +186,12 @@
     background-color: rgb(38, 38, 38); 
     color: white; 
     border: 3px solid rgb(52, 187, 244);
+  }
+  .btn-gg:hover {
+    color: white; 
+  }
+  .btn-fb:hover {
+    color: white; 
   }
   
 
