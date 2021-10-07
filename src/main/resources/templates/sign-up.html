@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/login_style.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="login-root">
+    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+        <div class="loginbackground box-background--white padding-top--64">
+        </div>
+        <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+            <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+
+            </div>
+            <div class="formbg-outer">
+                <div class="formbg">
+                    <div class="formbg-inner padding-horizontal--48">
+                        <center><h1><a th:href="@{/}" >View Raidee</a></h1></center>
+                        <form th:action="@{/login}" method="post" id="stripe-login">
+                            <div class="field padding-bottom--24">
+                                <input type="text" id="usernameInput" name="username" placeholder="ชื่อผู้ใช้">
+                                <input type="email" id="emailInput" name="email" placeholder="อีเมล">
+                                <input type="password" id="passwordInput" name="password" placeholder="รหัสผ่าน">
+                                <input type="password" id="confirmPasswordInput" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน">
+                            </div>
+                            <div class="field padding-bottom--15">
+                                <a type="button" class="btn btn-primary button--100" th:href="@{/}">สมัครบัญชี</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
