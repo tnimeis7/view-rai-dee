@@ -2,7 +2,7 @@ package th.ac.ku.viewraidee.model;
 
 import com.google.cloud.Timestamp;
 
-public class Article implements BlockComponents {
+public class Article implements BlockComponents{
 
     private String atcId;
 
@@ -15,7 +15,7 @@ public class Article implements BlockComponents {
     private String authorName;
     private int heart;
     private double starRate;
-    private Timestamp publishDate;
+    private String publishDate;
 
     public String getAtcId() {
         return atcId;
@@ -95,11 +95,9 @@ public class Article implements BlockComponents {
         this.starRate = starRate;
     }
 
-    public Timestamp getPublishDate() {
-        return publishDate;
-    }
+    public String getPublishDate() { return publishDate;}
 
-    public void setPublishDate(Timestamp timestamp) { this.publishDate = timestamp; }
+//    public void setPublishDate(Timestamp timestamp) { this.publishDate = timestamp; }
 
     @Override
     public String getId() {

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container">
+    <h1 class="display-6">All Articles</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>atcId</th>
+            <th>atcName</th>
+            <th>authorName</th>
+            <th>heart</th>
+            <th>publishDate</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="article : ${articles}">
+            <td th:text="${article.atcId}"></td>
+            <td th:text="${article.atcName}"></td>
+            <td th:text="${article.authorName}"></td>
+            <td th:text="${article.heart}"></td>
+            <td th:text="${article.publishDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

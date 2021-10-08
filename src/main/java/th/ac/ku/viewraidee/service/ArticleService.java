@@ -28,9 +28,9 @@ public class ArticleService {
     }
 
     // ทำไมไม่สีเหลือง!!!!!
-    public void deleteArticle(Article article) {
-        String url = "http://localhost:8090/Article";
-        restTemplate.delete(url, article, Article.class);
-    }
+//    public void deleteArticle(Article article) {
+//        String url = "http://localhost:8090/Article";
+//        restTemplate.delete(url, article, Article.class);
+//    }
 
 }

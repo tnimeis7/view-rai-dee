@@ -11,25 +11,25 @@ import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.ArticleService;
 
 @Controller
-@RequestMapping("/Article")
+@RequestMapping("/articles")
 public class ArticleController {
     @Autowired
     private ArticleService service;
 
     @GetMapping
     public String getArticles(Model model){
-        model.addAttribute("Articles", service.getAll());
-        return "Articles";
+        model.addAttribute("articles", service.getAll());
+        return "articles";
     }
 
     @GetMapping("/create")
     public String getAddPage(){
-        return "Article-Create";
+        return "article-create";
     }
 
     @PostMapping("/create")
     public String addArticle(@ModelAttribute Article article, Model model){
         service.addArticle(article);
-        return "redirect:/Article";
+        return "redirect:/articles";
     }
 }
