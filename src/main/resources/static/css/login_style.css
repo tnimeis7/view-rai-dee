@@ -167,14 +167,14 @@
   background-color: rgb(222, 0, 107);
   }
   .btn-login:hover {
-  background-color: rgb(168, 0, 81);
+  background-color: rgb(255, 0, 107);
   color: white;
   }
   .btn-sign-in {
     background-color: rgb(77, 77, 77);
     }
     .btn-sign-in:hover {
-    background-color: rgb(168, 0, 81);
+    background-color: rgb(255, 0, 107);
     color: white;
     }
   .btn-gg {
