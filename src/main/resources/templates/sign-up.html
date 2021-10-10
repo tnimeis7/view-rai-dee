@@ -7,6 +7,7 @@
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link th:rel="stylesheet" th:href="@{/css/login_style.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/password-check.js}"></script>
 </head>
 <body>
 <div class="login-root">
@@ -14,31 +15,26 @@
         <div class="loginbackground box-background--white padding-top--64">
         </div>
         <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-            <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-
-            </div>
             <div class="formbg-outer">
                 <div class="formbg">
                     <div class="formbg-inner padding-horizontal--48">
                         <div class="padding-bottom--24">
                             <center><h1><a th:href="@{/}" >View Raidee</a></h1></center>
                         </div>
-                        <form th:action="@{/login}" method="post" id="stripe-login">
+                        <form name="signUp" th:action="@{/signUp}" method="POST">
                             <div class="field padding-bottom--15">
-                                <input type="text" id="usernameInput" name="username" placeholder="ชื่อผู้ใช้">
+                                <input type="text" id="usernameInput" class="form-control" name="username" placeholder="ชื่อผู้ใช้">
                             </div>
                             <div class="field padding-bottom--15">
-                                <input type="email" id="emailInput" name="email" placeholder="อีเมล">
+                                <input type="email" id="emailInput" class="form-control" name="email" placeholder="อีเมล">
                             </div>
                             <div class="field padding-bottom--15">
-                                <input type="password" id="passwordInput" name="password" placeholder="รหัสผ่าน">
+                                <input type="password" id="passwordInput" class="form-control" name="password" placeholder="รหัสผ่าน">
                             </div>
                             <div class="field padding-bottom--24">
-                                <input type="password" id="confirmPasswordInput" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน">
+                                <input type="password" id="confirmPasswordInput" class="form-control" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน">
                             </div>
-                            <div class="field padding-bottom--15">
-                                <a type="button" class="btn button btn-login button--100" th:href="@{/}">สมัครบัญชี</a>
-                            </div>
+                            <button type="submit" class="btn button btn-login button--100" onclick="return checkField()">สมัครบัญชี</button>
                         </form>
                     </div>
                 </div>
@@ -46,6 +42,7 @@
         </div>
     </div>
 </div>
+<p th:text="|${signupError}|"></p>
 </body>
 
 </html>
