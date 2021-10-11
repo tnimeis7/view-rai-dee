@@ -37,16 +37,24 @@ public class AccountService {
     }
 
     public boolean isUsernameAvailable(String username) {
-        String url = "http://localhost:8090/Account/{username}";
+        String url = "http://localhost:8090/Account/id/{username}";
         ResponseEntity<Account> account = restTemplate.getForEntity(url, Account.class, username);
-        return account!=null;
+        Account newAccount = account.getBody();
+        return newAccount==null;
     }
 
     public Account getById(String username){
-        String url = "http://localhost:8090/Account/{username}";
+        String url = "http://localhost:8090/Account/id/{username}";
         ResponseEntity<Account> response = restTemplate.getForEntity(url, Account.class, username);
         Account account = response.getBody();
         return account;
+    }
+
+    public boolean isEmailAvailable(String email){
+        String url = "http://localhost:8090/Account/email/{email}";
+        ResponseEntity<Account> account = restTemplate.getForEntity(url, Account.class, email);
+        Account newAccount = account.getBody();
+        return newAccount==null;
     }
 
 }

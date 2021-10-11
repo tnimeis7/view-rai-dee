@@ -1,8 +1,6 @@
 package th.ac.ku.viewraidee.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.viewraidee.model.Account;
 import th.ac.ku.viewraidee.service.AccountService;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping("/signUp")
 public class SignUpController {
@@ -23,7 +18,7 @@ public class SignUpController {
     private AccountService accountService;
 
     @GetMapping
-    public String getSignUpPage(Model model , @AuthenticationPrincipal OAuth2User principal){
+    public String getSignUpPage(){
         return "sign-up";
     }
 
@@ -31,10 +26,15 @@ public class SignUpController {
     public String signupUser(@ModelAttribute Account account, Model model) {
         String signupError = null;
         if (!accountService.isUsernameAvailable(account.getUsername())) {
-            signupError = "มีชื่อผู้ใช้นี้อยู่ในระบบแล้ว";
+            System.out.println("user");
+            signupError = "มีชื่อผู้ใช้นี้อยู่แล้ว กรุณาเปลี่ยนชื่อ";
+        }
+        else if (!accountService.isEmailAvailable(account.getEmail())) {
+            System.out.println("email");
+            signupError = "มี email นี้อยู่แล้ว กรุณาเปลี่ยน email";
         }
         if (signupError == null) {
-            account.setRole("user");
+            account.setRole("not null");
             accountService.createAccount(account);
             model.addAttribute("signupSuccess", true);
         }else {
