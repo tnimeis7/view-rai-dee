@@ -15,17 +15,25 @@
         </div>
         <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
             <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-
             </div>
             <div class="formbg-outer">
                 <div class="formbg">
                     <div class="formbg-inner padding-horizontal--48">
                         <div class="padding-bottom--24">
-                            <center><h1><a th:href="@{/}" >View Raidee</a></h1></center>
+                            <center><h1><a th:href="@{/}"><img th:src="@{/images/logo.png}" width="200"/></a></h1></center>
                         </div>
                         <form th:action="@{/login}" method="post" id="stripe-login">
                             <div class="field padding-bottom--15">
                                 <input type="text" id="usernameInput" name="username" placeholder="ชื่อผู้ใช้">
+                            </div>
+                            <div class="padding-bottom--15">
+                                <input type="radio" name="เพศ" id="เพศ" value="ชาย" />ชาย
+                                <input type="radio" name="เพศ" id="เพศ" value="หญิง" />หญิง
+                                <input type="radio" name="เพศ" id="เพศ" value="ไม่ระบุ" />ไม่ระบุ
+                            </div>
+                            <div class=" field padding-bottom--15">
+                                <lable>วันเกิด</lable>
+                                <input type="date"/>
                             </div>
                             <div class="field padding-bottom--15">
                                 <input type="email" id="emailInput" name="email" placeholder="อีเมล">

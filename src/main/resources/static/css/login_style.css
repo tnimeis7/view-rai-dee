@@ -45,11 +45,11 @@
     justify-content: center;
   }
   .box-root {
-      box-sizing: border-box;
+    box-sizing: border-box;
   }
   .flex-direction--column {
-      -ms-flex-direction: column;
-      flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
 
   .padding-top--64 {
@@ -193,5 +193,9 @@
   .btn-fb:hover {
     color: white; 
   }
-  
-
+  ::placeholder {
+    color: white;
+  }
+  .form-center {
+    margin: auto;
+  }
