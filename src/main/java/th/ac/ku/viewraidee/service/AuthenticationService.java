@@ -6,10 +6,13 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 import th.ac.ku.viewraidee.model.Account;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 @Service
@@ -27,11 +30,18 @@ public class AuthenticationService implements AuthenticationProvider, Authentica
         String password = authentication.getCredentials().toString();
         Account account = accountService.getById(username);
         if (account != null) {
-            if (passwordEncoder.matches(password, account.getPassword()) || password.equals(account.getPassword())) {
+            if (passwordEncoder.matches(password, account.getPassword())) {
                 return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
             }
         }
         return null;
+    }
+
+    public void authenticateUncheck(String username, String password, HttpServletRequest request){
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+        request.getSession();
+        token.setDetails(new WebAuthenticationDetails(request));
+        SecurityContextHolder.getContext().setAuthentication(token);
     }
 
     @Override

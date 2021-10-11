@@ -52,27 +52,13 @@ public class SignUpController {
         }
         if (signupError == null) {
             account.setRole("user");
+            String password = account.getPassword();
             accountService.createAccount(account);
-            Account newAccount = accountService.getById(account.getUsername());
-            while(newAccount==null){
-                newAccount = accountService.getById(account.getUsername());
-            }
-            authenticateUserAndSetSession(newAccount, request);
-
+            authenticationService.authenticateUncheck(account.getUsername(), password, request);
         }else {
             model.addAttribute("signupError", signupError);
         }
         return "redirect:/";
-    }
-
-    private void authenticateUserAndSetSession(Account account, HttpServletRequest request) {
-        String username = account.getUsername();
-        String password = account.getPassword();
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
-        request.getSession();
-        token.setDetails(new WebAuthenticationDetails(request));
-        Authentication authenticatedUser = authenticationService.authenticate(token);
-        SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
     }
 
 }
