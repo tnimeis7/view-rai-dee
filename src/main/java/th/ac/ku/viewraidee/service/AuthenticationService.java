@@ -1,6 +1,7 @@
 package th.ac.ku.viewraidee.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,7 +13,7 @@ import th.ac.ku.viewraidee.model.Account;
 import java.util.ArrayList;
 
 @Service
-public class AuthenticationService implements AuthenticationProvider {
+public class AuthenticationService implements AuthenticationProvider, AuthenticationManager {
 
     @Autowired
     private AccountService accountService;
@@ -25,9 +26,8 @@ public class AuthenticationService implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
         Account account = accountService.getById(username);
-
         if (account != null) {
-            if (passwordEncoder.matches(password, account.getPassword())) {
+            if (passwordEncoder.matches(password, account.getPassword()) || password.equals(account.getPassword())) {
                 return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
             }
         }
