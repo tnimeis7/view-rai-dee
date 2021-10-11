@@ -8,12 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import th.ac.ku.viewraidee.model.Account;
-import th.ac.ku.viewraidee.service.AccountService;
-
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/")
@@ -30,7 +25,7 @@ public class HomeController {
             model.addAttribute("user", username);
         }
         else {
-            model.addAttribute("user", "Guest");
+            model.addAttribute("user", "ผู้เยี่ยมชม");
         }
         return "home";
     }
