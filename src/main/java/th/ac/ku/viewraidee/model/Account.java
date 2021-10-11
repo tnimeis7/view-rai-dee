@@ -1,6 +1,6 @@
 package th.ac.ku.viewraidee.model;
 
-public class Account {
+public class Account{
 
     private String username;
     private String password;
