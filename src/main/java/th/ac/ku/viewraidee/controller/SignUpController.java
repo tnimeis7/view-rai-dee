@@ -31,7 +31,7 @@ public class SignUpController {
     public String signupUser(@ModelAttribute Account account, Model model) {
         String signupError = null;
         if (!accountService.isUsernameAvailable(account.getUsername())) {
-            signupError = "The username already exists.";
+            signupError = "มีชื่อผู้ใช้นี้อยู่ในระบบแล้ว";
         }
         if (signupError == null) {
             account.setRole("user");

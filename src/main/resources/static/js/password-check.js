@@ -3,8 +3,10 @@ function checkField() {
     confirmPassword = document.signUp.confirmPassword.value;
 
     if (password != confirmPassword) {
-        alert ("\nPassword Didn't Match: Please try again")
+        alert ("\nรหัสผ่านไม่ตรง กรุณาตรวจสอบใหม่อีกครั้ง")
         return false;
+    }else if(password == null && confirmPassword == null){
+        alert("\nกรอกข้อมูลไม่ครบ กรุณาตรวจสอบใหม่อีกครั้ง")
     }
     else{
         return true;
