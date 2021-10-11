@@ -2,6 +2,7 @@ package th.ac.ku.viewraidee.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -39,6 +40,13 @@ public class AccountService {
         String url = "http://localhost:8090/Account/{username}";
         ResponseEntity<Account> account = restTemplate.getForEntity(url, Account.class, username);
         return account!=null;
+    }
+
+    public Account getById(String username){
+        String url = "http://localhost:8090/Account/{username}";
+        ResponseEntity<Account> response = restTemplate.getForEntity(url, Account.class, username);
+        Account account = response.getBody();
+        return account;
     }
 
 }
