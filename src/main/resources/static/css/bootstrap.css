@@ -635,6 +635,14 @@ progress {
   margin-left: auto;
 }
 
+.frame-vrd{
+  width: 90%;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  margin-right: 5rem;
+  margin-left: 5rem;
+}
+
 @media (min-width: 576px) {
   .container-sm, .container {
     max-width: 540px;
@@ -4487,6 +4495,8 @@ textarea.form-control-lg {
   color: #fff;
 }
 
+
+
 .card {
   position: relative;
   display: flex;
@@ -4496,7 +4506,6 @@ textarea.form-control-lg {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
 }
 .card > hr {
   margin-right: 0;
@@ -4587,7 +4596,14 @@ textarea.form-control-lg {
 .card-img,
 .card-img-top,
 .card-img-bottom {
-  width: 100%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  float: left;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .card-img,
@@ -7908,6 +7924,10 @@ textarea.form-control-lg {
 
 .rounded-2 {
   border-radius: 0.25rem !important;
+}
+
+.rounded-vrd-1 {
+  border-radius: 1rem !important;
 }
 
 .rounded-3 {

@@ -1,66 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Articles</title>
-    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
+
 </head>
 <body>
 
 <div th:insert="fragments/header :: header"></div>
 
-<div class="container py-3">
-    <div class="card">
-        <div class="row">
-            <div class="col-md-5">
-                <img class="d-block w-100" src="https://sv1.picz.in.th/images/2021/10/08/uSZzwl.jpg" alt="uSZzwl.jpg" border="0" />
-            </div>
-            <div class="col-md-7 px-3">
-                <div class="card-block px-6">
-                    <h4 class="card-title" th:text="${articles.get(0).getAtcName()}"></h4>
-                    <p class="card-text" th:text="${articles.get(0).getContent()}"></p>
-                    <p class="card-text" th:text="${articles.get(0).getPublishDate()}"></p>
+<div class="frame-vrd" style="background-color: #1a1e21">
+    <div class="container">
+<!--        <div class="frame-vrd" style="background-color: #1a1e21">-->
+            <div class="row mt-4" th:each="article : ${articles}">
+                <div class="card flex-row rounded-vrd-1 align-items-center">
+                    <div class="col-auto">
+                        <h5 style="margin-left: 15px; margin-top: 15px;" th:text="${article.movieName}"></h5>
+                        <img th:src="${article.coverPath}" class="card-img rounded-vrd-1">
+                    </div>
+                    <!--                <img th:src="${article.coverPath}" class="card-img rounded-vrd-2">-->
+                    <div class="card-body">
+                        <h4 class="card-title" th:text="${article.atcName}"></h4>
+                        <h6 class="card-title">รีวิวโดย:
+                            <span th:text="${article.authorName}"></span>
+                            วันที่: <span th:text="${article.publishDate}"></span></h6>
+                        <p class="card-text" th:text="${article.content}"></p>
+                    </div>
                 </div>
-
             </div>
-        </div>
+<!--        </div>-->
     </div>
 </div>
-
-<!--<div class="row">-->
-<!--    <div class="card">-->
-<!--        <h2>${article.atcId}</h2>-->
-<!--        <p>test</p>-->
-<!--        <h2 th:text="${articles.get(0).getAtcName()}"></h2>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--<div class="container">-->
-<!--    <h1 class="display-6">All Articles</h1>-->
-
-<!--    <table class="table table-striped">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>atcId</th>-->
-<!--            <th>atcName</th>-->
-<!--            <th>authorName</th>-->
-<!--            <th>heart</th>-->
-<!--            <th>publishDate</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="article : ${articles}">-->
-<!--            <td th:text="${article.atcId}"></td>-->
-<!--            <td th:text="${article.atcName}"></td>-->
-<!--            <td th:text="${article.authorName}"></td>-->
-<!--            <td th:text="${article.heart}"></td>-->
-<!--            <td th:text="${article.publishDate}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-
 
 </body>
 </html>
