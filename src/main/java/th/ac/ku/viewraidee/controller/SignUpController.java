@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.viewraidee.model.Account;
 import th.ac.ku.viewraidee.service.AccountService;
+import th.ac.ku.viewraidee.service.AuthenticationService;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/signUp")
@@ -17,28 +19,34 @@ public class SignUpController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     @GetMapping
     public String getSignUpPage(){
         return "sign-up";
     }
 
     @PostMapping
-    public String signupUser(@ModelAttribute Account account, Model model) {
+    public String signupUser(@ModelAttribute Account account, Model model, HttpServletRequest request){
         String signupError = null;
         if (!accountService.isUsernameAvailable(account.getUsername())) {
-            System.out.println("user");
             signupError = "มีชื่อผู้ใช้นี้อยู่แล้ว กรุณาเปลี่ยนชื่อ";
         }
         else if (!accountService.isEmailAvailable(account.getEmail())) {
-            System.out.println("email");
             signupError = "มี email นี้อยู่แล้ว กรุณาเปลี่ยน email";
         }
         if (signupError == null) {
-            account.setRole("not null");
+            String password = account.getPassword();
             accountService.createAccount(account);
-            model.addAttribute("signupSuccess", true);
+            Account newAccount;
+            do{
+                newAccount = accountService.getById(account.getUsername());
+            }while(newAccount==null);
+            authenticationService.preAuthenticate(account.getUsername(), password, request);
         }else {
             model.addAttribute("signupError", signupError);
+            return "sign-up";
         }
         return "redirect:/";
     }
