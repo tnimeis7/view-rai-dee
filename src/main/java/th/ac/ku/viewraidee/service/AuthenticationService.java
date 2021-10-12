@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 @Service
-public class AuthenticationService implements AuthenticationProvider, AuthenticationManager {
+public class AuthenticationService implements AuthenticationProvider {
 
     @Autowired
     private AccountService accountService;
@@ -33,15 +33,19 @@ public class AuthenticationService implements AuthenticationProvider, Authentica
             if (passwordEncoder.matches(password, account.getPassword())) {
                 return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
             }
+            else if(password==""){
+                return new UsernamePasswordAuthenticationToken(username, "", new ArrayList<>());
+            }
         }
         return null;
     }
 
-    public void authenticateUncheck(String username, String password, HttpServletRequest request){
+    public void preAuthenticate(String username, String password, HttpServletRequest request){
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
         request.getSession();
         token.setDetails(new WebAuthenticationDetails(request));
-        SecurityContextHolder.getContext().setAuthentication(token);
+        Authentication authenticatedUser = authenticate(token);
+        SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
     }
 
     @Override

@@ -68,7 +68,7 @@ public class HomeController {
             Account account = accountService.getByEmail(email);
             username = account.getUsername();
         }
-        authenticationService.authenticateUncheck(username, "", request);
+        authenticationService.preAuthenticate(username, "", request);
     }
 
 }

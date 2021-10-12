@@ -51,8 +51,13 @@ public class SignUpController {
             signupError = "มี email นี้อยู่แล้ว กรุณาเปลี่ยน email";
         }
         if (signupError == null) {
+            String password = account.getPassword();
             accountService.createAccount(account);
-            authenticationService.authenticateUncheck(account.getUsername(), account.getPassword(), request);
+            Account newAccount;
+            do{
+                newAccount = accountService.getById(account.getUsername());
+            }while(newAccount==null);
+            authenticationService.preAuthenticate(account.getUsername(), password, request);
         }else {
             model.addAttribute("signupError", signupError);
         }
