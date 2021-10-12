@@ -5,33 +5,41 @@
     <title>Articles</title>
 
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.css}">
-    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
 
 </head>
-<body>
+<body style="background-color: #2c3034;">
 
 <div th:insert="fragments/header :: header"></div>
+<div class="container">
+    <div class="dropdown" style="padding-bottom: 50px;">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+            วันที่ริวิวล่าสุด</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <a class="dropdown-item" href="#">Newest</a>
+            <a class="dropdown-item" href="#">Oldest</a>
+        </div>
 
-<div class="frame-vrd" style="background-color: #1a1e21">
-    <div class="container">
-<!--        <div class="frame-vrd" style="background-color: #1a1e21">-->
-            <div class="row mt-4" th:each="article : ${articles}">
-                <div class="card flex-row rounded-vrd-1 align-items-center">
-                    <div class="col-auto">
-                        <h5 style="margin-left: 15px; margin-top: 15px;" th:text="${article.movieName}"></h5>
-                        <img th:src="${article.coverPath}" class="card-img rounded-vrd-1">
-                    </div>
-                    <!--                <img th:src="${article.coverPath}" class="card-img rounded-vrd-2">-->
-                    <div class="card-body">
-                        <h4 class="card-title" th:text="${article.atcName}"></h4>
-                        <h6 class="card-title">รีวิวโดย:
-                            <span th:text="${article.authorName}"></span>
-                            วันที่: <span th:text="${article.publishDate}"></span></h6>
-                        <p class="card-text" th:text="${article.content}"></p>
-                    </div>
+    </div>
+</div>
+<div class="frame-vrd" style="background-color: #E5CE70;">
+    <div class="container" style="padding: 30px;">
+        <div class="row mt-2" th:each="article : ${articles}">
+            <div class="card flex-row rounded-vrd-1 align-items-center">
+                <div class="col-auto">
+                    <h5 style="margin-left: 15px; margin-top: 15px;" th:text="${article.movieName}"></h5>
+                    <img th:src="${article.coverPath}" class="card-img rounded-vrd-1">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${article.atcName}"></h4>
+                    <h6 class="card-title">รีวิวโดย:
+                        <span th:text="${article.authorName}"></span>
+                        วันที่: <span th:text="${article.publishDate}"></span></h6>
+                    <p class="card-text" th:text="${article.content}"></p>
                 </div>
             </div>
-<!--        </div>-->
+        </div>
     </div>
 </div>
 

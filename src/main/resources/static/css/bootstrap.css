@@ -636,11 +636,11 @@ progress {
 }
 
 .frame-vrd{
-  width: 90%;
+  width: 92%;
   padding-right: var(--bs-gutter-x, 0.75rem);
   padding-left: var(--bs-gutter-x, 0.75rem);
-  margin-right: 5rem;
-  margin-left: 5rem;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 @media (min-width: 576px) {

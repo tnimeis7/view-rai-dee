@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.ArticleService;
 
+import java.util.Comparator;
+
 @Controller
 @RequestMapping("/articles")
 public class ArticleController {
@@ -19,6 +21,7 @@ public class ArticleController {
     @GetMapping
     public String getArticles(Model model){
         model.addAttribute("articles", service.getAll());
+        model.addAttribute("byDate", Comparator.comparing(Article::getPublishDate));
         return "articles";
     }
 
