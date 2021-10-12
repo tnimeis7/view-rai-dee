@@ -31,16 +31,11 @@ public class AccountService {
     public void createAccount(Account account) {
         String url = "http://localhost:8090/Account";
         account.setRole("user");
-        String hashedPassword = passwordEncoder.encode(account.getPassword());
-        account.setPassword(hashedPassword);
+        if(account.getPassword()!=null){
+            String hashedPassword = passwordEncoder.encode(account.getPassword());
+            account.setPassword(hashedPassword);
+        }
         restTemplate.postForObject(url, account, Account.class);
-    }
-
-    public boolean isUsernameAvailable(String username) {
-        String url = "http://localhost:8090/Account/id/{username}";
-        ResponseEntity<Account> account = restTemplate.getForEntity(url, Account.class, username);
-        Account newAccount = account.getBody();
-        return newAccount==null;
     }
 
     public Account getById(String username){
@@ -50,11 +45,23 @@ public class AccountService {
         return account;
     }
 
-    public boolean isEmailAvailable(String email){
+    public Account getByEmail(String email){
         String url = "http://localhost:8090/Account/email/{email}";
-        ResponseEntity<Account> account = restTemplate.getForEntity(url, Account.class, email);
-        Account newAccount = account.getBody();
-        return newAccount==null;
+        ResponseEntity<Account> response = restTemplate.getForEntity(url, Account.class, email);
+        Account account = response.getBody();
+        return account;
     }
+
+    public boolean isUsernameAvailable(String username) {
+        Account account = getById(username);
+        return account==null;
+    }
+
+    public boolean isEmailAvailable(String email){
+        Account account = getByEmail(email);
+        return account==null;
+    }
+
+
 
 }
