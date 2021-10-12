@@ -23,6 +23,7 @@
                         <div class="padding-bottom--24">
                             <center><h1><a th:href="@{/}"><img th:src="@{/images/logo.png}" width="200"/></a></h1></center>
                         </div>
+                        <center><p th:text="${signupError}"></p></center>
                         <form name="signUp" th:action="@{/signUp}" method="POST">
                             <div class="field padding-bottom--15">
                                 <input type="text" id="usernameInput" class="form-control" name="username" placeholder="ชื่อผู้ใช้">
@@ -60,7 +61,5 @@
         </div>
     </div>
 </div>
-<p th:text="|${signupError}|"></p>
 </body>
-
 </html>

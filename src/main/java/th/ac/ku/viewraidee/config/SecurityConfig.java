@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
                 .formLogin()
                 .loginPage("/login")
+                .failureForwardUrl("/login/failed")
                 .defaultSuccessUrl("/").permitAll()
         .and()
                 .oauth2Login()
@@ -51,5 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(this.authenticationService);
     }
+
 }
 
