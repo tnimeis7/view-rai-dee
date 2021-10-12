@@ -11,6 +11,7 @@ import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.ArticleService;
 
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/articles")
@@ -21,7 +22,10 @@ public class ArticleController {
     @GetMapping
     public String getArticles(Model model){
         model.addAttribute("articles", service.getAll());
-        model.addAttribute("byDate", Comparator.comparing(Article::getPublishDate));
+        model.addAttribute("byDate",
+                service.getAll().stream().sorted(Comparator.comparing(Article::getPublishDate))
+                        .collect(Collectors.toList()));
+//                Comparator.comparing(Article::getPublishDate));
         return "articles";
     }
 
