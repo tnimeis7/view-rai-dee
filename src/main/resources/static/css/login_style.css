@@ -199,3 +199,12 @@
   .form-center {
     margin: auto;
   }
+  .eye {
+    position: absolute;
+  }
+  #hide1 {
+    display: none;
+  }
+  i {
+    margin-right: 100px;
+  }

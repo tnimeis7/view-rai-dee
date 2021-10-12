@@ -6,8 +6,10 @@
     <title>login</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link th:rel="stylesheet" th:href="@{/css/login_style.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/password-check.js}"></script>
+    <script th:src="@{/js/toggle-password.js}"></script>
 </head>
 <body>
 <div class="login-root">
@@ -27,30 +29,22 @@
                             <div class="field padding-bottom--15">
                                 <input type="text" id="usernameInput" class="form-control" name="username" placeholder="ชื่อผู้ใช้">
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male">
-                                <label class="form-check-label" for="inlineRadio1">ชาย</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female">
-                                <label class="form-check-label" for="inlineRadio2">หญิง</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="none">
-                                <label class="form-check-label" for="inlineRadio3">ไม่ระบุ</label>
-                            </div>
-                            <div class=" field padding-bottom--15">
-                                <lable>วันเกิด</lable>
-                                <input type="date"/>
-                            </div>
                             <div class="field padding-bottom--15">
                                 <input type="email" id="emailInput" class="form-control" name="email" placeholder="อีเมล">
                             </div>
                             <div class="field padding-bottom--15">
                                 <input type="password" id="passwordInput" class="form-control" name="password" placeholder="รหัสผ่าน">
+                                <span class="eye" onclick="showPwd1()">
+                                    <i id="hide1" class="fas fa-eye"></i>
+                                    <i id="hide2" class="fas fa-eye-slash"></i>
+                                </span>
                             </div>
                             <div class="field padding-bottom--24">
                                 <input type="password" id="confirmPasswordInput" class="form-control" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน">
+                                <span class="eye" onclick="showPwd2()">
+                                    <i id="hide1" class="fas fa-eye"></i>
+                                    <i id="hide2" class="fas fa-eye-slash"></i>
+                                </span>
                             </div>
                             <button type="submit" class="btn button btn-login button--100" onclick="return checkField()">สมัครบัญชี</button>
                         </form>

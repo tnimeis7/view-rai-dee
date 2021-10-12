@@ -6,7 +6,9 @@
     <title>login</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link th:rel="stylesheet" th:href="@{/css/login_style.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/toggle-password.js}"></script>
 </head>
 <body>
 <div class="login-root">
@@ -29,6 +31,10 @@
                             </div>
                             <div class="field padding-bottom--24">
                                 <input type="password" id="passwordInput" name="password" placeholder="รหัสผ่าน">
+                                <span class="eye" onclick="showPwd1()">
+                                    <i id="hide1" class="fas fa-eye"></i>
+                                    <i id="hide2" class="fas fa-eye-slash"></i>
+                                </span>
                             </div>
                             <div class="field padding-bottom--15 ">
                                 <button type="submit" class="btn button btn-login button--100">เข้าสู่ระบบ</button>
