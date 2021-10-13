@@ -71,14 +71,13 @@
     padding-bottom: 15px;
   }
   
-  
   .flex-justifyContent--center {
     -ms-flex-pack: center;
     justify-content: center;
   }
   
   .formbg {
-      margin: 0px auto;
+      margin: auto;
       width: 100%;
       max-width: 448px;
       background: rgb(38,38,38);
@@ -141,9 +140,6 @@
       font-weight: 600;
       margin: 0 10px;
   }
-  .keep-right {
-      text-align: right;
-  }
   .center {
       text-align: center;
   }
@@ -204,7 +200,4 @@
   }
   #hide1 {
     display: none;
-  }
-  i {
-    margin-right: 100px;
   }
