@@ -22,7 +22,7 @@
             <div class="formbg-outer">
                 <div class="formbg">
                     <div class="formbg-inner padding-horizontal--48">
-                        <div class="padding-bottom--24">
+                        <div>
                             <center><a th:href="@{/}"><img th:src="@{/images/logo.png}" width="200"/></a></center>
                         </div>
                         <center><p th:text="${failureMsg}"></p></center>
@@ -32,19 +32,19 @@
                             </div>
                             <div class="field padding-bottom--24">
                                 <input type="password" id="passwordInput" name="password" placeholder="รหัสผ่าน">
-                                <span onclick="showPwd1()">
+                                <span class="eye eye-img" onclick="showPwd1()">
                                     <img th:src="@{/images/see.png}" width="20" id="hide1"/>
                                     <img th:src="@{/images/invisible.png}" width="20" id="hide2"/>
                                 </span>
                             </div>
-                            <div class="field padding-bottom--15 ">
+                            <div class="field padding-bottom--24 padding-top--15 ">
                                 <button type="submit" class="btn button btn-login button--100">เข้าสู่ระบบ</button>
                             </div>
                         </form>
                         <div class="center padding-bottom--15 font-12">
                             หรือเข้าสู่ระบบผ่านทาง
                         </div>
-                        <div class="grid-test">
+                        <div class="grid-test padding-bottom--5">
                             <a type="button" class="button btn button--50 btn-gg" th:href="@{/oauth2/authorization/google}">Google</a>
                             <a type="button" class="button btn button--50 btn-fb" th:href="@{/oauth2/authorization/facebook}">Facebook</a>
                         </div >

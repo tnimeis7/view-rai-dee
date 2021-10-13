@@ -58,6 +58,9 @@
   .padding-top--24 {
     padding-top: 24px;
   }
+  .padding-top--15 {
+    padding-top: 15px;
+  }
   .padding-top--48 {
     padding-top: 48px;
   }
@@ -65,10 +68,16 @@
     padding-bottom: 24px;
   }
   .padding-horizontal--48 {
-    padding: 48px;
+    padding: 24px;
   }
   .padding-bottom--15 {
     padding-bottom: 15px;
+  }
+  .padding-bottom--5 {
+    padding-bottom: 5px;
+  }
+  .padding-bottom--40 {
+    padding-bottom: 40px;
   }
   
   .flex-justifyContent--center {
@@ -200,4 +209,10 @@
   }
   #hide1 {
     display: none;
+  }
+  #hide3 {
+    display: none;
+  }
+  .eye-img {
+    transform: translate(360px, -38px);
   }
