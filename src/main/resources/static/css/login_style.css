@@ -45,11 +45,11 @@
     justify-content: center;
   }
   .box-root {
-      box-sizing: border-box;
+    box-sizing: border-box;
   }
   .flex-direction--column {
-      -ms-flex-direction: column;
-      flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
 
   .padding-top--64 {
@@ -71,14 +71,13 @@
     padding-bottom: 15px;
   }
   
-  
   .flex-justifyContent--center {
     -ms-flex-pack: center;
     justify-content: center;
   }
   
   .formbg {
-      margin: 0px auto;
+      margin: auto;
       width: 100%;
       max-width: 448px;
       background: rgb(38,38,38);
@@ -141,9 +140,6 @@
       font-weight: 600;
       margin: 0 10px;
   }
-  .keep-right {
-      text-align: right;
-  }
   .center {
       text-align: center;
   }
@@ -167,14 +163,14 @@
   background-color: rgb(222, 0, 107);
   }
   .btn-login:hover {
-  background-color: rgb(168, 0, 81);
+  background-color: rgb(255, 0, 107);
   color: white;
   }
   .btn-sign-in {
     background-color: rgb(77, 77, 77);
     }
     .btn-sign-in:hover {
-    background-color: rgb(168, 0, 81);
+    background-color: rgb(255, 0, 107);
     color: white;
     }
   .btn-gg {
@@ -193,5 +189,15 @@
   .btn-fb:hover {
     color: white; 
   }
-  
-
+  ::placeholder {
+    color: white;
+  }
+  .form-center {
+    margin: auto;
+  }
+  .eye {
+    position: absolute;
+  }
+  #hide1 {
+    display: none;
+  }
