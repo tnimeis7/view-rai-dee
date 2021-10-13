@@ -32,9 +32,11 @@
                             </div>
                             <div class="field padding-bottom--24">
                                 <input type="password" id="passwordInput" name="password" placeholder="รหัสผ่าน">
-                                <span class="eye" onclick="showPwd1()">
-                                    <i id="hide1" class="fas fa-eye"></i>
-                                    <i id="hide2" class="fas fa-eye-slash"></i>
+                                <span onclick="showPwd1()">
+                                    <img th:src="@{/images/see.png}" width="20" id="hide1"/>
+                                    <img th:src="@{/images/see.png}" width="20" id="hide2"/>
+<!--                                    <i id="hide1" class="fad fa-eye"></i>-->
+<!--                                    <i id="hide2" class="fad fa-eye"></i>-->
                                 </span>
                             </div>
                             <div class="field padding-bottom--15 ">
