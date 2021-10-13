@@ -2,7 +2,6 @@ package th.ac.ku.viewraidee.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -62,6 +61,11 @@ public class AccountService {
         return account==null;
     }
 
+    public Account updateAccount(Account account, String username){
+        String url = "http://localhost:8090/Account/"+username;
+        restTemplate.put(url, account, Account.class);
+        return account;
+    }
 
 
 }
