@@ -58,8 +58,8 @@
   .padding-top--24 {
     padding-top: 24px;
   }
-  .padding-top--15 {
-    padding-top: 15px;
+  .padding-top--5 {
+    padding-top: 5px;
   }
   .padding-top--48 {
     padding-top: 48px;
@@ -89,7 +89,7 @@
       margin: auto;
       width: 100%;
       max-width: 448px;
-      background: rgb(38,38,38);
+      background: rgb(33,33,33);
       border-radius: 4px;
       box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
   }
