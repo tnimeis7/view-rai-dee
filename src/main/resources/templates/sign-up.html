@@ -36,15 +36,15 @@
                             <div class="field padding-bottom--15">
                                 <input type="password" id="passwordInput" class="form-control" name="password" placeholder="รหัสผ่าน">
                                 <span class="eye" onclick="showPwd1()">
-                                    <i id="hide1" class="fas fa-eye"></i>
-                                    <i id="hide2" class="fas fa-eye-slash"></i>
+                                    <img th:src="@{/images/see.png}" width="20" id="hide1"/>
+                                    <img th:src="@{/images/invisible.png}" width="20" id="hide2"/>
                                 </span>
                             </div>
                             <div class="field padding-bottom--24">
                                 <input type="password" id="confirmPasswordInput" class="form-control" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน">
                                 <span class="eye" onclick="showPwd2()">
-                                    <i id="hide3" class="fas fa-eye"></i>
-                                    <i id="hide4" class="fas fa-eye-slash"></i>
+                                    <img th:src="@{/images/see.png}" width="20" id="hide3"/>
+                                    <img th:src="@{/images/invisible.png}" width="20" id="hide4"/>
                                 </span>
                             </div>
                             <button type="submit" class="btn button btn-login button--100" onclick="return checkField()">สมัครบัญชี</button>
