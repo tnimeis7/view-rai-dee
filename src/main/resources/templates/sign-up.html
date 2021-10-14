@@ -8,7 +8,7 @@
     <link th:rel="stylesheet" th:href="@{/css/login_style.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
     <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/password-check.js}"></script>
+    <script th:src="@{/js/check-field.js}"></script>
     <script th:src="@{/js/toggle-password.js}"></script>
 </head>
 <body>
@@ -47,7 +47,7 @@
                                     <img th:src="@{/images/invisible.png}" width="20" id="hide4"/>
                                 </span>
                             </div>
-                            <button type="submit" class="btn button btn-login button--100" onclick="return checkField()">สมัครบัญชี</button>
+                            <button type="submit" class="btn button btn-login button--100" onclick="return checkFieldSignUp()">สมัครบัญชี</button>
                         </form>
                     </div>
                 </div>
