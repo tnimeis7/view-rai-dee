@@ -35,6 +35,11 @@ public class AccountService {
             account.setPassword(hashedPassword);
         }
         restTemplate.postForObject(url, account, Account.class);
+        //busy waiting loop (wait really create account)
+        Account newAccount;
+        do{
+            newAccount = getById(account.getUsername());
+        }while(newAccount==null);
     }
 
     public Account getById(String username){
@@ -66,15 +71,17 @@ public class AccountService {
         restTemplate.put(url, account, Account.class);
     }
 
-    public void updateWithHashedPassword(Account account){
-        String hashedPassword = passwordEncoder.encode(account.getPassword());
-        account.setPassword(hashedPassword);
-        update(account);
-    }
-
     public void delete(String username) {
         String url = "http://localhost:8090/Account/" + username;
         restTemplate.delete(url);
+    }
+
+    public void createAccountFirstTime(Account account) {
+        account.setRole("user");
+        account.setLink("");
+        account.setAboutMe("");
+        account.setPhoto("");
+        createAccount(account);
     }
 
 

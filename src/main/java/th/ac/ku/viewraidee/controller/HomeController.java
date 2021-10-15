@@ -52,7 +52,8 @@ public class HomeController {
             Account account = new Account();
             account.setUsername(email);
             account.setEmail(email);
-            accountService.createAccount(account);
+            accountService.createAccountFirstTime(account);
+
             username = email;
         }
         else{

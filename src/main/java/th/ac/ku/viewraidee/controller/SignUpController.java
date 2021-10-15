@@ -38,15 +38,7 @@ public class SignUpController {
         }
         if (signupError == null) {
             String password = account.getPassword();
-            account.setRole("user");
-            account.setLink("");
-            account.setAboutMe("");
-            account.setPhoto("");
-            accountService.createAccount(account);
-            Account newAccount;
-            do{
-                newAccount = accountService.getById(account.getUsername());
-            }while(newAccount==null);
+            accountService.createAccountFirstTime(account);
             authenticationService.preAuthenticate(account.getUsername(), password, request);
         }else {
             model.addAttribute("signupError", signupError);

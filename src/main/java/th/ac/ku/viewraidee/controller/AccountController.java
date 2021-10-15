@@ -44,17 +44,16 @@ public class AccountController {
         if(!(account.getUsername().equals(currentUsername))){
             String password = account.getPassword();
             accountService.createAccount(account);
-            if(passwordField.isEmpty()){
-                System.out.println(currentAccount.getPassword());
+            if(currentAccount.getPassword()!=null&&passwordField.isEmpty()){
                 account.setPassword(currentAccount.getPassword());
                 accountService.update(account);
             }
-            Account newAccount;
-            do{
-                newAccount = accountService.getById(account.getUsername());
-            }while(newAccount==null);
+            else if(currentAccount.getPassword()==null){
+                password = "";
+                account.setEmail(currentAccount.getEmail());
+                accountService.update(account);
+            }
             authenticationService.preAuthenticate(account.getUsername(), password, request);
-            System.out.println(account.getUsername()+" "+password);
             accountService.delete(currentUsername);
         }
         else{
