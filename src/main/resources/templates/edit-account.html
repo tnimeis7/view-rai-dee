@@ -34,7 +34,7 @@
             <div class="row mb-3 form-group field-input">
                 <label for="usernameField" class="col-sm-2 col-form-label">ชื่อผู้ใช้</label>
                 <div class="col-sm-10">
-                    <input type="text" id="usernameField" th:field="*{username}">
+                    <input type="text" id="usernameField" th:field="*{username}" disabled>
                 </div>
             </div>
             <div th:if="*{password!=null}" class="row mb-3 form-group field-input">
@@ -46,13 +46,13 @@
             <div th:if="*{password==null}" class="row mb-3 form-group field-input">
                 <label for="emailSocialField" class="col-sm-2 col-form-label">อีเมล</label>
                 <div class="col-sm-10">
-                    <input type="email" id="emailSocialField" th:field="*{email}" disabled>
+                    <input type="email" id="emailSocialField" th:field="*{email}">
                 </div>
             </div>
             <div th:if="*{password!=null}" class="row mb-3 form-group field-input">
                 <label for="passwordField" class="col-sm-2 col-form-label">รหัสผ่านใหม่</label>
                 <div class="col-sm-10">
-                    <input type="password" id="passwordField" placeholder="หากไม่ต้องการเปลี่ยนรหัสผ่าน ข้ามช่องนี้">
+                    <input type="password" id="passwordField" placeholder="หากไม่ต้องการเปลี่ยนรหัสผ่าน ข้ามช่องนี้" name="password">
                 </div>
             </div>
             <div th:if="*{password!=null}" class="row mb-3 form-group field-input">
@@ -64,7 +64,7 @@
             <div class="row mb-3 form-group field-input">
                 <label for="linkField" class="col-sm-2 col-form-label">link</label>
                 <div class="col-sm-10">
-                    <input type="text" id="linkField" th:field="*{username}">
+                    <input type="text" id="linkField" th:field="*{link}">
                 </div>
             </div>
             <div class="row mb-3 form-group field-input">

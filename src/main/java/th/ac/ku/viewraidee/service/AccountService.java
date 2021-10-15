@@ -61,11 +61,22 @@ public class AccountService {
         return account==null;
     }
 
-    public Account updateAccount(Account account, String username){
-        String url = "http://localhost:8090/Account/"+username;
+    public void update(Account account){
+        String url = "http://localhost:8090/Account/"+account.getUsername();
         restTemplate.put(url, account, Account.class);
-        return account;
     }
+
+    public void updateWithHashedPassword(Account account){
+        String hashedPassword = passwordEncoder.encode(account.getPassword());
+        account.setPassword(hashedPassword);
+        update(account);
+    }
+
+    public void delete(String username) {
+        String url = "http://localhost:8090/Account/" + username;
+        restTemplate.delete(url);
+    }
+
 
 
 }
