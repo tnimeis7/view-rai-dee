@@ -34,31 +34,43 @@
             <div class="row mb-3 form-group field-input">
                 <label for="usernameField" class="col-sm-2 col-form-label">ชื่อผู้ใช้</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="usernameField" th:field="*{username}" th:onkeypress="@{/account/edit}">
+                    <input type="text" id="usernameField" th:field="*{username}">
                 </div>
             </div>
-            <div class="row mb-3 form-group field-input">
-                <label for="emailField" class="col-sm-2 col-form-label">อีเมล</label>
+            <div th:if="*{password!=null}" class="row mb-3 form-group field-input">
+                <label for="emailOriginalField" class="col-sm-2 col-form-label">อีเมล</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="emailField" th:field="*{email}" th:onkeypress="@{/account/edit}">
+                    <input type="email" id="emailOriginalField" th:field="*{email}">
                 </div>
             </div>
-            <div class="row mb-3 form-group field-input">
-                <label for="passwordField" class="col-sm-2 col-form-label">รหัสผ่าน</label>
+            <div th:if="*{password==null}" class="row mb-3 form-group field-input">
+                <label for="emailSocialField" class="col-sm-2 col-form-label">อีเมล</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="passwordField" th:field="*{password}" th:onkeypress="@{/account/edit}">
+                    <input type="email" id="emailSocialField" th:field="*{email}" disabled>
+                </div>
+            </div>
+            <div th:if="*{password!=null}" class="row mb-3 form-group field-input">
+                <label for="passwordField" class="col-sm-2 col-form-label">รหัสผ่านใหม่</label>
+                <div class="col-sm-10">
+                    <input type="password" id="passwordField" placeholder="หากไม่ต้องการเปลี่ยนรหัสผ่าน ข้ามช่องนี้">
+                </div>
+            </div>
+            <div th:if="*{password!=null}" class="row mb-3 form-group field-input">
+                <label for="passwordField" class="col-sm-2 col-form-label">ยืนยันรหัสผ่านใหม่</label>
+                <div class="col-sm-10">
+                    <input type="password" id="confirmPasswordField">
                 </div>
             </div>
             <div class="row mb-3 form-group field-input">
                 <label for="linkField" class="col-sm-2 col-form-label">link</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="linkField" th:field="*{username}" th:onkeypress="@{/account/edit}">
+                    <input type="text" id="linkField" th:field="*{username}">
                 </div>
             </div>
             <div class="row mb-3 form-group field-input">
                 <label for="aboutMeField" class="col-sm-2 col-form-label">เกี่ยวกับฉัน</label>
                 <div class="col-sm-10">
-                    <textarea type="text" class="form-control" id="aboutMeField" th:field="*{aboutMe}" th:onkeypress="@{/account/edit}"></textarea>
+                    <textarea type="text" id="aboutMeField" th:field="*{aboutMe}"></textarea>
                 </div>
             </div>
 
