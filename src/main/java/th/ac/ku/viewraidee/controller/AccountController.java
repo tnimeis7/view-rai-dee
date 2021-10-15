@@ -1,18 +1,17 @@
 package th.ac.ku.viewraidee.controller;
 
-import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import th.ac.ku.viewraidee.model.Account;
 import th.ac.ku.viewraidee.service.AccountService;
+import th.ac.ku.viewraidee.service.AuthenticationService;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/account")
@@ -24,6 +23,9 @@ public class AccountController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     @GetMapping("/edit")
     public String getEditAccountPage(Model model) throws Exception {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -34,30 +36,45 @@ public class AccountController {
     }
 
     @PostMapping("/edit")
-    public String edit(@ModelAttribute Account account, Model model) {
-        String username[] = (account.getUsername()).split(",");
-        String link[] = (account.getLink()).split(",");
-        String aboutMe[] = (account.getAboutMe()).split(",");
-        if(accountService.isUsernameAvailable(username[1])){
-            Account currentAccount = accountService.getById(username[0]);
-//            deleteusername[0];
-//            createusername[1];
-
+    public String edit(@ModelAttribute Account account, HttpServletRequest request) {
+        String passwordField = account.getPassword();
+        String currentUsername = authenticationService.getCurrentUsername();
+        Account currentAccount = accountService.getById(currentUsername);
+        setStaticInfo(account, currentAccount);
+        if(!(account.getUsername().equals(currentUsername))){
+            String password = account.getPassword();
+            accountService.createAccount(account);
+            if(passwordField.isEmpty()){
+                System.out.println(currentAccount.getPassword());
+                account.setPassword(currentAccount.getPassword());
+                accountService.update(account);
+            }
+            Account newAccount;
+            do{
+                newAccount = accountService.getById(account.getUsername());
+            }while(newAccount==null);
+            authenticationService.preAuthenticate(account.getUsername(), password, request);
+            System.out.println(account.getUsername()+" "+password);
+            accountService.delete(currentUsername);
         }
         else{
-            if(account.getPassword()!=null){
-//                accountService.update()
+            if(passwordField.isEmpty()){
+                account.setPassword(currentAccount.getPassword());
             }
             else{
-
+                String hashedPassword = passwordEncoder.encode(account.getPassword());
+                account.setPassword(hashedPassword);
             }
-            System.out.println(account.getUsername()+" " +account.getEmail()+" "+account.getPassword());
+            accountService.update(account);
         }
-
-        System.out.println(account.getUsername()+" + " +account.getEmail()+" + "+account.getPassword()+" + "+account.getLink()
-                + " + "+account.getAboutMe()+ " + "+account.getCountArticle());
-        //accountService.update(account);
         return "redirect:/";
+    }
+
+    public void setStaticInfo(Account account, Account currentAccount){
+        account.setCountArticle(currentAccount.getCountArticle());
+        account.setCountHeart(currentAccount.getCountHeart());
+        account.setPhoto(currentAccount.getPhoto());
+        account.setRole(currentAccount.getRole());
     }
 
 }

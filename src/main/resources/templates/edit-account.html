@@ -28,13 +28,13 @@
         <form th:action="@{/account/edit}" method="POST" th:object="${account}">
             <button type="submit" class="btn btn-primary">X</button>
             <div class="form-group">
-                <img th:field="*{photo}" class="img-fluid" alt="Responsive image" ><br>
+                <img th:attr="src=*{photo}" th:width="200" class="img-fluid" alt="Responsive image" ><br>
                 <input type="file" id="editPhoto" value="แก้ไขรูป">
             </div>
             <div class="row mb-3 form-group field-input">
                 <label for="usernameField" class="col-sm-2 col-form-label">ชื่อผู้ใช้</label>
                 <div class="col-sm-10">
-                    <input type="text" id="usernameField" th:field="*{username}" disabled>
+                    <input type="text" id="usernameField" th:field="*{username}">
                 </div>
             </div>
             <div th:if="*{password!=null}" class="row mb-3 form-group field-input">
@@ -46,7 +46,7 @@
             <div th:if="*{password==null}" class="row mb-3 form-group field-input">
                 <label for="emailSocialField" class="col-sm-2 col-form-label">อีเมล</label>
                 <div class="col-sm-10">
-                    <input type="email" id="emailSocialField" th:field="*{email}">
+                    <input type="email" id="emailSocialField" th:field="*{email}" disabled>
                 </div>
             </div>
             <div th:if="*{password!=null}" class="row mb-3 form-group field-input">

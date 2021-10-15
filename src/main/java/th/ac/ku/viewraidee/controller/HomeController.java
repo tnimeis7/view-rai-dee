@@ -32,22 +32,13 @@ public class HomeController {
         if (principal != null){
             usernameEmailCheck(principal, request);
         }
-        if((username = getCurrentUsername())!=null){
+        if((username = authenticationService.getCurrentUsername())!=null){
             model.addAttribute("user", username);
         }
         else {
             model.addAttribute("user", "ผู้เยี่ยมชม");
         }
         return "home";
-    }
-
-    public String getCurrentUsername(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String login = authentication.getName();
-        if(login.equals("anonymousUser")){
-            return null;
-        }
-        return login;
     }
 
     public void usernameEmailCheck(OAuth2User principal, HttpServletRequest request){

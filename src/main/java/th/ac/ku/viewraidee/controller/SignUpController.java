@@ -38,6 +38,10 @@ public class SignUpController {
         }
         if (signupError == null) {
             String password = account.getPassword();
+            account.setRole("user");
+            account.setLink("");
+            account.setAboutMe("");
+            account.setPhoto("");
             accountService.createAccount(account);
             Account newAccount;
             do{

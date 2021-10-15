@@ -48,6 +48,15 @@ public class AuthenticationService implements AuthenticationProvider {
         SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
     }
 
+    public String getCurrentUsername(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = authentication.getName();
+        if(login.equals("anonymousUser")){
+            return null;
+        }
+        return login;
+    }
+
     @Override
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);

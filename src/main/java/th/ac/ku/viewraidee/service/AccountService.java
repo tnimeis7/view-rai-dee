@@ -19,6 +19,7 @@ public class AccountService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     public List<Account> getAll() {
         String url = "http://localhost:8090/Account";
         ResponseEntity<Account[]> response =
@@ -29,7 +30,6 @@ public class AccountService {
 
     public void createAccount(Account account) {
         String url = "http://localhost:8090/Account";
-        account.setRole("user");
         if(account.getPassword()!=null){
             String hashedPassword = passwordEncoder.encode(account.getPassword());
             account.setPassword(hashedPassword);
