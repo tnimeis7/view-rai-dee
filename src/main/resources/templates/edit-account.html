@@ -7,6 +7,7 @@
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link th:rel="stylesheet" th:href="@{/css/edit-account-style.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/edit-img.js}"></script>
 
     <script>
         function check(){
@@ -26,11 +27,16 @@
 <div th:insert="fragments/header :: header"></div>
     <div class="container" align="center">
         <form th:action="@{/account/edit}" method="POST" th:object="${account}">
-            <button type="submit" class="btn btn-primary">X</button>
-            <div class="form-group">
-                <img th:attr="src=*{photo}" th:width="200" class="img-fluid" alt="Responsive image" ><br>
-                <input type="file" id="editPhoto" value="แก้ไขรูป">
+            <div class="padding-bottom--24">
+                <button type="submit" class="btn btn-x">X</button>
             </div>
+           <div class="padding-bottom--200">
+               <div class="form-group profile-pic" align="center">
+                   <img th:src="@{/images/account.png}" id="photo"><br>
+                   <input type="file" id="editPhoto" value="editPhoto">
+                   <label for="editPhoto" id="uploadBtn">แก้ไขรูป</label>
+               </div>
+           </div>
             <div class="row mb-3 form-group field-input">
                 <label for="usernameField" class="col-sm-2 col-form-label">ชื่อผู้ใช้</label>
                 <div class="col-sm-10">

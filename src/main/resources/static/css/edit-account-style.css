@@ -1,6 +1,53 @@
 .form {
    margin: 120px 450px 50px 450px;
  }
+
  .field-input {
    width: 700px;
+ }
+
+.padding-bottom--24 {
+  padding-bottom: 24px;
+}
+
+.padding-bottom--200 {
+  padding-bottom: 200px;
+}
+
+ .btn-x {
+   transform: translate(720px,20px);
+ }
+
+ .profile-pic{
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid black;
+  
+}
+
+ #photo {
+    height: 150px;
+    width: 150px;
+ }
+
+ #editPhoto {
+   display: none;
+ }
+
+ #uploadBtn {
+   height: 40px;
+   width: 150px;
+   position: absolute;
+   transform: translate(-50%, -35px)
+   translateX(0%);
+   text-align: center;
+   background: rgba(0,0,0,0.7);
+   color: white;
+   line-height: 25px;
+   font-size: 15px;
+   cursor: pointer;
+
  }
