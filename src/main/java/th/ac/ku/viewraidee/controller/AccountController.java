@@ -15,6 +15,10 @@ import th.ac.ku.viewraidee.service.FileService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Logger;
+
 @Controller
 @RequestMapping("/account")
 public class AccountController {
@@ -30,6 +34,21 @@ public class AccountController {
 
     @Autowired
     private FileService fileService;
+
+    private Logger logger;
+
+    @GetMapping()
+    public String getAccountPage(Model model) throws Exception {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Account account = accountService.getById(username);
+        model.addAttribute("username", account.getUsername());
+        model.addAttribute("photo", account.getPhoto());
+        model.addAttribute("link", "Link: "+ account.getLink());
+        model.addAttribute("aboutMe", account.getAboutMe());
+        model.addAttribute("articleCount", account.getCountArticle());
+        model.addAttribute("heartCount", account.getCountHeart());
+        return "account";
+    }
 
     @GetMapping("/edit")
     public String getEditAccountPage(Model model) throws Exception {
@@ -71,7 +90,7 @@ public class AccountController {
             }
             accountService.update(account);
         }
-        return "redirect:/";
+        return "redirect:/account";
     }
 
     @PostMapping("/delete")

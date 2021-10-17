@@ -1,15 +1,16 @@
-const imgDiv = document.querySelector('.profile-pic')
-const img = document.getElementById('photo');
-const file = document.getElementById('editPhoto');
-const uploadBtn document.getElementById('uploadBtn');
+const imgDiv = document.getElementsByClassName("profile-pic-div")
+const img = document.getElementById("photo");
+const file = document.getElementById("editPhoto");
+const uploadBtn = document.getElementById("uploadBtn");
 
-imgDiv.addEventListener('mouseenter', function()
-{
+console.log(imgDiv);
+console.log(uploadBtn)
+
+imgDiv.addEventListener('mouseover', function(){
     uploadBtn.style.display = "block"
 });
 
-imgDiv.addEventListener('mouseleave', function()
-{
+imgDiv.addEventListener('mouseout', function() {
     uploadBtn.style.display = "none"
 });
 

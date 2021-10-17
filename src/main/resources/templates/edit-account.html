@@ -7,8 +7,32 @@
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link th:rel="stylesheet" th:href="@{/css/edit-account-style.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/edit-img.js}"></script>
+<!--    <script th:src="@{/js/edit-pic.js}"></script>-->
 </head>
+
+<script>
+    const imgDiv = document.getElementsByClassName("profile-pic-div")
+    console.log(document.getElementById("file"))
+    imgDiv.addEventListener('mouseover', function(){
+        uploadBtn.style.display = "block"
+    });
+
+    imgDiv.addEventListener('mouseout', function() {
+        uploadBtn.style.display = "none"
+    });
+
+    file.addEventListener('change', function(){
+        const chooseFile = this.files[0];
+        if(chooseFile) {
+            const reader = new FileReader();
+            reader.addEventListener('load', function() {
+                img.setAttribute('src', reader.result);
+            });
+            reader.readAsDataURL(chooseFile);
+
+        }
+    });
+</script>
 
 
 <body>
@@ -19,7 +43,7 @@
                 <button type="submit" class="btn btn-x">X</button>
             </div>
            <div class="padding-bottom--200">
-               <div class="form-group profile-pic" align="center">
+               <div class="profile-pic-div">
                    <img th:src="*{photo}" id="photo"><br>
                    <input type="file" id="editPhoto" value="editPhoto">
                    <label for="editPhoto" id="uploadBtn">แก้ไขรูป</label>
