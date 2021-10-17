@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.ArticleService;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -22,8 +23,11 @@ public class ArticleController {
     @GetMapping
     public String getArticles(Model model){
         model.addAttribute("articles", service.getAll());
-        model.addAttribute("byDate",
+        model.addAttribute("atcNewest",
                 service.getAll().stream().sorted(Comparator.comparing(Article::getPublishDate))
+                        .collect(Collectors.toList()));
+        model.addAttribute("atcOldest",
+                service.getAll().stream().sorted(Comparator.comparing(Article::getPublishDate).reversed())
                         .collect(Collectors.toList()));
 //                Comparator.comparing(Article::getPublishDate));
         return "articles";
