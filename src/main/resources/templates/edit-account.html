@@ -8,18 +8,6 @@
     <link th:rel="stylesheet" th:href="@{/css/edit-account-style.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/edit-img.js}"></script>
-
-    <script>
-        function check(){
-            var username = document.getElementById('usernameField');
-            username.addEventListener('keypress',function(event){
-                if(event.keyCode == 13) {
-                    event.preventDefault();
-                }
-            });
-        }
-    </script>
-
 </head>
 
 
@@ -32,7 +20,7 @@
             </div>
            <div class="padding-bottom--200">
                <div class="form-group profile-pic" align="center">
-                   <img th:src="@{/images/account.png}" id="photo"><br>
+                   <img th:src="*{photo}" id="photo"><br>
                    <input type="file" id="editPhoto" value="editPhoto">
                    <label for="editPhoto" id="uploadBtn">แก้ไขรูป</label>
                </div>
@@ -79,9 +67,11 @@
                     <textarea type="text" id="aboutMeField" th:field="*{aboutMe}"></textarea>
                 </div>
             </div>
-
-            <button type="button" class="btn btn-primary">ลบบัญชี</button>
         </form>
+        <form th:action="@{/account/delete}" method="POST">
+            <button type="submit" class="btn btn-primary">ลบบัญชี</button>
+        </form>
+
     </div>
 </body>
 </html>

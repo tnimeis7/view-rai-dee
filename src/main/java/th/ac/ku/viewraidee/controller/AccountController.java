@@ -7,9 +7,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import th.ac.ku.viewraidee.model.Account;
 import th.ac.ku.viewraidee.service.AccountService;
 import th.ac.ku.viewraidee.service.AuthenticationService;
+import th.ac.ku.viewraidee.service.FileService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,6 +27,9 @@ public class AccountController {
 
     @Autowired
     private AuthenticationService authenticationService;
+
+    @Autowired
+    private FileService fileService;
 
     @GetMapping("/edit")
     public String getEditAccountPage(Model model) throws Exception {
@@ -69,11 +74,26 @@ public class AccountController {
         return "redirect:/";
     }
 
+    @PostMapping("/delete")
+    public String delete(HttpServletRequest request) {
+        String currentUsername = authenticationService.getCurrentUsername();
+        accountService.delete(currentUsername);
+        while(accountService.isUsernameAvailable(currentUsername)){};
+        authenticationService.preAuthenticate(currentUsername, "", request);
+        return "redirect:/";
+    }
+
     public void setStaticInfo(Account account, Account currentAccount){
         account.setCountArticle(currentAccount.getCountArticle());
         account.setCountHeart(currentAccount.getCountHeart());
         account.setPhoto(currentAccount.getPhoto());
         account.setRole(currentAccount.getRole());
     }
+
+//    public Object upload(@RequestParam("file") MultipartFile multipartFile) {
+//        logger.info("HIT -/upload | File Name : {}", multipartFile.getOriginalFilename());
+//        return fileService.upload(multipartFile);
+//    }
+
 
 }

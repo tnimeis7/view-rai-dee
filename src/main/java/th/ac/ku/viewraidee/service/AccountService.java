@@ -58,12 +58,12 @@ public class AccountService {
 
     public boolean isUsernameAvailable(String username) {
         Account account = getById(username);
-        return account==null;
+        return account!=null;
     }
 
     public boolean isEmailAvailable(String email){
         Account account = getByEmail(email);
-        return account==null;
+        return account!=null;
     }
 
     public void update(Account account){

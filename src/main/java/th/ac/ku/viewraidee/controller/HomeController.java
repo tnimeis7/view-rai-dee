@@ -45,7 +45,7 @@ public class HomeController {
         boolean emailIsMatch = false;
         String username;
         String email = principal.getAttribute("email");
-        if (!accountService.isEmailAvailable(email)) {
+        if (accountService.isEmailAvailable(email)) {
             emailIsMatch = true;
         }
         if(!emailIsMatch){
