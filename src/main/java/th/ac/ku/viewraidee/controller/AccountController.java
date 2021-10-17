@@ -9,15 +9,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import th.ac.ku.viewraidee.model.Account;
+import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.AccountService;
+import th.ac.ku.viewraidee.service.ArticleService;
 import th.ac.ku.viewraidee.service.AuthenticationService;
 import th.ac.ku.viewraidee.service.FileService;
 
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/account")
@@ -35,6 +39,12 @@ public class AccountController {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private ArticleService articleService;
+
+    @Autowired
+    private ArticleController articleController;
+
     private Logger logger;
 
     @GetMapping()
@@ -47,6 +57,8 @@ public class AccountController {
         model.addAttribute("aboutMe", account.getAboutMe());
         model.addAttribute("articleCount", account.getCountArticle());
         model.addAttribute("heartCount", account.getCountHeart());
+        List<Article> onwArticle = articleController.getOwnArticles(username);
+        model.addAttribute("ownArticle", onwArticle);
         return "account";
     }
 

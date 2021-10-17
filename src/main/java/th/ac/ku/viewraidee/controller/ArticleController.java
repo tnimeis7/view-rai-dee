@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.ArticleService;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -43,4 +45,16 @@ public class ArticleController {
         service.addArticle(article);
         return "redirect:/articles";
     }
+
+    public List<Article> getOwnArticles(String username){
+        List<Article> articles = service.getAll();
+        List<Article> ownArticles = new ArrayList<>();
+        for (Article article : articles) {
+            if(article.getAuthorName().equals(username)){
+                ownArticles.add(article);
+            }
+        }
+        return ownArticles;
+    }
+
 }

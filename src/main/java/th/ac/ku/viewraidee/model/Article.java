@@ -1,7 +1,5 @@
 package th.ac.ku.viewraidee.model;
 
-import com.google.cloud.Timestamp;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

@@ -17,7 +17,8 @@
         left: 0;
         background-color: #0dcaf0; /* Black */
         overflow-x: hidden; /* Disable horizontal scroll */
-        padding-top: 20px;
+        margin-top: 50px;
+        padding-top: 100px;
     }
 
     /* The navigation menu links */
@@ -36,6 +37,7 @@
 
     /* Style page content */
     .main {
+        margin-top: 50px;
         margin-left: 400px; /* Same as the width of the sidebar */
         padding: 0px 10px;
     }
@@ -45,9 +47,51 @@
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
     }
+
+    #coverImg{
+        width: 240px;
+        height: 320px;
+        z-index: -1;
+        opacity: 0.8;
+        object-fit: cover;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        padding: 10px;
+    }
+
+    .grid-item{
+        margin-bottom: 30px !important;
+        margin-left: 50px !important;
+        width: 240px;
+        background-color: #1a1e21;
+        position: relative;
+    }
+
+    .textIMG{
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: #ffffff;
+    }
+
+    .star{
+        width: 20px;
+    }
+
+    #fixedBTN {
+        position: fixed;
+        bottom: 0px;
+        right: 0px;
+    }
+
 </style>
 
 <body>
+
+<div th:insert="fragments/header :: header"></div>
 
 <div class="sidenav">
     <p class="text-left" th:text="${username}"></p>
@@ -61,13 +105,19 @@
 </div>
 
 <div class="main">
-    <h2>Sidebar</h2>
-    <p>This sidebar is of full height (100%) and always shown.</p>
-    <p>Scroll down the page to see the result.</p>
-    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <div class="container" style="padding: 30px;">
+        <div class="grid-container" >
+            <div class="grid-item" th:each="article : ${ownArticle}">
+                <img id="coverImg" th:src="${article.coverPath}" class="card-img rounded-vrd-1">
+                <div class="textIMG">
+                    <h5 th:text="${article.movieName}"></h5>
+                    <p  th:text="${article.atcName}"></p>
+                    <img class="star" th:src="@{/images/star.png}" th:text="${article.getStarRate()}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <a type="button" class="btn btn-primary" id="fixedBTN" th:href="@{/article/add}">+</a>
 </div>
 
 </body>
