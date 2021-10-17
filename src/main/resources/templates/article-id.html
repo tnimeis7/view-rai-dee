@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link th:rel="stylesheet" th:href="@{/css/article-blog.css}">
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body style="background-color: #d4dcdc;">
+    <div th:insert="fragments/header :: header"></div>
+    <div class="frame-vrd" style="padding-top: 1rem;">
+        <div class="container align-items-center">
+            <div th:text="${article}">
+
+                <h1 th:text="${atc.atcName}"></h1>
+                <img th:src="${article.coverPath}" class="card-img rounded-vrd-1">
+                <h4 th:text="${article.movieName}"></h4>
+                <h4 th:text="${article.type}"></h4>
+<!--                <h4 th:text="${article.gen}"></h4> //หมวดหมู่หนังต้องเชื่อมกับคลาส Genre -->
+                <p th:text="${article.content}"></p>
+            tjyj
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

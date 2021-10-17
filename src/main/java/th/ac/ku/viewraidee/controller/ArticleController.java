@@ -3,10 +3,7 @@ package th.ac.ku.viewraidee.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.ArticleService;
 
@@ -32,6 +29,13 @@ public class ArticleController {
 //                Comparator.comparing(Article::getPublishDate));
         return "articles";
     }
+
+    @GetMapping("/{atcId}")
+    public String getArticle(@PathVariable String atcId, Model model){
+        model.addAttribute("article", service.getById(atcId));
+        return "article-id";
+    }
+
 
     @GetMapping("/create")
     public String getAddPage(){
