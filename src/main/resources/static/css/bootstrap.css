@@ -635,6 +635,15 @@ progress {
   margin-left: auto;
 }
 
+.frame-vrd{
+  width: 92%;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 0.25rem;
+}
+
 @media (min-width: 576px) {
   .container-sm, .container {
     max-width: 540px;
@@ -3745,7 +3754,7 @@ textarea.form-control-lg {
   padding: 0.25rem 1rem;
   clear: both;
   font-weight: 400;
-  color: #212529;
+  color: #E5CE70; /*#212529;*/
   text-align: inherit;
   text-decoration: none;
   white-space: nowrap;
@@ -3753,13 +3762,13 @@ textarea.form-control-lg {
   border: 0;
 }
 .dropdown-item:hover, .dropdown-item:focus {
-  color: #1e2125;
-  background-color: #e9ecef;
+  /*color: #1e2125;*/
+  background-color: #565C62;
 }
 .dropdown-item.active, .dropdown-item:active {
-  color: #fff;
+  /*color: #fff;*/
   text-decoration: none;
-  background-color: #0d6efd;
+  background-color: black;
 }
 .dropdown-item.disabled, .dropdown-item:disabled {
   color: #adb5bd;
@@ -4487,6 +4496,8 @@ textarea.form-control-lg {
   color: #fff;
 }
 
+
+
 .card {
   position: relative;
   display: flex;
@@ -4496,7 +4507,6 @@ textarea.form-control-lg {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
 }
 .card > hr {
   margin-right: 0;
@@ -4587,7 +4597,14 @@ textarea.form-control-lg {
 .card-img,
 .card-img-top,
 .card-img-bottom {
-  width: 100%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  float: left;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .card-img,
@@ -7908,6 +7925,10 @@ textarea.form-control-lg {
 
 .rounded-2 {
   border-radius: 0.25rem !important;
+}
+
+.rounded-vrd-1 {
+  border-radius: 1rem !important;
 }
 
 .rounded-3 {

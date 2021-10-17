@@ -1,0 +1,12 @@
+.btn-vrd-sort{
+    border-color: #E5CE70;
+    color: #E5CE70;
+}
+
+.btn-vrd-sort:hover, btn-vrd-sort:focus {
+    color: white;
+    border-color: white;
+}
+
+
+
