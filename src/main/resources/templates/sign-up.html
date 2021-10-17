@@ -28,20 +28,20 @@
                         <center><p th:text="${signupError}"></p></center>
                         <form name="signUp" th:action="@{/signUp}" method="POST">
                             <div class="field padding-bottom--15">
-                                <input type="text" id="usernameInput" class="form-control" name="username" placeholder="ชื่อผู้ใช้">
+                                <input type="text" id="usernameInput" name="username" placeholder="ชื่อผู้ใช้">
                             </div>
                             <div class="field padding-bottom--15">
-                                <input type="email" id="emailInput" class="form-control" name="email" placeholder="อีเมล">
+                                <input type="email" id="emailInput" name="email" placeholder="อีเมล">
                             </div>
                             <div class="field padding-bottom--15">
-                                <input type="password" id="passwordInput" class="form-control" name="password" placeholder="รหัสผ่าน">
+                                <input type="password" id="passwordInput" name="password" placeholder="รหัสผ่าน">
                                 <span class="eye eye-img" onclick="showPwd1()">
                                     <img th:src="@{/images/see.png}" width="20" id="hide1"/>
                                     <img th:src="@{/images/invisible.png}" width="20" id="hide2"/>
                                 </span>
                             </div>
                             <div class="field padding-bottom--24">
-                                <input type="password" id="confirmPasswordInput" class="form-control" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน">
+                                <input type="password" id="confirmPasswordInput" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน">
                                 <span class="eye eye-img" onclick="showPwd2()">
                                     <img th:src="@{/images/see.png}" width="20" id="hide3"/>
                                     <img th:src="@{/images/invisible.png}" width="20" id="hide4"/>

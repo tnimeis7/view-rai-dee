@@ -27,7 +27,7 @@
                             <center><a th:href="@{/}"><img th:src="@{/images/logo.png}" width="200"/></a></center>
                         </div>
                         <center><p th:text="${failureMsg}"></p></center>
-                        <form th:action="@{/login}" method="post" id="stripe-login">
+                        <form name="login" th:action="@{/login}" method="post" id="stripe-login">
                             <div class="field padding-bottom--15">
                                 <input type="text" id="usernameInput" name="username" placeholder="ชื่อผู้ใช้">
                             </div>
