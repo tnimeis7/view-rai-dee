@@ -55,8 +55,8 @@ public class AccountController {
         model.addAttribute("photo", account.getPhoto());
         model.addAttribute("link", "Link: "+ account.getLink());
         model.addAttribute("aboutMe", account.getAboutMe());
-        model.addAttribute("articleCount", account.getCountArticle());
-        model.addAttribute("heartCount", account.getCountHeart());
+        model.addAttribute("articleCount", "จำนวนบทความรีวิว: " + account.getCountArticle());
+        model.addAttribute("heartCount", "จำนวนหัวใจที่ได้รับ: " + account.getCountHeart());
         List<Article> onwArticle = articleController.getOwnArticles(username);
         model.addAttribute("ownArticle", onwArticle);
         return "account";

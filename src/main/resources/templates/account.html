@@ -4,104 +4,33 @@
     <meta charset="UTF-8">
     <title>ViewRaidee</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/account-style.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
-
-<style>
-    .sidenav {
-        height: 100%; /* Full-height: remove this if you want "auto" height */
-        width: 400px; /* Set the width of the sidebar */
-        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-        z-index: 1; /* Stay on top */
-        top: 0; /* Stay at the top */
-        left: 0;
-        background-color: #0dcaf0; /* Black */
-        overflow-x: hidden; /* Disable horizontal scroll */
-        margin-top: 50px;
-        padding-top: 100px;
-    }
-
-    /* The navigation menu links */
-    .sidenav a {
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-    }
-
-    /* When you mouse over the navigation links, change their color */
-    .sidenav a:hover {
-        color: #f1f1f1;
-    }
-
-    /* Style page content */
-    .main {
-        margin-top: 50px;
-        margin-left: 400px; /* Same as the width of the sidebar */
-        padding: 0px 10px;
-    }
-
-    /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-    @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
-    }
-
-    #coverImg{
-        width: 240px;
-        height: 320px;
-        z-index: -1;
-        opacity: 0.8;
-        object-fit: cover;
-    }
-
-    .grid-container {
-        display: grid;
-        grid-template-columns: auto auto auto;
-        padding: 10px;
-    }
-
-    .grid-item{
-        margin-bottom: 30px !important;
-        margin-left: 50px !important;
-        width: 240px;
-        background-color: #1a1e21;
-        position: relative;
-    }
-
-    .textIMG{
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        color: #ffffff;
-    }
-
-    .star{
-        width: 20px;
-    }
-
-    #fixedBTN {
-        position: fixed;
-        bottom: 0px;
-        right: 0px;
-    }
-
-</style>
-
 <body>
 
 <div th:insert="fragments/header :: header"></div>
 
 <div class="sidenav">
-    <p class="text-left" th:text="${username}"></p>
-    <img th:src="${photo}" th:width="100">
-    <p class="text-left" th:text="${link}"></p>
-    <p class="text-left" th:text="${aboutMe}"></p>
-    <a type="button" class="btn btn-secondary" th:href="@{/account/edit}">แก้ไข</a>
-    <p class="text-left" th:text="${articleCount}"></p>
-    <p class="text-left" th:text="${heartCount}"></p>
-    <a type="button" class="btn btn-secondary" th:href="@{/logout}">Logout</a>
+    <p class="text-left font--25" th:text="${username}" align="center"></p>
+    <img class="profile-pic" th:src="${photo}" th:width="120">
+    <div class="margin-left--35">
+        <p class="text-left padding-top--24" th:text="${link}"></p>
+        <p class="text-left break-word" th:text="${aboutMe}"></p>
+        <button type="submit" class="btn button btn-account" th:href="@{/account/edit}">แก้ไข</button>
+        <div class="line"></div>
+        <span class="display-flex">
+            <img th:src="@{/images/pencil.png}" width="30" height="30">
+            <p class="text-left margin-left--20" th:text="${articleCount}"></p>
+        </span>
+        <span class="display-flex padding-top--10">
+            <img th:src="@{/images/heart.png}" width="30" height="30">
+            <p class="text-left margin-left--20" th:text="${heartCount}"></p>
+        </span>
+        <div class="line"></div>
+        <button type="submit" class="btn button btn-logout" th:href="@{/logout}">ออกจากระบบ</button>
+    </div>
+
 </div>
 
 <div class="main">
@@ -117,7 +46,7 @@
             </div>
         </div>
     </div>
-    <a type="button" class="btn btn-primary" id="fixedBTN" th:href="@{/article/add}">+</a>
+    <a type="button" class="btn btn-add margin-right--20 margin-bottom--20" id="fixedBTN" th:href="@{/article/add}">+</a>
 </div>
 
 </body>
