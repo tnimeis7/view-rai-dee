@@ -7,27 +7,22 @@
     <link th:rel="stylesheet" th:href="@{/css/article-blog.css}">
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </head>
-<body style="background-color: #d4dcdc;">
+<body style="background-color: #1E1E1E;">
     <div th:insert="fragments/header :: header"></div>
-    <div class="frame-vrd" style="padding-top: 1rem;">
-        <div class="container align-items-center">
-            <div th:text="${article}">
-
-                <h1 th:text="${atc.atcName}"></h1>
-                <img th:src="${article.coverPath}" class="card-img rounded-vrd-1">
-                <h4 th:text="${article.movieName}"></h4>
-                <h4 th:text="${article.type}"></h4>
-<!--                <h4 th:text="${article.gen}"></h4> //หมวดหมู่หนังต้องเชื่อมกับคลาส Genre -->
-                <p th:text="${article.content}"></p>
-            tjyj
-
-
+    <div class="frame-vrd" style="background-color: #F7F7F7;">
+        <div class="container align-items-center" style="margin-top: 30px;">
+            <div class="row">
+                <center>
+                    <h1 th:text="${article.atcName}" style="margin-top: 50px;margin-bottom: 50px;"></h1>
+                    <img th:src="${article.coverPath}" class="poster rounded-vrd-1">
+                </center>
+                <h4>เรื่อง: <span th:text="${article.movieName}"></span></h4>
+                    <h4>ประเภท: <span th:text="${article.type}"></span></h4>
+                    <!--                <h4 th:text="${article.gen}"></h4> //หมวดหมู่หนังต้องเชื่อมกับคลาส Genre -->
+                    <p th:text="${article.content}"></p>
 
             </div>
         </div>
-
     </div>
-
-
 </body>
 </html>

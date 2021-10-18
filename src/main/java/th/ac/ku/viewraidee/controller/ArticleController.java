@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.ArticleService;
 
+import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -30,11 +31,16 @@ public class ArticleController {
         return "articles";
     }
 
-    @GetMapping("/{atcId}")
-    public String getArticle(@PathVariable String atcId, Model model){
-        model.addAttribute("article", service.getById(atcId));
+    @GetMapping("/{id}")
+    public String getArticle(@PathVariable String id, Model model){
+        model.addAttribute("article", service.getById(id));
         return "article-id";
     }
+//    @GetMapping("/{atcId}")
+//    public String getArticle(@PathVariable String atcId, HttpSession httpSession){
+//        httpSession.getmodel.addAttribute("article", service.getById(atcId));
+//        return "article-id";
+//    }
 
 
     @GetMapping("/create")

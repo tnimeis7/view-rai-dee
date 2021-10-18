@@ -28,8 +28,8 @@ public class ArticleService {
     }
 
     public Article getById(String id){
-        String url = "http://localhost:8090/Article/{atcId}";
-        ResponseEntity<Article> response = restTemplate.getForEntity(url, Article.class, id);
+        String url = "http://localhost:8090/Article/" + id;
+        ResponseEntity<Article> response = restTemplate.getForEntity(url, Article.class);
         Article article = response.getBody();
         return article;
     }

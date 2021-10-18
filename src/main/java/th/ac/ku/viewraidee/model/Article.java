@@ -5,9 +5,9 @@ import com.google.cloud.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Article implements BlockComponents{
+public class Article {
 
-    private String atcId;
+    private String id;
 
     private String atcName;
     private String movieName;
@@ -20,11 +20,11 @@ public class Article implements BlockComponents{
     private double starRate;
     private Date publishDate;
 
-    public String getAtcId() {
-        return atcId;
+    public String getId() {
+        return id;
     }
 
-    public void setAtcId(String atcId) { this.atcId = atcId; }
+    public void setId(String id) { this.id = id; }
 
     public String getAtcName() {
         return atcName;
@@ -105,8 +105,8 @@ public class Article implements BlockComponents{
 
 //    public void setPublishDate(Timestamp timestamp) { this.publishDate = timestamp; }
 
-    @Override
-    public String getId() {
-        return getAtcId();
-    }
+//    @Override
+//    public String getId() {
+//        return getAtcId();
+//    }
 }
