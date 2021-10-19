@@ -61,5 +61,31 @@
     object-fit: cover;
 }
 
+.limit-chars-300{
+    /*max-width: 300ch;*/
+    /*height: 8ch;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -web
+    /*overflow-wrap: break-word;*/
+}
+
+.line-clamp:after {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), #F7F7F7 50%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 0;
+    content: "...";
+    font-weight: bold;
+    padding: 0 20px 1px 45px;
+    position: absolute;
+    right: 0;}
+
+.line-clamp {
+    height: 5.6em;
+    line-height: 1.4em;
+    overflow: hidden;
+    position: relative;}
+
 
 

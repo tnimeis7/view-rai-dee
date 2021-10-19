@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>Articles</title>
 
-    <link th:rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link th:rel="stylesheet" th:href="@{/css/article-blog.css}">
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
 </head>
-<body style="background-color: #2c3034;">
+<body style="background-color: #F7F7F7;">
 
 <div th:insert="fragments/header :: header"></div>
 <div class="frame-vrd" style="padding-top: 1rem;">
@@ -24,20 +24,20 @@
     </div>
 
 </div>
-<div class="frame-vrd" style="background-color: #E5CE70;">
+<div class="frame-vrd" style="background-color: #3a4147;">
     <div class="container" style="padding: 30px;">
         <div class="row mt-2" th:each="article : ${atcNewest}">
-            <div class="card flex-row rounded-vrd-1 align-items-center">
+            <div class="card flex-row rounded-vrd-1 align-items-center" style="background-color: #F7F7F7;">
                 <div class="col-auto">
                     <h5 style="margin-left: 15px; margin-top: 15px;" th:text="${article.movieName}"></h5>
                     <a th:href="@{/articles/{id}(id=${article.id})}"><img th:src="${article.coverPath}" class="card-img card-img-vrd rounded-vrd-1"></a>
                 </div>
                 <div class="card-body">
-                    <a th:href="@{/articles/{id}(id=${article.id})}"><h4 class="card-title" th:text="${article.atcName}"></h4></a>
+                    <a th:href="@{/articles/{id}(id=${article.id})}"><h2 class="card-title" th:text="${article.atcName}"></h2></a>
                     <h6 class="card-title">รีวิวโดย:
                         <span th:text="${article.authorName}"></span>
                         | วันที่: <span th:text="${article.publishDate}"></span></h6>
-                    <p class="card-text" th:text="${article.content}"></p>
+                    <p class="card-text line-clamp justify-content-center" th:text="${article.content}"></p>
                 </div>
             </div>
         </div>
