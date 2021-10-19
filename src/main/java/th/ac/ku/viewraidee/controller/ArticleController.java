@@ -34,6 +34,8 @@ public class ArticleController {
     @GetMapping("/{id}")
     public String getArticle(@PathVariable String id, Model model){
         model.addAttribute("article", service.getById(id));
+        model.addAttribute('streaming', service.get
+
         return "article-id";
     }
 //    @GetMapping("/{atcId}")
