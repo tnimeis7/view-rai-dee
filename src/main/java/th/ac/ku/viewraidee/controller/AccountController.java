@@ -92,6 +92,7 @@ public class AccountController {
             }
             accountService.update(account);
         }
+        TimeUnit.SECONDS.sleep(1);
         return "redirect:/account";
     }
 
