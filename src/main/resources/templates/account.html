@@ -17,7 +17,7 @@
     <div class="margin-left--35">
         <p class="text-left padding-top--24" th:text="${link}"></p>
         <p class="text-left break-word" th:text="${aboutMe}"></p>
-        <button type="submit" class="btn button btn-account" th:href="@{/account/edit}">แก้ไข</button>
+        <button type="submit" class="btn button btn-account" onclick="window.location.href='/account/edit'">แก้ไข</button>
         <div class="line"></div>
         <span class="display-flex">
             <img th:src="@{/images/pencil.png}" width="30" height="30">
@@ -28,7 +28,7 @@
             <p class="text-left margin-left--20" th:text="${heartCount}"></p>
         </span>
         <div class="line"></div>
-        <button type="submit" class="btn button btn-logout" th:href="@{/logout}">ออกจากระบบ</button>
+        <button class="btn button btn-logout" onclick="window.location.href='/logout'">ออกจากระบบ</button>
     </div>
 
 </div>
