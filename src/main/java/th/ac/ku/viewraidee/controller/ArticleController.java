@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.ArticleService;
 
-import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -18,32 +18,35 @@ public class ArticleController {
     @Autowired
     private ArticleService service;
 
+    @Autowired
+    private ArticleStreamController articleStreamController;
+
     @GetMapping
     public String getArticles(Model model){
-        model.addAttribute("articles", service.getAll());
-        model.addAttribute("atcNewest",
-                service.getAll().stream().sorted(Comparator.comparing(Article::getPublishDate))
-                        .collect(Collectors.toList()));
-        model.addAttribute("atcOldest",
-                service.getAll().stream().sorted(Comparator.comparing(Article::getPublishDate).reversed())
-                        .collect(Collectors.toList()));
-//                Comparator.comparing(Article::getPublishDate));
+        model.addAttribute("atcNewest", sortArticles(1));
+        model.addAttribute("atcOldest", sortArticles(0));
         return "articles";
     }
+
+    private List<Article> sortArticles(int order){
+        List<Article> newest = service.getAll().stream().sorted(Comparator.comparing(Article::getPublishDate))
+                .collect(Collectors.toList());
+        List<Article> oldest = newest;
+        if(order == 1) return newest; // 1 is sorting list from newest
+        else{ // 0 is sorting List from oldest
+            Collections.reverse(oldest);
+            return oldest;
+        }
+    }
+
 
     @GetMapping("/{id}")
     public String getArticle(@PathVariable String id, Model model){
         model.addAttribute("article", service.getById(id));
-        model.addAttribute('streaming', service.get
+//        model.addAttribute("streaming", articleStreamController.getArticleStreams());
 
         return "article-id";
     }
-//    @GetMapping("/{atcId}")
-//    public String getArticle(@PathVariable String atcId, HttpSession httpSession){
-//        httpSession.getmodel.addAttribute("article", service.getById(atcId));
-//        return "article-id";
-//    }
-
 
     @GetMapping("/create")
     public String getAddPage(){
