@@ -13,15 +13,10 @@ import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.AccountService;
 import th.ac.ku.viewraidee.service.ArticleService;
 import th.ac.ku.viewraidee.service.AuthenticationService;
-import th.ac.ku.viewraidee.service.FileService;
 
 import javax.servlet.http.HttpServletRequest;
-
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/account")
@@ -37,15 +32,10 @@ public class AccountController {
     private AuthenticationService authenticationService;
 
     @Autowired
-    private FileService fileService;
-
-    @Autowired
     private ArticleService articleService;
 
     @Autowired
     private ArticleController articleController;
-
-    private Logger logger;
 
     @GetMapping()
     public String getAccountPage(Model model) throws Exception {
@@ -72,7 +62,7 @@ public class AccountController {
     }
 
     @PostMapping("/edit")
-    public String edit(@ModelAttribute Account account, HttpServletRequest request) {
+    public String edit(@ModelAttribute Account account, HttpServletRequest request) throws InterruptedException {
         String passwordField = account.getPassword();
         String currentUsername = authenticationService.getCurrentUsername();
         Account currentAccount = accountService.getById(currentUsername);
@@ -102,7 +92,22 @@ public class AccountController {
             }
             accountService.update(account);
         }
+        TimeUnit.SECONDS.sleep(1);
         return "redirect:/account";
+    }
+
+    @PostMapping("/changeImg")
+    public String changeImg(@ModelAttribute Account account){
+        String newPh = account.getPhoto();
+        String currentUsername = authenticationService.getCurrentUsername();
+        Account currentAccount = accountService.getById(currentUsername);
+        currentAccount.setPhoto(newPh);
+        accountService.update(currentAccount);
+        currentAccount = accountService.getById(currentUsername);
+        while(!(currentAccount.getPhoto().equals(newPh))){
+            currentAccount = accountService.getById(currentUsername);
+        }
+        return "redirect:/account/edit";
     }
 
     @PostMapping("/delete")
@@ -120,11 +125,4 @@ public class AccountController {
         account.setPhoto(currentAccount.getPhoto());
         account.setRole(currentAccount.getRole());
     }
-
-//    public Object upload(@RequestParam("file") MultipartFile multipartFile) {
-//        logger.info("HIT -/upload | File Name : {}", multipartFile.getOriginalFilename());
-//        return fileService.upload(multipartFile);
-//    }
-
-
 }
