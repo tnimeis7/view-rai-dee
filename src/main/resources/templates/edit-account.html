@@ -18,15 +18,15 @@
 <div class="container" align="center" th:object="${account}">
     <h1 class="display-6">Edit Profile</h1>
     <form th:action="@{/account/changeImg}" method="POST">
-        <div class="row mb-3 form-group field-input" align="center">
-            <div class="profile-pic-div">
+        <div class="row mb-3 form-group field-input padding-top--50">
+            <div class="profile-pic-div img-center">
                 <img th:src="*{photo}" id="photo" ><br>
                 <input type="file" id="fileBtn" name="file" value="editPhoto">
                 <label for="fileBtn" id="uploadBtn">แก้ไขรูป</label>
                 <button type="submit" id="submitChangeImg" class="btn btn-x" style="display: none;"></button>
             </div>
         </div>
-        <div class="row mb-3 form-group field-input">
+        <div class="row mb-0 form-group">
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="imgUrl" style="display: none;" th:field="*{photo}">
             </div>
@@ -34,9 +34,7 @@
     </form>
 
     <form th:action="@{/account/edit}" method="POST">
-        <div class="padding-bottom--24">
-            <button type="submit" class="btn btn-x">X</button>
-        </div>
+        <button type="submit" class="btn btn-x">X</button>
         <div class="row mb-3 form-group field-input">
             <label for="usernameField" class="col-sm-2 col-form-label">ชื่อผู้ใช้</label>
             <div class="col-sm-10">
