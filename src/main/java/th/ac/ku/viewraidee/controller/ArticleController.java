@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.ArticleService;
+import th.ac.ku.viewraidee.service.ArticleStreamService;
+import th.ac.ku.viewraidee.service.TagService;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,7 +21,10 @@ public class ArticleController {
     private ArticleService service;
 
     @Autowired
-    private ArticleStreamController articleStreamController;
+    private ArticleStreamService articleStreamService;
+
+    @Autowired
+    private TagService tagService;
 
     @GetMapping
     public String getArticles(Model model){
@@ -43,8 +48,9 @@ public class ArticleController {
     @GetMapping("/{id}")
     public String getArticle(@PathVariable String id, Model model){
         model.addAttribute("article", service.getById(id));
+        model.addAttribute("streamPlatforms", articleStreamService.getAllPlatformByAtcId(id));
+        model.addAttribute("tags", tagService.getAllTagByAtcId(id));
 //        model.addAttribute("streaming", articleStreamController.getArticleStreams());
-
         return "article-id";
     }
 

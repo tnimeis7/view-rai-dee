@@ -7,11 +7,9 @@
     <link th:rel="stylesheet" th:href="@{/css/article-blog.css}">
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <style>
-        .youtube-container{
-            margin-left: auto;
-            margin-right: auto;
-            /*width: 640px;*/
-            /*display: block;*/
+        .space-between-inline{
+            display: inline-block;
+            padding-right: 20px;
         }
     </style>
 </head>
@@ -28,17 +26,32 @@
                     <h4>ประเภท: <span th:text="${article.type}"></span></h4>
                     <!--                <h4 th:text="${article.gen}"></h4> //หมวดหมู่หนังต้องเชื่อมกับคลาส Genre -->
                     <p class="justify-content-center" th:text="${article.content}"></p>
-            <div class="d-block">
+            <!--โซน video teaser จนถึง ดูที่-->
+            <div class="d-block" style="margin-top: 50px;">
                 <div class="d-flex justify-content-center">
                     <iframe th:src="${article.teaserLink}" width="640px" height="395px"></iframe>
                 </div>
-                <h4>รีวิวโดย <span th:text="${article.authorName}">
-                    วันที่ <span th:text="${article.publishDate}"></span> </span></h4>
-                <h4>แท็ก</h4>
-                <h4>ดูที่</h4>
-                
 
+                <div class="container" style="width:800px; margin-top: 50px;">
+                    <h4 style="display: inline-block; padding-right: 200px;">
+                        รีวิวโดย <span th:text="${article.authorName}"></span>
+                        วันที่ <span th:text="${article.publishDate}"></span></span></h4>
+
+                    <h4 class="space-between-inline">แท็ก
+                        <div th:each="tag : ${tags}" class="space-between-inline">
+                            <h5 th:text="${tag.getNameTag()}"></h5>
+                        </div>
+                    </h4>
+
+                    <h4>ดูที่</h4>
+                    <div th:each="streamPf : ${streamPlatforms}" style="display: inline-block; padding-right: 10px;">
+                        <img th:src="${streamPf.getPicPath()}" class="platformLogo">
+                    </div>
+                </div>
             </div>
+            <!-- Show Heart Count -->
+            <div>
+
 <!--            </div>-->
         </div>
     </div>

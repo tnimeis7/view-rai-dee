@@ -1,11 +1,13 @@
 .btn-vrd-sort{
-    border-color: #E5CE70;
-    color: #E5CE70;
+    border-color: #2c3034;
+    color: #2c3034;
+    border-width: 0.1rem;
 }
 
-.btn-vrd-sort:hover, btn-vrd-sort:focus {
-    color: white;
-    border-color: white;
+.btn-vrd-sort:hover, btn-vrd-sort:focus, btn-vrd-sort:active {
+    color: #F7F7F7;
+    /*border-color: white;*/
+    background-color: #2c3034;
 }
 
 .frame-vrd{
@@ -27,11 +29,11 @@
     padding: 0.25rem 1rem;
     clear: both;
     font-weight: 400;
-    color: #E5CE70; /*#212529;*/
+    color: #F7F7F7; /*#212529;*/
     text-align: inherit;
     text-decoration: none;
     white-space: nowrap;
-    background-color: transparent;
+    background-color: #2c3034;
     border: 0;
 }
 .dropdown-item-vrd:hover, .dropdown-item-vrd:focus {
@@ -42,6 +44,9 @@
     /*color: #fff;*/
     text-decoration: none;
     background-color: black;
+}
+select selected{
+
 }
 
 .card-img-vrd {
@@ -68,7 +73,6 @@
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -web
     /*overflow-wrap: break-word;*/
 }
 
@@ -86,6 +90,17 @@
     line-height: 1.4em;
     overflow: hidden;
     position: relative;}
+
+selectvrd {
+    color: red; !important;
+
+}
+
+.platformLogo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
 
 
 

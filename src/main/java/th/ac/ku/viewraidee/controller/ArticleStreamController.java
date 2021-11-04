@@ -18,18 +18,11 @@ public class ArticleStreamController {
     @Autowired
     private ArticleStreamService service;
 
-//    @GetMapping
-//    public String getArticleStreams(Model model) {
-//        model.addAttribute("atcStreams", service.getAll());
-//        return "articleStreaming";
-//    }
-
-//    public String getStreamsForOneATc(){
-//        List<ArticleStream> atcStreams = service.getAll();
-//
-//
-//
-//
-//    }
+    //ทำงานไม่ได้ แม้จะรีเทิร์นหน้าเดียวกัน เลยให้ ArticleController เรียกใช้ ArticleStreamService เอง
+    @GetMapping
+    public String getPlatformsEachAtc(Model model, String atcId){
+        model.addAttribute("streamPlatform", service.getAllPlatformByAtcId(atcId));
+        return "article-id";
+    }
 
 }
