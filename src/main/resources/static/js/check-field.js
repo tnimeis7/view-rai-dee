@@ -5,10 +5,10 @@ function checkFieldSignUp() {
     confirmPassword = document.signUp.confirmPassword.value;
 
     if(username == "" || email == "" || password == "" || confirmPassword == "") {
-        Swal("\nกรอกข้อมูลไม่ครบ กรุณาตรวจสอบใหม่อีกครั้ง")
+        alert("\nกรอกข้อมูลไม่ครบ กรุณาตรวจสอบใหม่อีกครั้ง")
         return false;
     }else if(password !== confirmPassword){
-        Swal("\nรหัสผ่านไม่ตรง กรุณาตรวจสอบใหม่อีกครั้ง")
+        alert("\nรหัสผ่านไม่ตรง กรุณาตรวจสอบใหม่อีกครั้ง")
         return false;
     }else{
         return true;
@@ -20,7 +20,7 @@ function checkFieldLogin() {
     password = document.login.password.value;
 
     if(username == "" || password == ""){
-        Swal("\nกรอกข้อมูลไม่ครบ กรุณาตรวจสอบใหม่อีกครั้ง")
+        alert("\nกรอกข้อมูลไม่ครบ กรุณาตรวจสอบใหม่อีกครั้ง")
         return false;
     }else{
         return true;

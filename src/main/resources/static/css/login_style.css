@@ -240,5 +240,8 @@
     transform: translate(-5px, -2px)
   }
   .black{
-  color: black;
+    color: black;
+  }
+  .wrong{
+    color: #E43A36;
   }
