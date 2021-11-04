@@ -90,7 +90,7 @@
         margin-left: auto;
         margin-right: auto;
         border-radius: 50%;
-        border: 3px solid #1E1E1E;
+        border: 1.5px solid #1E1E1E;
         overflow: hidden;
     }
 
@@ -139,7 +139,7 @@
     .btn-account {
         background-color: white;
         color: black;
-        border: 2px solid black;
+        border: 1px solid black;
         width: 80px;
         height: 40px;
     }
@@ -147,7 +147,7 @@
     .btn-logout {
         background-color: white;
         color: black;
-        border: 2px solid black;
+        border: 1px solid black;
         width: 120px;
         height: 40px;
         margin-right: 35px;
@@ -162,7 +162,7 @@
     }
 
     .line {
-        height: 1.5px;
+        height: 1px;
         background: black;
         margin: 20px 32px 20px 0px;
     }
@@ -189,5 +189,6 @@
 
     .btn-add:active {
         background: #92A3AA
+        color: white;
     }
 
