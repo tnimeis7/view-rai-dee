@@ -84,6 +84,10 @@ public class AccountService {
         createAccount(account);
     }
 
+    public boolean checkMatch(String password, String hashedPassword){
+        return passwordEncoder.matches(password, hashedPassword);
+    }
+
 
 
 }

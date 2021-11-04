@@ -53,18 +53,6 @@
                 <input type="email" class="form-control" id="emailSocialField" th:field="*{email}" disabled>
             </div>
         </div>
-        <div th:if="*{password!=null}" class="row mb-3 form-group field-input">
-            <label for="passwordField" class="col-sm-2 col-form-label">รหัสผ่านใหม่</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="passwordField" placeholder="หากไม่ต้องการเปลี่ยนรหัสผ่าน ข้ามช่องนี้" name="password">
-            </div>
-        </div>
-        <div th:if="*{password!=null}" class="row mb-3 form-group field-input">
-            <label for="passwordField" class="col-sm-2 col-form-label">ยืนยันรหัสผ่านใหม่</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="confirmPasswordField">
-            </div>
-        </div>
         <div class="row mb-3 form-group field-input">
             <label for="linkField" class="col-sm-2 col-form-label">link</label>
             <div class="col-sm-10">
@@ -78,9 +66,38 @@
             </div>
         </div>
     </form>
+    <div th:if="*{password!=null}">
+        <br><hr><br><p>เปลี่ยนรหัสผ่าน</p>
+        <form th:action="@{/account/password/edit}" method="POST">
+            <center><p th:text="${changePasswordError}"></p></center>
+            <div class="row mb-3 form-group field-input">
+                <label for="passwordField" class="col-sm-2 col-form-label">รหัสผ่านปัจจุบัน</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="currentPasswordField" name="password">
+                </div>
+            </div>
+            <div class="row mb-3 form-group field-input">
+                <label for="passwordField" class="col-sm-2 col-form-label">รหัสผ่านใหม่</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="passwordField" name="password">
+                </div>
+            </div>
+            <div class="row mb-3 form-group field-input">
+                <label for="passwordField" class="col-sm-2 col-form-label">ยืนยันรหัสผ่านใหม่</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="confirmPasswordField">
+                </div>
+            </div>
+            <div class="row mb-3 form-group field-input">
+                <button type="submit" class="btn btn-primary" onclick="">เปลี่ยนรหัสผ่าน</button>
+            </div>
+        </form>
+    </div>
+    <br><hr><br>
     <form th:action="@{/account/delete}" method="POST">
         <button type="submit" class="btn btn-primary">ลบบัญชี</button>
     </form>
+    <br>
 </div>
 </body>
 

@@ -7,7 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import th.ac.ku.viewraidee.model.Account;
 import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.service.AccountService;
@@ -63,36 +62,47 @@ public class AccountController {
 
     @PostMapping("/edit")
     public String edit(@ModelAttribute Account account, HttpServletRequest request) throws InterruptedException {
-        String passwordField = account.getPassword();
+        String password = "";
         String currentUsername = authenticationService.getCurrentUsername();
         Account currentAccount = accountService.getById(currentUsername);
         setStaticInfo(account, currentAccount);
-        if(!(account.getUsername().equals(currentUsername))){
-            String password = account.getPassword();
+        if(!(account.getUsername().equals(currentUsername))){ //change username
             accountService.createAccount(account);
-            if(currentAccount.getPassword()!=null&&passwordField.isEmpty()){
-                account.setPassword(currentAccount.getPassword());
-                accountService.update(account);
+            if(currentAccount.getPassword()==null){ //social account
+                account.setEmail(currentAccount.getEmail()); //เพราะ email โดนให้แก้ไขไม่ได้
             }
-            else if(currentAccount.getPassword()==null){
-                password = "";
-                account.setEmail(currentAccount.getEmail());
-                accountService.update(account);
+            else {
+                password = currentAccount.getPassword();
             }
-            authenticationService.preAuthenticate(account.getUsername(), password, request);
+            account.setPassword(password);
+            accountService.update(account);
+            authenticationService.preAuthenticate(account.getUsername(), "", request);
             accountService.delete(currentUsername);
         }
         else{
-            if(passwordField.isEmpty()){
-                account.setPassword(currentAccount.getPassword());
-            }
-            else{
-                String hashedPassword = passwordEncoder.encode(account.getPassword());
-                account.setPassword(hashedPassword);
-            }
+            account.setPassword(currentAccount.getPassword());
             accountService.update(account);
         }
-        TimeUnit.SECONDS.sleep(1);
+        return "redirect:/account";
+    }
+
+    @PostMapping("/password/edit")
+    public String editPassword(@ModelAttribute Account account, Model model) {
+        String changePasswordError = null;
+        String currentUsername = authenticationService.getCurrentUsername();
+        Account currentAccount = accountService.getById(currentUsername);
+        String value[] = splitField(account.getPassword());
+        if(accountService.checkMatch(value[0], currentAccount.getPassword())){
+            String hashedPassword = passwordEncoder.encode(value[1]);
+            currentAccount.setPassword(hashedPassword);
+            accountService.update(currentAccount);
+        }
+        else{
+            changePasswordError = "รหัสผ่านปัจจุบันไม่ถูกต้อง";
+            model.addAttribute("account", currentAccount);
+            model.addAttribute("changePasswordError", changePasswordError);
+            return "edit-account";
+        }
         return "redirect:/account";
     }
 
@@ -124,5 +134,9 @@ public class AccountController {
         account.setCountHeart(currentAccount.getCountHeart());
         account.setPhoto(currentAccount.getPhoto());
         account.setRole(currentAccount.getRole());
+    }
+
+    public String[] splitField(String fieldValue){
+        return fieldValue.split(",");
     }
 }
