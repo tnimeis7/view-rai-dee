@@ -38,24 +38,21 @@ public class AccountController {
 
     @GetMapping()
     public String getAccountPage(Model model) throws Exception {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Account account = accountService.getById(username);
+        Account account = authenticationService.getCurrentAccount();
         model.addAttribute("username", account.getUsername());
         model.addAttribute("photo", account.getPhoto());
         model.addAttribute("link", "Link: "+ account.getLink());
         model.addAttribute("aboutMe", account.getAboutMe());
         model.addAttribute("articleCount", "จำนวนบทความรีวิว: " + account.getCountArticle());
         model.addAttribute("heartCount", "จำนวนหัวใจที่ได้รับ: " + account.getCountHeart());
-        List<Article> onwArticle = articleController.getOwnArticles(username);
+        List<Article> onwArticle = articleController.getOwnArticles(account.getUsername());
         model.addAttribute("ownArticle", onwArticle);
         return "account";
     }
 
     @GetMapping("/edit")
     public String getEditAccountPage(Model model) throws Exception {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        Account account = accountService.getById(username);
+        Account account = authenticationService.getCurrentAccount();
         model.addAttribute("account", account);
         return "edit-account";
     }
@@ -63,10 +60,9 @@ public class AccountController {
     @PostMapping("/edit")
     public String edit(@ModelAttribute Account account, HttpServletRequest request) throws InterruptedException {
         String password = "";
-        String currentUsername = authenticationService.getCurrentUsername();
-        Account currentAccount = accountService.getById(currentUsername);
+        Account currentAccount = authenticationService.getCurrentAccount();
         setStaticInfo(account, currentAccount);
-        if(!(account.getUsername().equals(currentUsername))){ //change username
+        if(!(account.getUsername().equals(currentAccount.getUsername()))){ //change username
             accountService.createAccount(account);
             if(currentAccount.getPassword()==null){ //social account
                 account.setEmail(currentAccount.getEmail()); //เพราะ email โดนให้แก้ไขไม่ได้
@@ -77,7 +73,7 @@ public class AccountController {
             account.setPassword(password);
             accountService.update(account);
             authenticationService.preAuthenticate(account.getUsername(), "", request);
-            accountService.delete(currentUsername);
+            accountService.delete(currentAccount.getUsername());
         }
         else{
             account.setPassword(currentAccount.getPassword());
@@ -89,8 +85,7 @@ public class AccountController {
     @PostMapping("/password/edit")
     public String editPassword(@ModelAttribute Account account, Model model) {
         String changePasswordError = null;
-        String currentUsername = authenticationService.getCurrentUsername();
-        Account currentAccount = accountService.getById(currentUsername);
+        Account currentAccount = authenticationService.getCurrentAccount();
         String value[] = splitField(account.getPassword());
         if(accountService.checkMatch(value[0], currentAccount.getPassword())){
             String hashedPassword = passwordEncoder.encode(value[1]);
@@ -109,13 +104,12 @@ public class AccountController {
     @PostMapping("/changeImg")
     public String changeImg(@ModelAttribute Account account){
         String newPh = account.getPhoto();
-        String currentUsername = authenticationService.getCurrentUsername();
-        Account currentAccount = accountService.getById(currentUsername);
+        Account currentAccount = authenticationService.getCurrentAccount();
         currentAccount.setPhoto(newPh);
         accountService.update(currentAccount);
-        currentAccount = accountService.getById(currentUsername);
+        currentAccount = accountService.getById(currentAccount.getUsername());
         while(!(currentAccount.getPhoto().equals(newPh))){
-            currentAccount = accountService.getById(currentUsername);
+            currentAccount = accountService.getById(currentAccount.getUsername());
         }
         return "redirect:/account/edit";
     }

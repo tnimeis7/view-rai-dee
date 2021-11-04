@@ -57,6 +57,12 @@ public class AuthenticationService implements AuthenticationProvider {
         return login;
     }
 
+    public Account getCurrentAccount(){
+        String currentUsername = getCurrentUsername();
+        return accountService.getById(currentUsername);
+    }
+
+
     @Override
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
