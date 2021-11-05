@@ -1,6 +1,6 @@
 package th.ac.ku.viewraidee.model;
 
-public class ArticleStream implements BlockComponents{
+public class ArticleStream{
     private String atcId;
     private String platform;
 
@@ -20,7 +20,6 @@ public class ArticleStream implements BlockComponents{
         this.platform = platform;
     }
 
-    @Override
     public String getId() {
         return getAtcId()+"_"+getPlatform();
     }

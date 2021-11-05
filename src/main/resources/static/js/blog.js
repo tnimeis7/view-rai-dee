@@ -1,5 +1,10 @@
-document.getElementById.addEventListener("click", sortAtcByDate)
-
-function sortAtcByDate(){
-    temp = document.getElementById("").value
+function showContent(selector, maxLength) {
+    var element = document.querySelector(selector),
+        truncated = element.innerText;
+    if (truncated.length > maxLength) {
+        truncated = truncated.substr(0, maxLength) + "...";
+    }
+    return truncated;
 }
+
+document.querySelector('p').innerText = showContent('p', 3);
