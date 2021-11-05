@@ -1,5 +1,7 @@
 package th.ac.ku.viewraidee.model;
 
+import java.util.UUID;
+
 public class Feedback implements BlockComponents {
 
     private String fbId;
@@ -12,6 +14,7 @@ public class Feedback implements BlockComponents {
     }
 
     public void setFbId(String fbId) {
+
         this.fbId = fbId;
     }
 
@@ -39,6 +42,10 @@ public class Feedback implements BlockComponents {
         this.fbStatus = fbStatus;
     }
 
+    public String generateUUIDForId(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
+    }
     @Override
     public String getId() {
         return getFbId();

@@ -40,13 +40,23 @@ public class AccountController {
     public String getAccountPage(Model model) throws Exception {
         Account account = authenticationService.getCurrentAccount();
         model.addAttribute("user",account.getUsername());
-        model.addAttribute("username", account.getUsername());
-        model.addAttribute("photo", account.getPhoto());
-        model.addAttribute("link", "Link: "+ account.getLink());
-        model.addAttribute("aboutMe", account.getAboutMe());
-        model.addAttribute("articleCount", "จำนวนบทความรีวิว: " + account.getCountArticle());
-        model.addAttribute("heartCount", "จำนวนหัวใจที่ได้รับ: " + account.getCountHeart());
+        model.addAttribute("role", null);
+        model.addAttribute("account",account);
         List<Article> onwArticle = articleController.getOwnArticles(account.getUsername());
+        model.addAttribute("ownArticle", onwArticle);
+        return "account";
+    }
+
+    @GetMapping("{username}")
+    public String getOtherAccount(Model model, @ModelAttribute Account sendingAccount) throws Exception {
+        Account account = authenticationService.getCurrentAccount();
+        model.addAttribute("user",account.getUsername());
+        if(account.getRole().equals("admin")){
+            model.addAttribute("role", account.getRole());
+        }
+        Account otherAcc = accountService.getById(sendingAccount.getUsername());
+        model.addAttribute("account",otherAcc);
+        List<Article> onwArticle = articleController.getOwnArticles(otherAcc.getUsername());
         model.addAttribute("ownArticle", onwArticle);
         return "account";
     }
@@ -120,10 +130,20 @@ public class AccountController {
     public String delete(HttpServletRequest request) {
         String currentUsername = authenticationService.getCurrentUsername();
         accountService.delete(currentUsername);
+        //ไล่ลบทุก article ของคนนี้
         while(accountService.isUsernameAvailable(currentUsername)){};
         authenticationService.preAuthenticate(currentUsername, "", request);
         return "redirect:/";
     }
+
+    @PostMapping("/delete/{username}")
+    public String deleteOtherAcc(HttpServletRequest request, Account otherAccount) {
+        String username = otherAccount.getUsername();
+        accountService.delete(username);
+        //ไล่ลบทุก article ของคนนี้
+        return "redirect:/";
+    }
+
 
     public void setStaticInfo(Account account, Account currentAccount){
         account.setCountArticle(currentAccount.getCountArticle());
