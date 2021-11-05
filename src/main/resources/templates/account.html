@@ -29,7 +29,11 @@
         </span>
         <div class="line"></div>
         <button th:if="${user}==*{username}" class="btn button btn-logout" onclick="window.location.href='/logout'">ออกจากระบบ</button>
-        <button th:if="${role}!=null" class="btn button btn-logout" onclick="window.location.href='/account/delete'">ลบ Account</button>
+        <form th:if="${role}!=null" th:action="|@{/account/delete/${account.username}}|" method="POST">
+            <input type="hidden" class="form-control" id="usernameField" th:field="*{username}">
+            <button class="btn button btn-logout">ลบ Account</button>
+        </form>
+
     </div>
 
 </div>

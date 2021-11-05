@@ -137,9 +137,10 @@ public class AccountController {
     }
 
     @PostMapping("/delete/{username}")
-    public String deleteOtherAcc(HttpServletRequest request, Account otherAccount) {
-        String username = otherAccount.getUsername();
-        accountService.delete(username);
+    public String deleteOtherAcc(HttpServletRequest request, @ModelAttribute Account otherAccount) {
+        System.out.println(otherAccount.getUsername());
+        Account deleteAcc = accountService.getById(otherAccount.getUsername());
+        accountService.delete(deleteAcc.getUsername());
         //ไล่ลบทุก article ของคนนี้
         return "redirect:/";
     }
