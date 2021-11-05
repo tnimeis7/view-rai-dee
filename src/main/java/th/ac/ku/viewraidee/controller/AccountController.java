@@ -39,6 +39,7 @@ public class AccountController {
     @GetMapping()
     public String getAccountPage(Model model) throws Exception {
         Account account = authenticationService.getCurrentAccount();
+        model.addAttribute("user",account.getUsername());
         model.addAttribute("username", account.getUsername());
         model.addAttribute("photo", account.getPhoto());
         model.addAttribute("link", "Link: "+ account.getLink());
@@ -53,6 +54,7 @@ public class AccountController {
     @GetMapping("/edit")
     public String getEditAccountPage(Model model) throws Exception {
         Account account = authenticationService.getCurrentAccount();
+        model.addAttribute("user",account.getUsername());
         model.addAttribute("account", account);
         return "edit-account";
     }
