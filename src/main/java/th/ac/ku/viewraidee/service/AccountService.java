@@ -2,7 +2,6 @@ package th.ac.ku.viewraidee.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -31,6 +30,9 @@ public class AccountService {
     public void createAccount(Account account) {
         String url = "http://localhost:8090/Account";
         account.setRole("user");
+        account.setLink("");
+        account.setAboutMe("");
+        account.setPhoto("");
         if(account.getPassword()!=null){
             String hashedPassword = passwordEncoder.encode(account.getPassword());
             account.setPassword(hashedPassword);

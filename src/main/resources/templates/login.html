@@ -9,47 +9,45 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/toggle-password.js}"></script>
+    <script th:src="@{/js/check-field.js}"></script>
 </head>
 <body>
 <div class="login-root">
     <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
-        <div class="loginbackground box-background--white">
-        </div>
         <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
             <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-
             </div>
             <div class="formbg-outer">
                 <div class="formbg">
                     <div class="formbg-inner padding-horizontal--48">
-                        <div class="padding-bottom--24">
-                            <center><a th:href="@{/}"><img th:src="@{/images/logo.png}" width="200"/></a></center>
+                        <div>
+                            <center><a th:href="@{/}"><img th:src="@{/images/logo-white-tpr-crop.png}" width="200"/></a></center>
                         </div>
-                        <center><p th:text="${failureMsg}"></p></center>
-                        <form th:action="@{/login}" method="post" id="stripe-login">
+                        <center><p class="wrong" th:text="${failureMsg}"></p></center>
+                        <form name="login" th:action="@{/login}" method="post" id="stripe-login">
                             <div class="field padding-bottom--15">
                                 <input type="text" id="usernameInput" name="username" placeholder="ชื่อผู้ใช้">
                             </div>
                             <div class="field padding-bottom--24">
                                 <input type="password" id="passwordInput" name="password" placeholder="รหัสผ่าน">
-                                <span class="eye" onclick="showPwd1()">
-                                    <i id="hide1" class="fas fa-eye"></i>
-                                    <i id="hide2" class="fas fa-eye-slash"></i>
+                                <span class="eye eye-img" onclick="showPwd1()">
+                                    <img th:src="@{/images/view.png}" width="20" id="hide1"/>
+                                    <img th:src="@{/images/hidden.png}" width="20" id="hide2"/>
                                 </span>
                             </div>
-                            <div class="field padding-bottom--15 ">
-                                <button type="submit" class="btn button btn-login button--100">เข้าสู่ระบบ</button>
+                            <div class="field padding-bottom--24 padding-top--10">
+                                <button type="submit" class="btn button btn-login button--100" id="click" onclick="return checkFieldLogin()" >เข้าสู่ระบบ</button>
                             </div>
                         </form>
                         <div class="center padding-bottom--15 font-12">
                             หรือเข้าสู่ระบบผ่านทาง
                         </div>
-                        <div class="grid-test">
-                            <a type="button" class="button btn button--50 btn-gg" th:href="@{/oauth2/authorization/google}">Google</a>
-                            <a type="button" class="button btn button--50 btn-fb" th:href="@{/oauth2/authorization/facebook}">Facebook</a>
+                        <div class="grid-test padding-bottom--5">
+                            <a type="button" class="button btn button--50 btn-gg" th:href="@{/oauth2/authorization/google}"><img class="icon" th:src="@{/images/icon-google.png}" width="20"/>   Google</a>
+                            <a type="button" class="button btn button--50 btn-fb" th:href="@{/oauth2/authorization/facebook}"><img class="icon" th:src="@{/images/icon-facebook.png}" width="20"/>   Facebook</a>
                         </div >
                         <div class="center">
-                            <hr>
+                            <hr class="black">
                             <div class="padding-bottom--15 font-12">ถ้าคุณยังไม่มีบัญชี</div>
                             <div class="grid-test button-size">
                                 <a type="button" class="btn button btn-sign-in button--100" th:href="@{/signUp}">สมัครบัญชี</a>
