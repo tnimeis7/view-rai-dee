@@ -17,6 +17,7 @@
     margin-right: auto;
     margin-left: auto;
     border-radius: 0.25rem;
+    margin-top: 20px;
 }
 
 .rounded-vrd-1 {
@@ -102,5 +103,20 @@ selectvrd {
     border-radius: 50%;
 }
 
+.heart-icon {
+    width: 70px;
+    height: 70px;
+}
+
+.space-between-inline{
+    display: inline-block;
+    padding-right: 20px;
+}
+.tag-box{
+    width: auto;
+    height: 30px;
+    background-color: #94a7ae;
+    border-radius: 20px;
+}
 
 

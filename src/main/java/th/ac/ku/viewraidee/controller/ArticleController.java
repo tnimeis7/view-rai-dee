@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import th.ac.ku.viewraidee.model.Article;
+import th.ac.ku.viewraidee.model.Genre;
 import th.ac.ku.viewraidee.service.ArticleService;
 import th.ac.ku.viewraidee.service.ArticleStreamService;
+import th.ac.ku.viewraidee.service.GenreService;
 import th.ac.ku.viewraidee.service.TagService;
 
 import java.util.Collections;
@@ -25,6 +27,9 @@ public class ArticleController {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private GenreService genreService;
 
     @GetMapping
     public String getArticles(Model model){
@@ -50,6 +55,7 @@ public class ArticleController {
         model.addAttribute("article", service.getById(id));
         model.addAttribute("streamPlatforms", articleStreamService.getAllPlatformByAtcId(id));
         model.addAttribute("tags", tagService.getAllTagByAtcId(id));
+        model.addAttribute("genres", genreService.getAllGenreByAtcId(id));
 //        model.addAttribute("streaming", articleStreamController.getArticleStreams());
         return "article-id";
     }
