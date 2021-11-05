@@ -32,7 +32,7 @@ public class HomeController {
         if (principal != null){
             usernameEmailCheck(principal, request);
         }
-        if((username = getCurrentUsername())!=null){
+        if((username = authenticationService.getCurrentUsername())!=null){
             model.addAttribute("user", username);
         }
         else {
@@ -41,27 +41,19 @@ public class HomeController {
         return "home";
     }
 
-    public String getCurrentUsername(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String login = authentication.getName();
-        if(login.equals("anonymousUser")){
-            return null;
-        }
-        return login;
-    }
-
     public void usernameEmailCheck(OAuth2User principal, HttpServletRequest request){
         boolean emailIsMatch = false;
         String username;
         String email = principal.getAttribute("email");
-        if (!accountService.isEmailAvailable(email)) {
+        if (accountService.isEmailAvailable(email)) {
             emailIsMatch = true;
         }
         if(!emailIsMatch){
             Account account = new Account();
             account.setUsername(email);
             account.setEmail(email);
-            accountService.createAccount(account);
+            accountService.createAccountFirstTime(account);
+
             username = email;
         }
         else{

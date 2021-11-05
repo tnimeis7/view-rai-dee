@@ -30,19 +30,15 @@ public class SignUpController {
     @PostMapping
     public String signupUser(@ModelAttribute Account account, Model model, HttpServletRequest request){
         String signupError = null;
-        if (!accountService.isUsernameAvailable(account.getUsername())) {
+        if (accountService.isUsernameAvailable(account.getUsername())) {
             signupError = "มีชื่อผู้ใช้นี้อยู่แล้ว กรุณาเปลี่ยนชื่อ";
         }
-        else if (!accountService.isEmailAvailable(account.getEmail())) {
+        else if (accountService.isEmailAvailable(account.getEmail())) {
             signupError = "มี email นี้อยู่แล้ว กรุณาเปลี่ยน email";
         }
         if (signupError == null) {
             String password = account.getPassword();
-            accountService.createAccount(account);
-            Account newAccount;
-            do{
-                newAccount = accountService.getById(account.getUsername());
-            }while(newAccount==null);
+            accountService.createAccountFirstTime(account);
             authenticationService.preAuthenticate(account.getUsername(), password, request);
         }else {
             model.addAttribute("signupError", signupError);

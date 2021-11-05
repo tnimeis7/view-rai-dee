@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/edit-account-style.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/check-field.js}"></script>
+</head>
+
+
+
+
+<body>
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container" align="center" th:object="${account}">
+    <h1 class="display-6">Edit Profile</h1>
+    <form th:action="@{/account/changeImg}" method="POST">
+        <div class="row mb-3 form-group field-input padding-top--50">
+            <div class="profile-pic-div img-center">
+                <img th:src="*{photo}" id="photo" ><br>
+                <input type="file" id="fileBtn" name="file" value="editPhoto">
+                <label for="fileBtn" id="uploadBtn">แก้ไขรูป</label>
+                <button type="submit" id="submitChangeImg" class="btn btn-x" style="display: none;"></button>
+            </div>
+        </div>
+        <div class="row mb-0 form-group">
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="imgUrl" style="display: none;" th:field="*{photo}">
+            </div>
+        </div>
+    </form>
+
+    <form th:action="@{/account/edit}" method="POST">
+        <button type="submit" class="btn btn-x">X</button>
+        <div class="row mb-3 form-group field-input">
+            <label for="usernameField" class="col-sm-2 col-form-label">ชื่อผู้ใช้</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="usernameField" th:field="*{username}">
+            </div>
+        </div>
+        <div th:if="*{password!=null}" class="row mb-3 form-group field-input">
+            <label for="emailOriginalField" class="col-sm-2 col-form-label">อีเมล</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="emailOriginalField" th:field="*{email}">
+            </div>
+        </div>
+        <div th:if="*{password==null}" class="row mb-3 form-group field-input">
+            <label for="emailSocialField" class="col-sm-2 col-form-label">อีเมล</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="emailSocialField" th:field="*{email}" disabled>
+            </div>
+        </div>
+        <div class="row mb-3 form-group field-input">
+            <label for="linkField" class="col-sm-2 col-form-label">link</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="linkField" th:field="*{link}">
+            </div>
+        </div>
+        <div class="row mb-3 form-group field-input">
+            <label for="aboutMeField" class="col-sm-2 col-form-label">เกี่ยวกับฉัน</label>
+            <div class="col-sm-10">
+                <textarea type="text" id="aboutMeField" class="form-control" th:field="*{aboutMe}"></textarea>
+            </div>
+        </div>
+    </form>
+    <div th:if="*{password!=null}">
+        <br><hr><br><p>เปลี่ยนรหัสผ่าน</p>
+        <form th:action="@{/account/password/edit}" method="POST">
+            <center><p th:text="${changePasswordError}"></p></center>
+            <div class="row mb-3 form-group field-input">
+                <label for="passwordField" class="col-sm-2 col-form-label">รหัสผ่านปัจจุบัน</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="currentPasswordField" name="password">
+                </div>
+            </div>
+            <div class="row mb-3 form-group field-input">
+                <label for="passwordField" class="col-sm-2 col-form-label">รหัสผ่านใหม่</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="passwordField" name="password">
+                </div>
+            </div>
+            <div class="row mb-3 form-group field-input">
+                <label for="passwordField" class="col-sm-2 col-form-label">ยืนยันรหัสผ่านใหม่</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="confirmPasswordField">
+                </div>
+            </div>
+            <div class="row mb-3 form-group field-input">
+                <button type="submit" class="btn btn-primary" onclick="return checkPassword()">เปลี่ยนรหัสผ่าน</button>
+            </div>
+        </form>
+    </div>
+    <br><hr><br>
+    <form th:action="@{/account/delete}" method="POST">
+        <button type="submit" class="btn btn-primary">ลบบัญชี</button>
+    </form>
+    <br>
+</div>
+</body>
+
+<script type="module" th:inline="javascript" >
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-storage.js";
+    const firebaseConfig = {
+        apiKey: "AIzaSyAEGZeJ2_eGLmUxbnicwTjYxuBml3jN4tg",
+        authDomain: "viewraideeweb.firebaseapp.com",
+        databaseURL: "https://viewraideeweb-default-rtdb.firebaseio.com",
+        projectId: "viewraideeweb",
+        storageBucket: "viewraideeweb.appspot.com",
+        messagingSenderId: "927678633451",
+        appId: "1:927678633451:web:2e9b6edd7a2ad6962f75ae",
+        measurementId: "G-DN9RQLGSDD"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage();
+
+    const imgDiv = document.querySelector('.profile-pic-div');
+    const fileBtn = document.querySelector('#fileBtn');
+    const showImg = document.querySelector('#photo');
+    const uploadBtn = document.querySelector('#uploadBtn');
+    var currentImgUrl = document.querySelector('#photo').getAttribute('src');
+    const desertRef = ref(storage, currentImgUrl);
+    const newImgUrl = document.querySelector('#imgUrl');
+
+
+    imgDiv.addEventListener('mouseover', function(e){
+        uploadBtn.style.display = "block"
+    });
+
+    imgDiv.addEventListener('mouseout', function(e) {
+        uploadBtn.style.display = "none"
+    });
+    fileBtn.addEventListener('change', function(e){
+        var file = e.target.files[0];
+        var storageRef = ref(storage, "images/" + file.name);
+        uploadBytes(storageRef, file).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                console.log("New Image url: " + url);
+                showImg.setAttribute('src', url);
+                newImgUrl.setAttribute('value', url);
+                deleteObject(desertRef).then(() => {
+                    console.log("Delete Current Image");
+                }).catch((error) => {
+                    console.log("Can't Delete Current Image")
+                });
+                document.getElementById('submitChangeImg').click();
+            })
+        });
+    });
+</script>
+
+</html>

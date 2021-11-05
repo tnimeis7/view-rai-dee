@@ -19,6 +19,7 @@ public class AccountService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     public List<Account> getAll() {
         String url = "http://localhost:8090/Account";
         ResponseEntity<Account[]> response =
@@ -29,15 +30,16 @@ public class AccountService {
 
     public void createAccount(Account account) {
         String url = "http://localhost:8090/Account";
-        account.setRole("user");
-        account.setLink("");
-        account.setAboutMe("");
-        account.setPhoto("");
         if(account.getPassword()!=null){
             String hashedPassword = passwordEncoder.encode(account.getPassword());
             account.setPassword(hashedPassword);
         }
         restTemplate.postForObject(url, account, Account.class);
+        //busy waiting loop (wait really create account)
+        Account newAccount;
+        do{
+            newAccount = getById(account.getUsername());
+        }while(newAccount==null);
     }
 
     public Account getById(String username){
@@ -56,12 +58,34 @@ public class AccountService {
 
     public boolean isUsernameAvailable(String username) {
         Account account = getById(username);
-        return account==null;
+        return account!=null;
     }
 
     public boolean isEmailAvailable(String email){
         Account account = getByEmail(email);
-        return account==null;
+        return account!=null;
+    }
+
+    public void update(Account account){
+        String url = "http://localhost:8090/Account/"+account.getUsername();
+        restTemplate.put(url, account, Account.class);
+    }
+
+    public void delete(String username) {
+        String url = "http://localhost:8090/Account/" + username;
+        restTemplate.delete(url);
+    }
+
+    public void createAccountFirstTime(Account account) {
+        account.setRole("user");
+        account.setLink("");
+        account.setAboutMe("");
+        account.setPhoto("");
+        createAccount(account);
+    }
+
+    public boolean checkMatch(String password, String hashedPassword){
+        return passwordEncoder.matches(password, hashedPassword);
     }
 
 

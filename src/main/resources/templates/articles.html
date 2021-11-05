@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link th:rel="stylesheet" th:href="@{/css/article-blog.css}">
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</head>
+<body style="background-color: #2c3034;">
+
+<div th:insert="fragments/header :: header"></div>
+<div class="frame-vrd" style="padding-top: 1rem;">
+    <div class="dropdown" style="padding-bottom: 10px; left: -12px;">
+        <button class="btn btn-vrd-sort dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown">
+            วันที่รีวิว</button>
+        <ul class="dropdown-menu" style="background-color:#2c3034; border:0;" aria-labelledby="dropdownMenuButton">
+            <li><label class="dropdown-item" href="#">เรียงจากล่าสุด</label></li>
+            <li><label class="dropdown-item" href="#">เรียงจากเก่าสุด</label></li>
+        </ul>
+    </div>
+
+</div>
+<!--<div class="frame-vrd" style="background-color: #E5CE70;">-->
+<!--    <div class="container" style="padding: 30px;">-->
+<!--        <div class="row mt-2" th:each="article : ${atcNewest}">-->
+<!--            <div class="card flex-row rounded-vrd-1 align-items-center">-->
+<!--                <div class="col-auto">-->
+<!--                    <h5 style="margin-left: 15px; margin-top: 15px;" th:text="${article.movieName}"></h5>-->
+<!--                    <img th:src="${article.coverPath}" class="card-img rounded-vrd-1">-->
+<!--                </div>-->
+<!--                <div class="card-body">-->
+<!--                    <h4 class="card-title" th:text="${article.atcName}"></h4>-->
+<!--                    <h6 class="card-title">รีวิวโดย:-->
+<!--                        <span th:text="${article.authorName}"></span>-->
+<!--                        | วันที่: <span th:text="${article.publishDate}"></span></h6>-->
+<!--                    <p class="card-text" th:text="${article.content}"></p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+</body>
+<!--<script>-->
+<!--    var input;-->
+<!--    if(input == newest){-->
+<!--        atcSort =-->
+<!--    }-->
+<!--</script>-->
+
+</html>
