@@ -79,6 +79,9 @@ public class ArticleController {
         model.addAttribute("genres", genreService.getAllGenreByAtcId(id));
         List<Comment> comments = service.getCommentByAtcId(id);
         comments = sortCommentByTime(comments);
+        for (Comment var: comments) {
+            System.out.println(var.getCommentDate());
+        }
         Hashtable<Comment, String> articleComments = new Hashtable<>();
         if(comments!=null){
             for (Comment var: comments) {
@@ -137,7 +140,7 @@ public class ArticleController {
             DateFormat dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm");
             public int compare(Comment l1, Comment l2) {
                 try {
-                    return dateTime.parse(l2.getCommentDate()).compareTo(dateTime.parse(l1.getCommentDate()));
+                    return dateTime.parse(l1.getCommentDate()).compareTo(dateTime.parse(l2.getCommentDate()));
                 } catch (ParseException e) {
                     throw new IllegalArgumentException(e);
                 }

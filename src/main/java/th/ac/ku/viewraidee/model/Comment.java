@@ -39,12 +39,14 @@ public class Comment{
     }
 
     public String getCommentDate() {
-        SimpleDateFormat simpDate = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        return simpDate.format(commentDate);
+        if(commentDate!=null){
+            SimpleDateFormat simpDate = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            return simpDate.format(commentDate);
+        }
+        return null;
     }
 
     public void setCommentDate(Date commentDate) {
-
         this.commentDate = commentDate;
     }
 
