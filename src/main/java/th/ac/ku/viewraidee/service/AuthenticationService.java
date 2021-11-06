@@ -59,6 +59,9 @@ public class AuthenticationService implements AuthenticationProvider {
 
     public Account getCurrentAccount(){
         String currentUsername = getCurrentUsername();
+        if(currentUsername==null){
+            return null;
+        }
         return accountService.getById(currentUsername);
     }
 
