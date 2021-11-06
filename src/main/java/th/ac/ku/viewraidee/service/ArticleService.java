@@ -48,7 +48,7 @@ public class ArticleService {
     }
 
     public void plusHeart(String id) {
-        String url = "http://localhost:8090/Article/" + id;
+        String url = "http://localhost:8090/Article/heart/" + id;
         restTemplate.postForObject(url, id, Article.class);
     }
 
