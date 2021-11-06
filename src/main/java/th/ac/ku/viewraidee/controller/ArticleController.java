@@ -11,6 +11,8 @@ import th.ac.ku.viewraidee.service.ArticleStreamService;
 import th.ac.ku.viewraidee.service.GenreService;
 import th.ac.ku.viewraidee.service.TagService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,12 +34,35 @@ public class ArticleController {
     @Autowired
     private GenreService genreService;
 
+//    private List<Article> sortedList = new ArrayList<>();
+
     @GetMapping
     public String getArticles(Model model){
-        model.addAttribute("atcNewest", sortArticles(1));
-        model.addAttribute("atcOldest", sortArticles(0));
+        model.addAttribute("atcSorted", service.getAll().stream().sorted(Comparator.comparing(Article::getPublishDate))
+                .collect(Collectors.toList()));
+//        model.addAttribute("atcNewest", sortArticles(1));
+//        model.addAttribute("atcOldest", sortArticles(0));
         return "articles";
     }
+    @GetMapping("/{sorting}")
+    public String getArticles(@PathVariable(value="temp") String sorting,@RequestParam String request, Model model){
+//        if
+        model.addAttribute("atcSorted", service.getAll().stream().sorted(Comparator.comparing(Article::getPublishDate))
+                .collect(Collectors.toList()));
+//        model.addAttribute("atcNewest", sortArticles(1));
+//        model.addAttribute("atcOldest", sortArticles(0));
+        return "redirect:/articles";
+    }
+
+//    @PostMapping("/sort")
+//    public String getSortInput(@ModelAttribute String sorting, Model model, HttpSession session, HttpServletRequest request){
+//        String selected = request.getParameter("sorting");
+//        System.out.println("selected is: " + selected);
+//        sortedList = service.getAll().stream().sorted(Comparator.comparing(Article::getPublishDate))
+//                .collect(Collectors.toList());
+//        if(selected == "oldest") Collections.reverse(sortedList);
+//        return "redirect:/articles";
+//    }
 
     private List<Article> sortArticles(int order){
         List<Article> newest = service.getAll().stream().sorted(Comparator.comparing(Article::getPublishDate))
