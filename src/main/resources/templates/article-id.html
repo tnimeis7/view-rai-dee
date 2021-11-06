@@ -83,7 +83,8 @@
         <!-- Show Heart Count and Report -->
         <div class="d-flex justify-content-between" style="margin-top: 150px; padding-bottom: 20px;">
             <div>
-                <img src="https://sv1.picz.in.th/images/2021/11/05/unGzrl.png" alt="unGzrl.png" class="heart-icon">
+                <a th:if="${user}!='ผู้เยี่ยมชม'" th:href="@{/articles/heart/{id}(id=${article.id})}"><img src="https://sv1.picz.in.th/images/2021/11/05/unGzrl.png" alt="unGzrl.png" class="heart-icon"></a>
+                <img th:if="${user}=='ผู้เยี่ยมชม'" src="https://sv1.picz.in.th/images/2021/11/05/unGzrl.png" alt="unGzrl.png" class="heart-icon">
                 <span th:text="${article.getHeart()}" style="font-size: 30px; font-weight: bold;"></span>
             </div>
             <button type="button" class="btn btn-danger btn-report">รายงาน</button>

@@ -47,6 +47,11 @@ public class ArticleService {
         return Arrays.asList(comment);
     }
 
+    public void plusHeart(String id) {
+        String url = "http://localhost:8090/Article/" + id;
+        restTemplate.postForObject(url, id, Article.class);
+    }
+
     // ทำไมไม่สีเหลือง!!!!!
 //    public void deleteArticle(Article article) {
 //        String url = "http://localhost:8090/Article";

@@ -78,6 +78,7 @@ public class ArticleController {
         model.addAttribute("tags", tagService.getAllTagByAtcId(id));
         model.addAttribute("genres", genreService.getAllGenreByAtcId(id));
         List<Comment> comments = service.getCommentByAtcId(id);
+        comments = sortCommentByTime(comments);
         Hashtable<Comment, String> articleComments = new Hashtable<>();
         if(comments!=null){
             for (Comment var: comments) {
@@ -110,6 +111,13 @@ public class ArticleController {
         comment.setUsername(account.getUsername());
         service.addComment(comment);
         redirectAttrs.addAttribute("id", article.getId());
+        return "redirect:/articles/{id}";
+    }
+
+    @RequestMapping("/heart/{id}")
+    public String plusHeart(@PathVariable String id, RedirectAttributes redirectAttrs){
+        service.plusHeart(id);
+        redirectAttrs.addAttribute("id", id);
         return "redirect:/articles/{id}";
     }
 

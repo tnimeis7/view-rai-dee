@@ -101,7 +101,7 @@ public class Article {
         return simpDate.format(publishDate);
     }
 
-//    public void setPublishDate(Timestamp timestamp) { this.publishDate = timestamp; }
+    public void setPublishDate(Date date) { this.publishDate = date; }
 
 //    @Override
 //    public String getId() {
