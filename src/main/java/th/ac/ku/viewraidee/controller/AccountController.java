@@ -42,9 +42,15 @@ public class AccountController {
         model.addAttribute("user",account.getUsername());
         model.addAttribute("role", null);
         model.addAttribute("account",account);
-        List<Article> onwArticle = articleController.getOwnArticles(account.getUsername());
-        model.addAttribute("ownArticle", onwArticle);
-        return "account";
+        if(account.getRole().equals("user")){
+            List<Article> onwArticle = articleController.getOwnArticles(account.getUsername());
+            model.addAttribute("ownArticle", onwArticle);
+            return "account";
+        }
+        else{
+
+            return "admin";
+        }
     }
 
     @GetMapping("{username}")
@@ -138,7 +144,6 @@ public class AccountController {
 
     @PostMapping("/delete/{username}")
     public String deleteOtherAcc(HttpServletRequest request, @ModelAttribute Account otherAccount) {
-        System.out.println(otherAccount.getUsername());
         Account deleteAcc = accountService.getById(otherAccount.getUsername());
         accountService.delete(deleteAcc.getUsername());
         //ไล่ลบทุก article ของคนนี้

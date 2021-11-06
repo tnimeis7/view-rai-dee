@@ -2,7 +2,7 @@ package th.ac.ku.viewraidee.model;
 
 import java.util.UUID;
 
-public class Feedback implements BlockComponents {
+public class Feedback {
 
     private String fbId;
     private String fbContent;
@@ -45,9 +45,5 @@ public class Feedback implements BlockComponents {
     public String generateUUIDForId(){
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
-    }
-    @Override
-    public String getId() {
-        return getFbId();
     }
 }

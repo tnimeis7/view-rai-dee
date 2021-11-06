@@ -2,20 +2,20 @@ package th.ac.ku.viewraidee.model;
 
 import com.google.cloud.Timestamp;
 
-public class Report implements BlockComponents {
-    private String reportId;
+public class Report {
+    private String id;
     private String reportContent;
-    private String atcId;
+    private String mentionedId;
     private String reportBy;
-    private String commentId;
+    private String type; //article, comment
     private Timestamp reportDate;
 
-    public String getReportId() {
-        return reportId;
+    public String getId() {
+        return id;
     }
 
-    public void setReportId(String reportId) {
-        this.reportId = reportId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getReportContent() {
@@ -26,12 +26,12 @@ public class Report implements BlockComponents {
         this.reportContent = reportContent;
     }
 
-    public String getAtcId() {
-        return atcId;
+    public String getMentionedId() {
+        return mentionedId;
     }
 
-    public void setAtcId(String atcId) {
-        this.atcId = atcId;
+    public void setMentionedId(String mentionedId) {
+        this.mentionedId = mentionedId;
     }
 
     public String getReportBy() {
@@ -42,12 +42,12 @@ public class Report implements BlockComponents {
         this.reportBy = reportBy;
     }
 
-    public String getCommentId() {
-        return commentId;
+    public String getType() {
+        return type;
     }
 
-    public void setCommentId(String commentId) {
-        this.commentId = commentId;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Timestamp getReportDate() {
@@ -56,10 +56,5 @@ public class Report implements BlockComponents {
 
     public void setReportDate(Timestamp reportDate) {
         this.reportDate = reportDate;
-    }
-
-    @Override
-    public String getId() {
-        return getReportId();
     }
 }
