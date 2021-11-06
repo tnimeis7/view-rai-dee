@@ -39,7 +39,7 @@
             <div class="grid-item" th:each="article : ${ownArticle}">
                 <img id="coverImg" th:src="${article.coverPath}" class="card-img rounded-vrd-1">
                 <div class="textIMG">
-                    <h5 th:text="${article.movieName}"></h5>
+                    <a th:href="@{/articles/{id}(id=${article.id})}"><h5 th:text="${article.movieName}"></h5></a>
                     <p  th:text="${article.atcName}"></p>
                     <img class="star" th:src="@{/images/star.png}" th:text="${article.getStarRate()}">
                 </div>
@@ -48,6 +48,5 @@
     </div>
     <a type="button" class="btn btn-add margin-right--20 margin-bottom--20" id="fixedBTN" th:href="@{/article/add}">+</a>
 </div>
-
 </body>
 </html>

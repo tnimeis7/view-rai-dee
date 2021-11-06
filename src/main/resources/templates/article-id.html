@@ -92,7 +92,26 @@
 
     <!-- new section comment -->
     <div class="frame-vrd" style="background-color: #F7F7F7; margin-top: 20px;">
-        Comments
+        <form th:if="${user}!='ผู้เยี่ยมชม'" th:action="@{/articles/comment/add}" method="POST">
+            <p>แสดงความคิดเห็น</p>
+            <br><img th:src="${loginUser.getPhoto()}" width="50px"><p th:text="${loginUser.getUsername()}"></p>
+            <input type="hidden" class="form-control" id="ArticleIdField" name="articleId" th:field="${article.id}">
+            <input type="text" class="form-control" id="ContentField" name="commentContent">
+            <button type="submit" class="btn btn-primary">แสดงความคิดเห็น</button>
+            <br>
+        </form>
+        <p>ความคิดเห็นทั้งหมด</p>
+        <div class="container" style="padding: 30px;">
+            <div class="grid-container" >
+                <div class="grid-item" th:each="comment : ${comments}">
+                    <img th:src="${comment.getValue()}" width="50px">
+                    <p th:text="${comment.getKey().username}"></p>
+                    <p class="justify-content-center" th:text="${comment.getKey().commentContent}"></p>
+                    <p th:text="${comment.getKey().commentDate}"></p>
+                </div>
+            </div>
         </div>
+    </div><br>
+
 </body>
 </html>

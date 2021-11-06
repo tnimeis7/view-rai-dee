@@ -2,18 +2,24 @@ package th.ac.ku.viewraidee.model;
 
 import com.google.cloud.Timestamp;
 
-public class Comment implements BlockComponents {
-    private String commentId;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
+
+public class Comment{
+    private String id;
     private String articleId;
     private String commentContent;
-    private Timestamp commentDate;
+    private Date commentDate;
+    private String username;
 
-    public String getCommentId() {
-        return commentId;
+
+    public String getId() {
+        return id;
     }
 
-    public void setCommentId(String commentId) {
-        this.commentId = commentId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getArticleId() {
@@ -32,16 +38,27 @@ public class Comment implements BlockComponents {
         this.commentContent = commentContent;
     }
 
-    public Timestamp getCommentDate() {
-        return commentDate;
+    public String getCommentDate() {
+        SimpleDateFormat simpDate = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        return simpDate.format(commentDate);
     }
 
-    public void setCommentDate(Timestamp commentDate) {
+    public void setCommentDate(Date commentDate) {
+
         this.commentDate = commentDate;
     }
 
-    @Override
-    public String getId() {
-        return getCommentId();
+    public String getUsername() {
+        return username;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String generateUUID(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
+    }
+
 }
