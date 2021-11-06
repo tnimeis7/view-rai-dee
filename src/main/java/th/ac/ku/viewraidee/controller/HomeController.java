@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.viewraidee.model.Account;
 import th.ac.ku.viewraidee.service.AccountService;
+import th.ac.ku.viewraidee.service.ArticleService;
 import th.ac.ku.viewraidee.service.AuthenticationService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +26,14 @@ public class HomeController {
     @Autowired
     private AuthenticationService authenticationService;
 
+    @Autowired
+    private ArticleService articleService;
+
     @GetMapping
     public String getHomePage(Model model, @AuthenticationPrincipal OAuth2User principal, HttpServletRequest request){
         String username;
         model.addAttribute("greeting", "to our website");
+        model.addAttribute("mostPopular", articleService.getMostPopularArticles());
         if (principal != null){
             usernameEmailCheck(principal, request);
         }
