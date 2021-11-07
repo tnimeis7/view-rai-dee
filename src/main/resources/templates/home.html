@@ -24,89 +24,99 @@
         .btn-type:hover{
             background-color: #94a7ae;
         }
-        input[type=search] {
-            width: 200px;
-            height: 50px;
+        .img-sqr{
+            width: 250px;
+            height: 150px;
+        }
+        .more-box{
+            width: 250px;
+            height: 150px;
+            opacity: 80%;
+            background-color: black;
         }
     </style>
 
 </head>
-<body style="background-color: #F7F7F7">
+<body style="background-color: #F7F7F7;">
 <div th:insert="fragments/header :: header"></div>
+<div class="frame-vrd" style="width:100%; background-color: black; position: inherit;padding-top: 56px;">
+    <div class="container">
+        <!--    <h1 class="display-6">Welcome</h1>-->
 
-<div class="container">
-    <h1 class="display-6">Welcome</h1>
+        <!--    <p th:text="|${greeting}, ${user}|"></p>-->
 
-    <p th:text="|${greeting}, ${user}|"></p>
-
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img th:src="${mostPopular.get(0).coverPath}" class="d-block w-100" style="height: 450px; object-fit: cover;" >
-                <div class="carousel-caption d-none d-md-block">
-                    <h2>Top #1</h2>
-                    <h4 th:text="${mostPopular.get(0).atcName}"></h4>
-                    <h5 th:text="${mostPopular.get(0).movieName}">First slide label</h5>
-                    <th:block th:each="i: ${#numbers.sequence(1, 5)}">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img th:src="${mostPopular.get(0).coverPath}" class="d-block w-100" style="height: 450px; object-fit: cover;" >
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>Top #1</h2>
+                        <h1 th:text="${mostPopular.get(0).movieName}"></h1>
+                        <h4 th:text="${mostPopular.get(0).atcName}"></h4>
+                        <th:block th:each="i: ${#numbers.sequence(1, 5)}">
                         <span th:if="${mostPopular.get(0).starRate >= i}">
                             <span class="fa fa-star checked"></span>
                         </span>
-                        <span th:unless="${mostPopular.get(0).starRate >= i}">
+                            <span th:unless="${mostPopular.get(0).starRate >= i}">
                             <span class="fa fa-star"></span>
                         </span>
-                    </th:block>
-                    <p>ผู้เขียนรีวิว <br> <span th:text="${mostPopular.get(0).authorName}"> </span>
-                    </p>
+                        </th:block>
+                        <p>ผู้เขียนรีวิว <br> <span th:text="${mostPopular.get(0).authorName}"> </span>
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img th:src="${mostPopular.get(1).coverPath}" class="d-block w-100" style="height: 450px; object-fit: cover;" >
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Top #2</h3>
-                    <h5 th:text="${mostPopular.get(1).atcName}">First slide label</h5>
-                    <th:block th:each="i: ${#numbers.sequence(1, 5)}">
+                <div class="carousel-item">
+                    <img th:src="${mostPopular.get(1).coverPath}" class="d-block w-100" style="height: 450px; object-fit: cover;" >
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>Top #2</h2>
+                        <h1 th:text="${mostPopular.get(1).movieName}"></h1>
+                        <h4 th:text="${mostPopular.get(1).atcName}"></h4>
+                        <th:block th:each="i: ${#numbers.sequence(1, 5)}">
                         <span th:if="${mostPopular.get(1).starRate >= i}">
                             <span class="fa fa-star checked"></span>
                         </span>
-                        <span th:unless="${mostPopular.get(1).starRate >= i}">
+                            <span th:unless="${mostPopular.get(1).starRate >= i}">
                             <span class="fa fa-star"></span>
                         </span>
-                    </th:block>
-                    <p>ผู้เขียนรีวิว <br> <span th:text="${mostPopular.get(1).authorName}"> </span></p>
+                        </th:block>
+                        <p>ผู้เขียนรีวิว <br> <span th:text="${mostPopular.get(1).authorName}"> </span></p>
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img th:src="${mostPopular.get(2).coverPath}" class="d-block w-100" style="height: 450px; object-fit: cover;" >
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Top #3></h3>
-                    <h5 th:text="${mostPopular.get(2).atcName}">First slide label</h5>
-                    <th:block th:each="i: ${#numbers.sequence(1, 5)}">
+                <div class="carousel-item">
+                    <img th:src="${mostPopular.get(2).coverPath}" class="d-block w-100" style="height: 450px; object-fit: cover;" >
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>Top #3></h2>
+                        <h1 th:text="${mostPopular.get(2).movieName}"></h1>
+                        <h4 th:text="${mostPopular.get(2).atcName}"></h4>
+                        <th:block th:each="i: ${#numbers.sequence(1, 5)}">
                         <span th:if="${mostPopular.get(2).starRate >= i}">
                             <span class="fa fa-star checked"></span>
                         </span>
-                        <span th:unless="${mostPopular.get(2).starRate >= i}">
+                            <span th:unless="${mostPopular.get(2).starRate >= i}">
                             <span class="fa fa-star"></span>
                         </span>
-                    </th:block>
-                    <p>ผู้เขียนรีวิว <br> <span th:text="${mostPopular.get(2).authorName}"> </span></p>
+                        </th:block>
+                        <p>ผู้เขียนรีวิว <br> <span th:text="${mostPopular.get(2).authorName}"> </span></p>
+                    </div>
                 </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
 
+    </div>
+</div>
     <div class="d-flex bd-highlight justify-content-center" style="padding-top: 10px;">
         <button class="btn-type">ภาพยนตร์</button>
         <button class="btn-type">ซีรี่ส์</button>
@@ -120,10 +130,22 @@
                 <i class="fa fa-search" aria-hidden="true"></i>
             </span>
         </div>
-
     </div>
 
-</div>
+    <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;padding-top: 15px;">
+        <div class="frame-vrd" style="background-color: #94a7ae; height: 400px;">
+            <h4 style="padding-left: 15px; padding-top: 15px;">บทความที่ได้รับความนิยมสูงสุด</h4>
+            <div class="d-flex justify-content-around" style="padding-top: 20px;">
+                 <span th:each="mostPop: ${mostPopular}">
+                    <img th:src="${mostPop.coverPath}" class="img-sqr">
+                </span>
+                <div class="card more-box align-content-center" style="background-color: black;" >
+                    <h5 class="card-title" style="color: #F7F7F7">ดูเพิ่มเติม</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 </body>
