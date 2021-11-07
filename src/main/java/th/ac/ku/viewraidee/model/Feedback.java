@@ -2,20 +2,20 @@ package th.ac.ku.viewraidee.model;
 
 import java.util.UUID;
 
-public class Feedback {
+public class Feedback{
 
-    private String fbId;
+    private String id;
     private String fbContent;
     private String fbBy;
     private String fbStatus;
 
-    public String getFbId() {
-        return fbId;
+    public String getId() {
+        return id;
     }
 
-    public void setFbId(String fbId) {
+    public void setFbId(String id) {
 
-        this.fbId = fbId;
+        this.id = id;
     }
 
     public String getFbContent() {
@@ -46,4 +46,15 @@ public class Feedback {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
     }
+
+//    @Override
+//    public String toString() {
+//        return "Feedback{" +
+//                "fbId='" + id + '\'' +
+//                ", fbContent='" + fbContent + '\'' +
+//                ", fbBy='" + fbBy + '\'' +
+//                ", fbStatus='" + fbStatus + '\'' +
+//                '}';
+//    }
+
 }

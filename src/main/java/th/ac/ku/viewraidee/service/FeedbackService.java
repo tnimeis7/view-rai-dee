@@ -14,7 +14,7 @@ public class FeedbackService {
     private RestTemplate restTemplate;
 
     public void createFeedback(Feedback feedback) {
-        String url = "http://localhost:8090/Feedback";
+        String url = "http://localhost:8090/Feedback" ;
         restTemplate.postForObject(url, feedback, Feedback.class);
     }
 
