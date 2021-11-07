@@ -2,13 +2,15 @@ package th.ac.ku.viewraidee.model;
 
 import com.google.cloud.Timestamp;
 
+import java.util.Date;
+
 public class Report {
     private String id;
     private String reportContent;
     private String mentionedId;
     private String reportBy;
     private String type; //article, comment
-    private Timestamp reportDate;
+    private Date reportDate;
 
     public String getId() {
         return id;
@@ -50,11 +52,26 @@ public class Report {
         this.type = type;
     }
 
-    public Timestamp getReportDate() {
+    public Date getReportDate() {
+        if(reportDate==null){
+            return null;
+        }
         return reportDate;
     }
 
-    public void setReportDate(Timestamp reportDate) {
+    public void setReportDate(Date reportDate) {
         this.reportDate = reportDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "id='" + id + '\'' +
+                ", reportContent='" + reportContent + '\'' +
+                ", mentionedId='" + mentionedId + '\'' +
+                ", reportBy='" + reportBy + '\'' +
+                ", type='" + type + '\'' +
+                ", reportDate=" + reportDate +
+                '}';
     }
 }

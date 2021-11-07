@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import th.ac.ku.viewraidee.model.Account;
-import th.ac.ku.viewraidee.model.Article;
-import th.ac.ku.viewraidee.model.Comment;
-import th.ac.ku.viewraidee.model.Genre;
+import th.ac.ku.viewraidee.model.*;
 import th.ac.ku.viewraidee.service.*;
 
 import java.sql.Timestamp;
@@ -79,10 +76,10 @@ public class ArticleController {
         model.addAttribute("genres", genreService.getAllGenreByAtcId(id));
         List<Comment> comments = service.getCommentByAtcId(id);
         comments = sortCommentByTime(comments);
-        for (Comment var: comments) {
-            System.out.println(var.getCommentDate());
-        }
-        Hashtable<Comment, String> articleComments = new Hashtable<>();
+//        for (Comment var: comments) {
+//            System.out.println(var.getCommentDate());
+//        }
+        LinkedHashMap<Comment, String> articleComments = new LinkedHashMap<>();
         if(comments!=null){
             for (Comment var: comments) {
                 Account commentAcc = accountService.getById(var.getUsername());
@@ -90,6 +87,14 @@ public class ArticleController {
             }
         }
         model.addAttribute("comments", articleComments);
+        //report choice
+//        List<String> report = new ArrayList<>();
+//        report.add("เนื้อหาหยาบคาย");
+//        report.add("ลามกอนาจาร");
+//        report.add("หมิ่นประมาททำให้ผู้อื่นเสื่อมเสียชื่อเสียง");
+//        report.add("ยุยงให้เกิดการทะเลาะวิวาท");
+//        report.add("เนื้อหาคุกคามและกลั่นแกล้ง");
+//        model.addAttribute("report", report);
 //        model.addAttribute("streaming", articleStreamController.getArticleStreams());
         return "article-id";
     }
@@ -147,6 +152,13 @@ public class ArticleController {
             }
         });
         return comments;
+    }
+
+    @PostMapping("/report/{id}")
+    public String report(@PathVariable String id, RedirectAttributes redirectAttrs, @ModelAttribute Report report){
+        System.out.println(report.toString());
+        redirectAttrs.addAttribute("id", id);
+        return "redirect:/articles/{id}";
     }
 
 
