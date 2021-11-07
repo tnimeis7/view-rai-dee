@@ -88,21 +88,23 @@
                 <img th:if="${user}=='ผู้เยี่ยมชม'" src="https://sv1.picz.in.th/images/2021/11/05/unGzrl.png" alt="unGzrl.png" class="heart-icon">
                 <span th:text="${article.getHeart()}" style="font-size: 30px; font-weight: bold;"></span>
             </div>
-            <a th:if="${user}==${article.authorName}" href="#" type="button" class="btn btn-danger btn-report">ลบบทความ</a>
-            <form th:if="${user}!=${article.authorName}" th:action="@{/articles/report/{id}(id=${article.id})}" method="POST">
-                <select th:name="reportContent" class="form-select" aria-label="Default select example">
-                    <option selected>report</option>
-                    <option>เนื้อหาหยาบคาย</option>
-                    <option>ลามกอนาจาร</option>
-                    <option>หมิ่นประมาททำให้ผู้อื่นเสื่อมเสียชื่อเสียง</option>
-                    <option>ยุยงให้เกิดการทะเลาะวิวาท</option>
-                    <option>เนื้อหาคุกคามและกลั่นแกล้ง</option>
-                </select>
-                <input type="hidden" class="form-control" th:name="reportBy" th:value="${user}">
-                <input type="hidden" class="form-control" th:name="mentionedId" th:value="${article.id}">
-                <input type="hidden" class="form-control" th:name="type" value="article">
-                <button type="submit" class="btn btn-primary">report</button>
-            </form>
+            <div th:if="${user}!='ผู้เยี่ยมชม'">
+                <a th:if="${user}==${article.authorName} or ${admin}!=null" href="#" type="button" class="btn btn-danger btn-report">ลบบทความ</a>
+                <form th:if="${user}!=${article.authorName} and ${admin}==null" th:action="@{/articles/report/{id}(id=${article.id})}" method="POST">
+                    <select th:name="reportContent" class="form-select" aria-label="Default select example">
+                        <option selected>report</option>
+                        <option>เนื้อหาหยาบคาย</option>
+                        <option>ลามกอนาจาร</option>
+                        <option>หมิ่นประมาททำให้ผู้อื่นเสื่อมเสียชื่อเสียง</option>
+                        <option>ยุยงให้เกิดการทะเลาะวิวาท</option>
+                        <option>เนื้อหาคุกคามและกลั่นแกล้ง</option>
+                    </select>
+                    <input type="hidden" class="form-control" th:name="reportBy" th:value="${user}">
+                    <input type="hidden" class="form-control" th:name="mentionedId" th:value="${article.id}">
+                    <input type="hidden" class="form-control" th:name="type" value="article">
+                    <button type="submit" class="btn btn-primary">report</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -123,8 +125,8 @@
                     <img th:src="${comment.value}" width="50px">
                     <p th:text="${comment.key.username}"></p>
                     <div th:if="${user}!='ผู้เยี่ยมชม'">
-                        <a th:if="${user}==${comment.key.username}" href="#" type="button" class="btn btn-danger btn-report">ลบบทความ</a>
-                        <form th:if="${user}!=${comment.key.username}" th:action="@{/articles/report/{id}(id=${article.id})}" method="POST">
+                        <a th:if="${user}==${comment.key.username} or ${admin}!=null" href="#" type="button" class="btn btn-danger btn-report">ลบบทความ</a>
+                        <form th:if="${user}!=${comment.key.username} and ${admin}==null" th:action="@{/articles/report/{id}(id=${article.id})}" method="POST">
                             <select th:name="reportContent" class="form-select" aria-label="Default select example">
                                 <option selected>report</option>
                                 <option>เนื้อหาหยาบคาย</option>

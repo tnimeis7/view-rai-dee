@@ -67,8 +67,15 @@ public class ArticleController {
         if (account != null) {
             model.addAttribute("user", account.getUsername());
             model.addAttribute("loginUser", account);
+            if (account.getRole().equals("admin")) {
+                model.addAttribute("admin", "admin");
+            }
+            else{
+                model.addAttribute("admin", null);
+            }
         }else{
             model.addAttribute("user","ผู้เยี่ยมชม");
+            model.addAttribute("admin", null);
         }
         model.addAttribute("article", service.getById(id));
         model.addAttribute("streamPlatforms", articleStreamService.getAllPlatformByAtcId(id));
