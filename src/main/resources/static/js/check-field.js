@@ -43,3 +43,11 @@ function checkPassword() {
         return true;
     }
 }
+
+function checkFeedback() {
+    feedback = document.feedback.fbContent.value;
+
+    if(feedback == "") {
+        alert("")
+    }
+}

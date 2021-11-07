@@ -14,7 +14,7 @@
 
     <p th:text="|${greeting}, ${user}|"></p>
 
-    <form th:if="${user}!='ผู้เยี่ยมชม'" th:action="@{/feedback/add}" method="POST">
+    <form name="feedback" th:if="${user}!='ผู้เยี่ยมชม'" th:action="@{/feedback/add}" method="POST">
         <label for="feedback">ส่ง feedback ให้เรา</label>
         <textarea class="form-control" id="feedback" name="fbContent" rows="5"></textarea><br>
         <button type="submit" class="btn btn-primary">ส่ง</button>
