@@ -69,12 +69,12 @@
     </form>
     <div th:if="*{password!=null}">
         <br><hr><br><p>เปลี่ยนรหัสผ่าน</p>
-        <form th:action="@{/account/password/edit}" method="POST">
+        <form name="changePassword" th:action="@{/account/password/edit}" method="POST">
             <center><p th:text="${changePasswordError}"></p></center>
             <div class="row mb-3 form-group field-input">
                 <label for="passwordField" class="col-sm-2 col-form-label">รหัสผ่านปัจจุบัน</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="currentPasswordField" name="password">
+                    <input type="password" class="form-control" id="currentPasswordField" name="currentPassword">
                 </div>
             </div>
             <div class="row mb-3 form-group field-input">
@@ -86,7 +86,7 @@
             <div class="row mb-3 form-group field-input">
                 <label for="passwordField" class="col-sm-2 col-form-label">ยืนยันรหัสผ่านใหม่</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="confirmPasswordField">
+                    <input type="password" class="form-control" id="confirmPasswordField" name="confirmPassword">
                 </div>
             </div>
             <div class="row mb-3 form-group field-input">
