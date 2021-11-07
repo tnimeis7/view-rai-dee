@@ -29,8 +29,8 @@ function checkFieldLogin() {
 }
 
 function checkPassword() {
-    current = document.changePassword.currentPassword.value;
-    password = document.changePassword.password.value;
+    var current = document.getElementById('currentPasswordField').value;
+    var password = document.getElementById('passwordField').value;
     confirm = document.changePassword.confirmPassword.value;
 
     console.log(current);
