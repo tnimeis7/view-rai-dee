@@ -68,16 +68,20 @@ public class AccountController {
             accountService.createAccount(account);
             if(currentAccount.getPassword()==null){ //social account
                 account.setEmail(currentAccount.getEmail()); //เพราะ email โดนให้แก้ไขไม่ได้
+                account.setPassword(null);
             }
             else {
                 password = currentAccount.getPassword();
+                account.setPassword(password);
             }
-            account.setPassword(password);
             accountService.update(account);
             authenticationService.preAuthenticate(account.getUsername(), "", request);
             accountService.delete(currentAccount.getUsername());
         }
         else{
+            if(currentAccount.getPassword()==null){ //social account
+                account.setEmail(currentAccount.getEmail()); //เพราะ email โดนให้แก้ไขไม่ได้
+            }
             account.setPassword(currentAccount.getPassword());
             accountService.update(account);
         }

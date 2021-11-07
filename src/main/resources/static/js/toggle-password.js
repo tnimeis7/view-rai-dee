@@ -8,8 +8,9 @@ function showPwd1() {
     z.style.display = "none";
   } else {
     x.type = "password";
-    y.style.display = "none";
     z.style.display = "block";
+    y.style.display = "none";
+
   }
 }
 

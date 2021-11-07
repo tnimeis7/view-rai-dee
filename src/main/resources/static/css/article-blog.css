@@ -1,12 +1,121 @@
 .btn-vrd-sort{
-    border-color: #E5CE70;
-    color: #E5CE70;
+    border-color: #2c3034;
+    color: #2c3034;
+    border-width: 0.1rem;
 }
 
-.btn-vrd-sort:hover, btn-vrd-sort:focus {
-    color: white;
-    border-color: white;
+.btn-vrd-sort:hover, btn-vrd-sort:focus, btn-vrd-sort:active {
+    color: #F7F7F7;
+    /*border-color: white;*/
+    background-color: #2c3034;
 }
 
+.frame-vrd{
+    width: 92%;
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 0.75rem);
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 0.25rem;
+}
+
+.rounded-vrd-1 {
+    border-radius: 1rem !important;
+}
+
+.dropdown-item-vrd {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #F7F7F7; /*#212529;*/
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: #2c3034;
+    border: 0;
+}
+.dropdown-item-vrd:hover, .dropdown-item-vrd:focus {
+    /*color: #1e2125;*/
+    background-color: #565C62;
+}
+.dropdown-item-vrd.active, .dropdown-item-vrd:active {
+    /*color: #fff;*/
+    text-decoration: none;
+    background-color: black;
+}
+select selected{
+
+}
+
+.card-img-vrd {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    float:left;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.poster{
+    width: 480px;
+    height: 640px;
+    object-fit: cover;
+}
+
+.limit-chars-300{
+    /*max-width: 300ch;*/
+    /*height: 8ch;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    /*overflow-wrap: break-word;*/
+}
+
+.line-clamp:after {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), #F7F7F7 50%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 0;
+    content: "...";
+    font-weight: bold;
+    padding: 0 20px 1px 45px;
+    position: absolute;
+    right: 0;}
+
+.line-clamp {
+    height: 5.6em;
+    line-height: 1.4em;
+    overflow: hidden;
+    position: relative;}
+
+selectvrd {
+    color: red; !important;
+
+}
+
+.platformLogo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.heart-icon {
+    width: 70px;
+    height: 70px;
+}
+
+.space-between-inline{
+    display: inline-block;
+    padding-right: 20px;
+}
+.tag-box{
+    width: auto;
+    height: 30px;
+    background-color: #94a7ae;
+    border-radius: 20px;
+}
 
 

@@ -27,6 +27,13 @@ public class ArticleService {
         restTemplate.postForObject(url, article, Article.class);
     }
 
+    public Article getById(String id){
+        String url = "http://localhost:8090/Article/" + id;
+        ResponseEntity<Article> response = restTemplate.getForEntity(url, Article.class);
+        Article article = response.getBody();
+        return article;
+    }
+
     // ทำไมไม่สีเหลือง!!!!!
 //    public void deleteArticle(Article article) {
 //        String url = "http://localhost:8090/Article";

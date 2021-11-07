@@ -18,7 +18,7 @@
     
   }
   .login-root {
-      background: rgb(0, 0, 0);
+      background: white;
       display: flex;
       width: 100%;
       min-height: 100vh;
@@ -58,6 +58,9 @@
   .padding-top--24 {
     padding-top: 24px;
   }
+  .padding-top--10 {
+    padding-top: 10px;
+  }
   .padding-top--48 {
     padding-top: 48px;
   }
@@ -65,10 +68,19 @@
     padding-bottom: 24px;
   }
   .padding-horizontal--48 {
-    padding: 48px;
+    padding: 24px;
   }
   .padding-bottom--15 {
     padding-bottom: 15px;
+  }
+  .padding-bottom--20 {
+    padding-bottom: 20px;
+  }
+  .padding-bottom--5 {
+    padding-bottom: 5px;
+  }
+  .padding-bottom--40 {
+    padding-bottom: 40px;
   }
   
   .flex-justifyContent--center {
@@ -80,7 +92,7 @@
       margin: auto;
       width: 100%;
       max-width: 448px;
-      background: rgb(38,38,38);
+      background: white;
       border-radius: 4px;
       box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
   }
@@ -122,7 +134,9 @@
       border: unset;
       border-radius: 4px;
       outline-color: rgb(84 105 212 / 0.5);
-      background-color: rgb(77,77,77);
+      background-color: white;
+      border: 1px solid #9E9E9E;
+      color: black;
       box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
                   rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
                   rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
@@ -151,6 +165,7 @@
   }
   .font-12 {
     font-size: 12px;
+    color: black;
   }
   .button {
   color: white;
@@ -160,37 +175,38 @@
   cursor: pointer;
   }
   .btn-login {
-  background-color: rgb(222, 0, 107);
+  background-color: black;
   }
   .btn-login:hover {
-  background-color: rgb(255, 0, 107);
+  background-color: rgb(77, 77, 77);
   color: white;
   }
   .btn-sign-in {
-    background-color: rgb(77, 77, 77);
-    }
-    .btn-sign-in:hover {
-    background-color: rgb(255, 0, 107);
-    color: white;
-    }
+    background-color: white;
+    color: black;
+    border: 1px solid #9E9E9E;
+  }
+  .btn-sign-in:hover {
+    color: black;
+  }
   .btn-gg {
-    background-color: rgb(38, 38, 38); 
-    color: white; 
-    border: 3px solid rgb(252, 255, 127);
+    background-color: white;
+    color: black;
+    border: 1px solid #FF3E30;
   }
   .btn-fb {
-    background-color: rgb(38, 38, 38); 
-    color: white; 
-    border: 3px solid rgb(52, 187, 244);
+    background-color: white;
+    color: black;
+    border: 1px solid #176BEF;
   }
   .btn-gg:hover {
-    color: white; 
+    color: black;
   }
   .btn-fb:hover {
-    color: white; 
+    color: black;
   }
   ::placeholder {
-    color: white;
+    color: black;
   }
   .form-center {
     margin: auto;
@@ -198,9 +214,34 @@
   .eye {
     position: absolute;
   }
+
   #hide1 {
     display: none;
+    position: absolute;
+    transform: translate(0px, 0px);
+  }
+  #hide2 {
+     position: absolute;
+     transform: translate(0px, 0px);
   }
   #hide3 {
     display: none;
+    position: absolute;
+    transform: translate(0px, 0px);
+  }
+  #hide4 {
+    position: absolute;
+    transform: translate(0px, 0px);
+  }
+  .eye-img {
+    transform: translate(360px, -32px);
+  }
+  .icon{
+    transform: translate(-5px, -2px)
+  }
+  .black{
+    color: black;
+  }
+  .wrong{
+    color: #E43A36;
   }

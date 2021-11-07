@@ -8,7 +8,7 @@
     <link th:rel="stylesheet" th:href="@{/css/login_style.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
     <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/password-check.js}"></script>
+    <script th:src="@{/js/check-field.js}"></script>
     <script th:src="@{/js/toggle-password.js}"></script>
 </head>
 <body>
@@ -22,29 +22,29 @@
             <div class="formbg-outer">
                 <div class="formbg">
                     <div class="formbg-inner padding-horizontal--48">
-                        <div class="padding-bottom--24">
-                            <center><h1><a th:href="@{/}"><img th:src="@{/images/logo.png}" width="200"/></a></h1></center>
+                        <div>
+                            <center><h1><a th:href="@{/}"><img th:src="@{/images/Logo-white-tpr-crop.png}" width="200"/></a></h1></center>
                         </div>
-                        <center><p th:text="${signupError}"></p></center>
+                        <center><p class="wrong" th:text="${signupError}"></p></center>
                         <form name="signUp" th:action="@{/signUp}" method="POST">
-                            <div class="field padding-bottom--15">
-                                <input type="text" id="usernameInput" class="form-control" name="username" placeholder="ชื่อผู้ใช้">
+                            <div class="field padding-bottom--20">
+                                <input type="text" id="usernameInput" name="username" placeholder="ชื่อผู้ใช้">
                             </div>
-                            <div class="field padding-bottom--15">
-                                <input type="email" id="emailInput" class="form-control" name="email" placeholder="อีเมล">
+                            <div class="field padding-bottom--20">
+                                <input type="email" id="emailInput" name="email" placeholder="อีเมล">
                             </div>
-                            <div class="field padding-bottom--15">
-                                <input type="password" id="passwordInput" class="form-control" name="password" placeholder="รหัสผ่าน">
-                                <span class="eye" onclick="showPwd1()">
-                                    <i id="hide1" class="fas fa-eye"></i>
-                                    <i id="hide2" class="fas fa-eye-slash"></i>
+                            <div class="field padding-bottom--20">
+                                <input type="password" id="passwordInput" name="password" placeholder="รหัสผ่าน">
+                                <span class="eye eye-img" onclick="showPwd1()">
+                                    <img th:src="@{/images/view.png}" width="20" id="hide1"/>
+                                    <img th:src="@{/images/hidden.png}" width="20" id="hide2"/>
                                 </span>
                             </div>
-                            <div class="field padding-bottom--24">
-                                <input type="password" id="confirmPasswordInput" class="form-control" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน">
-                                <span class="eye" onclick="showPwd2()">
-                                    <i id="hide3" class="fas fa-eye"></i>
-                                    <i id="hide4" class="fas fa-eye-slash"></i>
+                            <div class="field padding-bottom--40">
+                                <input type="password" id="confirmPasswordInput" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน">
+                                <span class="eye eye-img" onclick="showPwd2()">
+                                    <img th:src="@{/images/view.png}" width="20" id="hide3"/>
+                                    <img th:src="@{/images/hidden.png}" width="20" id="hide4"/>
                                 </span>
                             </div>
                             <button type="submit" class="btn button btn-login button--100" onclick="return checkFieldSignUp()">สมัครบัญชี</button>

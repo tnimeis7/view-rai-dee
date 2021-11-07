@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link th:rel="stylesheet" th:href="@{/css/article-blog.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <style>
+        .top-right{
+            position: absolute;
+            right: 80px;
+            margin-top:10px;
+        }
+        .checked{
+            color: orange;
+        }
+        .btn-report{
+            width: 100px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body style="background-color: #1E1E1E;">
+    <div th:insert="fragments/header :: header"></div>
+    <div class="frame-vrd" style="background-color: #F7F7F7; position: inherit; margin-top: 100px;">
+        <!-- star -->
+        <div class="top-right">
+            <th:block th:each="i: ${#numbers.sequence(1, 5)}">
+                <span th:if="${article.getStarRate() >= i}">
+                    <span class="fa fa-star checked"></span>
+                </span>
+                <span th:unless="${article.getStarRate() >= i}">
+                    <span class="fa fa-star"></span>
+                </span>
+            </th:block>
+        </div>
+        <div class="container align-items-center">
+            <center>
+                <h1 th:text="${article.atcName}" style="padding-top: 50px; padding-bottom: 20px;"></h1>
+                <img th:src="${article.coverPath}" class="poster rounded-vrd-1">
+            </center>
+            <h4>เรื่อง: <span th:text="${article.movieName}"></span></h4>
+            <h4>ประเภท: <span th:text="${article.type}"></span></h4>
+            <h4>หมวดหมู่หนัง:
+                <div class="space-between-inline" th:each="genre : ${genres}">
+                    <h4 th:text="${genre.getGenreName()}"></h4>
+                </div>
+            </h4>
+            <p class="justify-content-center" th:text="${article.content}"></p>
+            <!--โซน video teaser จนถึง ดูที่-->
+            <div class="d-block" style="margin-top: 50px;">
+                <div class="d-flex justify-content-center">
+                    <iframe th:src="${article.teaserLink}" width="640px" height="395px"></iframe>
+                </div>
+
+                <div class="container" style="width:800px; margin-top: 50px;">
+                    <h4 class="space-between-inline">
+                        รีวิวโดย <span th:text="${article.authorName}"></span>
+                        วันที่ <span th:text="${article.publishDate}"></span></span>
+                    </h4>
+
+                    <h4>แท็ก
+                        <div th:each="tag : ${tags}" class="space-between-inline">
+                            <div class="tag-box">
+                                <h5>#<span th:text="${tag.getNameTag()}"></span></h5>
+                            </div>
+                        </div>
+                    </h4>
+
+                    <h4>ดูที่</h4>
+                    <div th:each="streamPf : ${streamPlatforms}" class="space-between-inline" style="padding-top:10px;">
+                        <img th:src="${streamPf.getPicPath()}" class="platformLogo">
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- Show Heart Count and Report -->
+        <div class="d-flex justify-content-between" style="margin-top: 150px; padding-bottom: 20px;">
+            <div>
+                <img src="https://sv1.picz.in.th/images/2021/11/05/unGzrl.png" alt="unGzrl.png" class="heart-icon">
+                <span th:text="${article.getHeart()}" style="font-size: 30px; font-weight: bold;"></span>
+            </div>
+            <button type="button" class="btn btn-danger btn-report">รายงาน</button>
+        </div>
+    </div>
+
+    <!-- new section comment -->
+    <div class="frame-vrd" style="background-color: #F7F7F7; margin-top: 20px;">
+        Comments
+        </div>
+</body>
+</html>
