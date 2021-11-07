@@ -3,6 +3,7 @@ package th.ac.ku.viewraidee.model;
 import com.google.cloud.Timestamp;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Report {
     private String id;
@@ -61,6 +62,11 @@ public class Report {
 
     public void setReportDate(Date reportDate) {
         this.reportDate = reportDate;
+    }
+
+    public String generateUUID(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
     }
 
     @Override

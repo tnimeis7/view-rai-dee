@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.model.Comment;
+import th.ac.ku.viewraidee.model.Report;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,6 +51,11 @@ public class ArticleService {
     public void plusHeart(String id) {
         String url = "http://localhost:8090/Article/heart/" + id;
         restTemplate.postForObject(url, id, Article.class);
+    }
+
+    public void createReport(Report report) {
+        String url = "http://localhost:8090/Report";
+        restTemplate.postForObject(url, report, Report.class);
     }
 
     // ทำไมไม่สีเหลือง!!!!!
