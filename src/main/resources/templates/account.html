@@ -15,8 +15,11 @@
     <p class="text-left font--25" th:text="${username}" align="center"></p>
     <img class="profile-pic" th:src="${photo}" th:width="120">
     <div class="margin-left--35">
-        <p class="text-left padding-top--24" th:text="${link}"></p>
-        <p class="text-left break-word" th:text="${aboutMe}"></p>
+        <div class="aboutMeBox">
+            <a class="link-profile break-word" style="padding-left: 0px; font-size: medium; color: black;" th:text="'Link: ' + ${link}" th:href="${link}"></a>
+            <p class="text-left break-word" th:text="${aboutMe}"></p>
+        </div>
+
         <button type="submit" class="btn button btn-account" onclick="window.location.href='/account/edit'">แก้ไข</button>
         <div class="line"></div>
         <span class="display-flex">
@@ -34,14 +37,14 @@
 </div>
 
 <div class="main">
-    <div class="container" style="padding: 30px;">
+    <div class="container" style="padding: 10px;">
         <div class="grid-container" >
             <div class="grid-item" th:each="article : ${ownArticle}">
                 <img id="coverImg" th:src="${article.coverPath}" class="card-img rounded-vrd-1">
                 <div class="textIMG">
                     <h5 th:text="${article.movieName}"></h5>
                     <p  th:text="${article.atcName}"></p>
-                    <img class="star" th:src="@{/images/star.png}" th:text="${article.getStarRate()}">
+                    <img class="star" th:src="@{/images/star.png}" th:text="' '+ ${article.getStarRate()}">
                 </div>
             </div>
         </div>
