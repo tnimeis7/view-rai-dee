@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/check-field.js}"></script>
     <style>
         .top-right{
             position: absolute;
@@ -98,7 +99,7 @@
             <br><img th:src="${loginUser.getPhoto()}" width="50px"><p th:text="${loginUser.getUsername()}"></p>
             <input type="hidden" class="form-control" id="ArticleIdField" name="articleId" th:field="${article.id}">
             <input type="text" class="form-control" id="ContentField" name="commentContent">
-            <button type="submit" class="btn btn-primary">แสดงความคิดเห็น</button>
+            <button type="submit" class="btn btn-primary" onclick="return checkComment()">แสดงความคิดเห็น</button>
             <br>
         </form>
         <p>ความคิดเห็นทั้งหมด</p>

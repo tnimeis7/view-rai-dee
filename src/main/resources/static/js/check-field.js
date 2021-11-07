@@ -43,3 +43,15 @@ function checkPassword() {
         return true;
     }
 }
+
+function checkComment(){
+    comment = document.getElementById("ContentField").value;
+
+    if(comment == "") {
+        alert("กรุณากรอกเนื้อหาที่จะแสดงความเห็น");
+        return false;
+    }else {
+        alert("คุณได้แสดงความเห็นแล้ว");
+        return true;
+    }
+}
