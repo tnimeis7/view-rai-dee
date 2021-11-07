@@ -8,6 +8,7 @@
     <link th:rel="stylesheet" th:href="@{/css/edit-account-style.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/check-field.js}"></script>
+    <script th:src="@{/js/delete-account.js}"></script>
 </head>
 
 
@@ -34,12 +35,12 @@
         </div>
     </form>
 
-    <form th:action="@{/account/edit}" method="POST">
+    <form name="profile" th:action="@{/account/edit}" method="POST">
         <button type="submit" class="btn btn-x">X</button>
         <div class="row mb-3 form-group field-input">
             <label for="usernameField" class="col-sm-2 col-form-label">ชื่อผู้ใช้</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="usernameField" th:field="*{username}">
+                <input type="text" class="form-control" id="usernameField" th:field="*{username}" name="username">
             </div>
         </div>
         <div th:if="*{password!=null}" class="row mb-3 form-group field-input">
@@ -96,7 +97,7 @@
     </div>
     <br><hr><br>
     <form th:action="@{/account/delete}" method="POST">
-        <button type="submit" class="btn btn-primary">ลบบัญชี</button>
+        <button type="submit" class="btn btn-primary" onclick="return confirmDelete()">ลบบัญชี</button>
     </form>
     <br>
 </div>
