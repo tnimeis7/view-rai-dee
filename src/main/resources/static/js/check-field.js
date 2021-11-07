@@ -48,6 +48,9 @@ function checkFeedback() {
     feedback = document.feedback.fbContent.value;
 
     if(feedback == "") {
-        alert("")
+        alert("กรุณากรอกข้อความก่อนส่ง")
+        return false;
+    }else {
+        return true;
     }
 }
