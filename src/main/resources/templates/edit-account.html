@@ -73,33 +73,33 @@
         <form name="changePassword" th:action="@{/account/password/edit}" method="POST">
             <center><div th:if="${changePasswordError}!=null" th:text="${changePasswordError}" class="alert alert-danger" role="alert"></div></center>
             <div class="row mb-3 form-group field-input">
-                <label for="passwordField" class="col-sm-2 col-form-label">รหัสผ่านปัจจุบัน</label>
-                <div class="col-sm-10">
+                <label for="passwordField" class="col-sm-3">รหัสผ่านปัจจุบัน</label>
+                <div class="col-sm-9">
                     <input type="password" class="form-control" id="currentPasswordField" name="password">
                 </div>
             </div>
             <div class="row mb-3 form-group field-input">
-                <label for="passwordField" class="col-sm-2 col-form-label">รหัสผ่านใหม่</label>
-                <div class="col-sm-10">
+                <label for="passwordField" class="col-sm-3 col-form-label">รหัสผ่านใหม่</label>
+                <div class="col-sm-9">
                     <input type="password" class="form-control" id="passwordField" name="password">
                 </div>
             </div>
             <div class="row mb-3 form-group field-input">
-                <label for="passwordField" class="col-sm-2 col-form-label">ยืนยันรหัสผ่านใหม่</label>
-                <div class="col-sm-10">
+                <label for="passwordField" class="col-sm-3 col-form-label">ยืนยันรหัสผ่านใหม่</label>
+                <div class="col-sm-9">
                     <input type="password" class="form-control" id="confirmPasswordField" name="confirmPassword">
                 </div>
             </div>
             <div class="row mb-3 form-group field-input">
-                <button type="submit" class="btn btn-primary" onclick="return checkPassword()">เปลี่ยนรหัสผ่าน</button>
+                <center><button type="submit" class="btn button btn-deleteAcc" onclick="return checkPassword()">เปลี่ยนรหัสผ่าน</button></center>
             </div>
         </form>
     </div>
     <br><hr><br>
     <form th:action="@{/account/delete}" method="POST">
-        <button type="submit" class="btn btn-primary" onclick="return confirmDelete()">ลบบัญชี</button>
+        <button type="submit" class="btn button btn-deleteAcc" onclick="return confirmDelete()">ลบบัญชี</button>
     </form>
-    <br>
+    <br><br>
 </div>
 </body>
 
