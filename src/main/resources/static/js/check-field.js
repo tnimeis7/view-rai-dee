@@ -44,9 +44,9 @@ function checkPassword() {
 }
 
 function checkFeedback() {
-    feedback = document.feedback.fbContent.value;
+    feedback = document.getElementById("feedback").value;
 
-    console.log(feedback);
+    console.log("asdasc0"+feedback);
     if(feedback == "") {
         alert("\nกรุณากรอกข้อความก่อนส่ง");
         return false;
