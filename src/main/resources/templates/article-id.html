@@ -100,7 +100,7 @@
                 </select>
                 <input type="hidden" class="form-control" th:name="reportBy" th:value="${user}">
                 <input type="hidden" class="form-control" th:name="mentionedId" th:value="${article.id}">
-                <input type="hidden" class="form-control" th:name="type" value="comment">
+                <input type="hidden" class="form-control" th:name="type" value="article">
                 <button type="submit" class="btn btn-primary">report</button>
             </form>
         </div>
@@ -135,7 +135,7 @@
                             </select>
                             <input type="hidden" class="form-control" th:name="reportBy" th:value="${user}">
                             <input type="hidden" class="form-control" th:name="mentionedId" th:value="${comment.key.id}">
-                            <input type="hidden" class="form-control" th:name="type" value="article">
+                            <input type="hidden" class="form-control" th:name="type" value="comment">
                             <button type="submit" class="btn btn-primary">report</button>
                         </form>
                     </div>

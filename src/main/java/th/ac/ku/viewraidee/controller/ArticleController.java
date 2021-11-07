@@ -156,7 +156,9 @@ public class ArticleController {
 
     @PostMapping("/report/{id}")
     public String report(@PathVariable String id, RedirectAttributes redirectAttrs, @ModelAttribute Report report){
+        report.setId(report.generateUUID());
         System.out.println(report.toString());
+        service.createReport(report);
         redirectAttrs.addAttribute("id", id);
         return "redirect:/articles/{id}";
     }
