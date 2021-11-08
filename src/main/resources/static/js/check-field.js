@@ -29,9 +29,13 @@ function checkFieldLogin() {
 }
 
 function checkPassword() {
-    current = document.getElementById("currentPasswordField");
-    password = document.getElementById("passwordField");
-    confirm = document.getElementById("confirmPasswordField");
+    var current = document.getElementById('currentPasswordField').value;
+    var password = document.getElementById('passwordField').value;
+    confirm = document.changePassword.confirmPassword.value;
+
+    console.log(current);
+    console.log(password);
+    console.log(confirm);
 
     if(current == "" || password == "" || confirm == "") {
         alert("กรุณากรอกข้อมูลให้ครบ");

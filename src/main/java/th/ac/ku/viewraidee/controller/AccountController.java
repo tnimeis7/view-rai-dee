@@ -42,7 +42,7 @@ public class AccountController {
         model.addAttribute("user",account.getUsername());
         model.addAttribute("username", account.getUsername());
         model.addAttribute("photo", account.getPhoto());
-        model.addAttribute("link", "Link: "+ account.getLink());
+        model.addAttribute("link", account.getLink());
         model.addAttribute("aboutMe", account.getAboutMe());
         model.addAttribute("articleCount", "จำนวนบทความรีวิว: " + account.getCountArticle());
         model.addAttribute("heartCount", "จำนวนหัวใจที่ได้รับ: " + account.getCountHeart());
@@ -68,24 +68,29 @@ public class AccountController {
             accountService.createAccount(account);
             if(currentAccount.getPassword()==null){ //social account
                 account.setEmail(currentAccount.getEmail()); //เพราะ email โดนให้แก้ไขไม่ได้
+                account.setPassword(null);
             }
             else {
                 password = currentAccount.getPassword();
+                account.setPassword(password);
             }
-            account.setPassword(password);
             accountService.update(account);
             authenticationService.preAuthenticate(account.getUsername(), "", request);
             accountService.delete(currentAccount.getUsername());
         }
         else{
+            if(currentAccount.getPassword()==null){ //social account
+                account.setEmail(currentAccount.getEmail()); //เพราะ email โดนให้แก้ไขไม่ได้
+            }
             account.setPassword(currentAccount.getPassword());
             accountService.update(account);
         }
+        TimeUnit.SECONDS.sleep(1);
         return "redirect:/account";
     }
 
     @PostMapping("/password/edit")
-    public String editPassword(@ModelAttribute Account account, Model model) {
+    public String editPassword(@ModelAttribute Account account, Model model) throws InterruptedException {
         String changePasswordError = null;
         Account currentAccount = authenticationService.getCurrentAccount();
         String value[] = splitField(account.getPassword());
@@ -100,6 +105,7 @@ public class AccountController {
             model.addAttribute("changePasswordError", changePasswordError);
             return "edit-account";
         }
+        TimeUnit.SECONDS.sleep(1);
         return "redirect:/account";
     }
 
