@@ -2,20 +2,23 @@ package th.ac.ku.viewraidee.model;
 
 import com.google.cloud.Timestamp;
 
-public class Report implements BlockComponents {
-    private String reportId;
-    private String reportContent;
-    private String atcId;
-    private String reportBy;
-    private String commentId;
-    private Timestamp reportDate;
+import java.util.Date;
+import java.util.UUID;
 
-    public String getReportId() {
-        return reportId;
+public class Report {
+    private String id;
+    private String reportContent;
+    private String mentionedId;
+    private String reportBy;
+    private String type; //article, comment
+    private Date reportDate;
+
+    public String getId() {
+        return id;
     }
 
-    public void setReportId(String reportId) {
-        this.reportId = reportId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getReportContent() {
@@ -26,12 +29,12 @@ public class Report implements BlockComponents {
         this.reportContent = reportContent;
     }
 
-    public String getAtcId() {
-        return atcId;
+    public String getMentionedId() {
+        return mentionedId;
     }
 
-    public void setAtcId(String atcId) {
-        this.atcId = atcId;
+    public void setMentionedId(String mentionedId) {
+        this.mentionedId = mentionedId;
     }
 
     public String getReportBy() {
@@ -42,24 +45,39 @@ public class Report implements BlockComponents {
         this.reportBy = reportBy;
     }
 
-    public String getCommentId() {
-        return commentId;
+    public String getType() {
+        return type;
     }
 
-    public void setCommentId(String commentId) {
-        this.commentId = commentId;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public Timestamp getReportDate() {
+    public Date getReportDate() {
+        if(reportDate==null){
+            return null;
+        }
         return reportDate;
     }
 
-    public void setReportDate(Timestamp reportDate) {
+    public void setReportDate(Date reportDate) {
         this.reportDate = reportDate;
     }
 
+    public String generateUUID(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
+    }
+
     @Override
-    public String getId() {
-        return getReportId();
+    public String toString() {
+        return "Report{" +
+                "id='" + id + '\'' +
+                ", reportContent='" + reportContent + '\'' +
+                ", mentionedId='" + mentionedId + '\'' +
+                ", reportBy='" + reportBy + '\'' +
+                ", type='" + type + '\'' +
+                ", reportDate=" + reportDate +
+                '}';
     }
 }

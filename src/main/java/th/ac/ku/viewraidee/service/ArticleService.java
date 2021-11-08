@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import th.ac.ku.viewraidee.model.Article;
+import th.ac.ku.viewraidee.model.Comment;
+import th.ac.ku.viewraidee.model.Report;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +34,28 @@ public class ArticleService {
         ResponseEntity<Article> response = restTemplate.getForEntity(url, Article.class);
         Article article = response.getBody();
         return article;
+    }
+
+    public void addComment(Comment comment) {
+        String url = "http://localhost:8090/Comment";
+        restTemplate.postForObject(url, comment, Comment.class);
+    }
+
+    public List<Comment> getCommentByAtcId(String id){
+        String url = "http://localhost:8090/Comment/articleId/{id}";
+        ResponseEntity<Comment[]> response = restTemplate.getForEntity(url, Comment[].class, id);
+        Comment[] comment = response.getBody();
+        return Arrays.asList(comment);
+    }
+
+    public void plusHeart(String id) {
+        String url = "http://localhost:8090/Article/heart/" + id;
+        restTemplate.postForObject(url, id, Article.class);
+    }
+
+    public void createReport(Report report) {
+        String url = "http://localhost:8090/Report";
+        restTemplate.postForObject(url, report, Report.class);
     }
 
     // ทำไมไม่สีเหลือง!!!!!

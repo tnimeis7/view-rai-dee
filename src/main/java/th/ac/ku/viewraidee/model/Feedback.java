@@ -1,18 +1,21 @@
 package th.ac.ku.viewraidee.model;
 
-public class Feedback implements BlockComponents {
+import java.util.UUID;
 
-    private String fbId;
+public class Feedback{
+
+    private String id;
     private String fbContent;
     private String fbBy;
     private String fbStatus;
 
-    public String getFbId() {
-        return fbId;
+    public String getId() {
+        return id;
     }
 
-    public void setFbId(String fbId) {
-        this.fbId = fbId;
+    public void setFbId(String id) {
+
+        this.id = id;
     }
 
     public String getFbContent() {
@@ -39,8 +42,19 @@ public class Feedback implements BlockComponents {
         this.fbStatus = fbStatus;
     }
 
-    @Override
-    public String getId() {
-        return getFbId();
+    public String generateUUIDForId(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
     }
+
+//    @Override
+//    public String toString() {
+//        return "Feedback{" +
+//                "fbId='" + id + '\'' +
+//                ", fbContent='" + fbContent + '\'' +
+//                ", fbBy='" + fbBy + '\'' +
+//                ", fbStatus='" + fbStatus + '\'' +
+//                '}';
+//    }
+
 }
