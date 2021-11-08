@@ -3,11 +3,14 @@ package th.ac.ku.viewraidee.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.model.Comment;
 import th.ac.ku.viewraidee.model.Report;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -87,6 +90,33 @@ public class ArticleService {
         ResponseEntity<Article[]> response = restTemplate.getForEntity(url, Article[].class);
         Article[] articles = response.getBody();
         return Arrays.asList(articles);
+    }
+
+    public void setUsernameOfComment(String username, String newUsername){
+        String url = "http://localhost:8090/Comment/setUsername/" + username + "/" + newUsername;
+        MultiValueMap<String, String> parametersMap = new LinkedMultiValueMap<>();
+        parametersMap.add("username", username);
+        parametersMap.add("newUsername", newUsername);
+        restTemplate.postForObject(url, parametersMap, Comment.class, newUsername);
+    }
+
+    public void setUsernameOfArticle(String username,  String newUsername){
+        String url = "http://localhost:8090/Article/setUsername/" + username + "/" + newUsername;
+        List<String> list = new ArrayList<>();
+        MultiValueMap<String, String> parametersMap = new LinkedMultiValueMap<>();
+        parametersMap.add("username", username);
+        parametersMap.add("newUsername", newUsername);
+        restTemplate.postForObject(url, parametersMap, Article.class, newUsername);
+    }
+
+    public void deleteCommentByUsername(String username){
+        String url = "http://localhost:8090/Comment/delete/" + username;
+        restTemplate.postForObject(url, username, Comment.class);
+    }
+
+    public void deleteArticleByUsername(String username){
+        String url = "http://localhost:8090/Article/delete/" + username;
+        restTemplate.postForObject(url, username, Article.class);
     }
 
     // ทำไมไม่สีเหลือง!!!!!
