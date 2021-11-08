@@ -89,7 +89,7 @@
                 <span th:text="${article.getHeart()}" style="font-size: 30px; font-weight: bold;"></span>
             </div>
             <div th:if="${user}!='ผู้เยี่ยมชม'">
-                <a th:if="${user}==${article.authorName} or ${admin}!=null" href="#" type="button" class="btn btn-danger btn-report">ลบบทความ</a>
+                <a th:if="${user}==${article.authorName} or ${admin}!=null" th:href="@{/articles/delete/article/{id}(id=${article.id})}" type="button" class="btn btn-danger btn-report">ลบ</a>
                 <form th:if="${user}!=${article.authorName} and ${admin}==null" th:action="@{/articles/report/{id}(id=${article.id})}" method="POST">
                     <select th:name="reportContent" class="form-select" aria-label="Default select example">
                         <option selected>report</option>
@@ -125,7 +125,7 @@
                     <img th:src="${comment.value}" width="50px">
                     <p th:text="${comment.key.username}"></p>
                     <div th:if="${user}!='ผู้เยี่ยมชม'">
-                        <a th:if="${user}==${comment.key.username} or ${admin}!=null" href="#" type="button" class="btn btn-danger btn-report">ลบบทความ</a>
+                        <a th:if="${user}==${comment.key.username} or ${admin}!=null" th:href="@{/articles/delete/comment/{id}(id=${comment.key.id})}" type="button" class="btn btn-danger btn-report">ลบ</a>
                         <form th:if="${user}!=${comment.key.username} and ${admin}==null" th:action="@{/articles/report/{id}(id=${article.id})}" method="POST">
                             <select th:name="reportContent" class="form-select" aria-label="Default select example">
                                 <option selected>report</option>

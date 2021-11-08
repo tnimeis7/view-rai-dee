@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import th.ac.ku.viewraidee.model.*;
 import th.ac.ku.viewraidee.service.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -167,6 +168,20 @@ public class ArticleController {
         System.out.println(report.toString());
         service.createReport(report);
         redirectAttrs.addAttribute("id", id);
+        return "redirect:/articles/{id}";
+    }
+
+    @RequestMapping ("/delete/article/{id}")
+    public String deleteAtc(HttpServletRequest request, @PathVariable String id) {
+        service.deleteAtc(id);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/delete/comment/{id}")
+    public String deleteComment(HttpServletRequest request, @PathVariable String id, RedirectAttributes redirectAttrs) {
+        Comment comment = service.getCommentById(id);
+        redirectAttrs.addAttribute("id", comment.getArticleId());
+        service.deleteComment(id);
         return "redirect:/articles/{id}";
     }
 

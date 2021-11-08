@@ -58,6 +58,37 @@ public class ArticleService {
         restTemplate.postForObject(url, report, Report.class);
     }
 
+    public void deleteAtc(String atcId){
+        String url = "http://localhost:8090/Article/" + atcId;
+        restTemplate.delete(url);
+    }
+
+    public void deleteComment(String commentId){
+        String url = "http://localhost:8090/Comment/" + commentId;
+        restTemplate.delete(url);
+    }
+
+    public Comment getCommentById(String id){
+        String url = "http://localhost:8090/Comment/" + id;
+        ResponseEntity<Comment> response = restTemplate.getForEntity(url, Comment.class);
+        Comment comment = response.getBody();
+        return comment;
+    }
+
+    public List<Comment> getCommentByUsername(String username){
+        String url = "http://localhost:8090/Comment/username/" + username;
+        ResponseEntity<Comment[]> response = restTemplate.getForEntity(url, Comment[].class);
+        Comment[] comment = response.getBody();
+        return Arrays.asList(comment);
+    }
+
+    public List<Article> getArticleByUsername(String username){
+        String url = "http://localhost:8090/Article/author/" + username;
+        ResponseEntity<Article[]> response = restTemplate.getForEntity(url, Article[].class);
+        Article[] articles = response.getBody();
+        return Arrays.asList(articles);
+    }
+
     // ทำไมไม่สีเหลือง!!!!!
 //    public void deleteArticle(Article article) {
 //        String url = "http://localhost:8090/Article";
