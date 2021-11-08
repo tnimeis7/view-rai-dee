@@ -71,106 +71,108 @@
     </div>
 </nav>
 
-
-<div class="container p-5 my-5 text-white">
-    <div class="mb-3" style="width:300px;">
-        <a for="exampleFormControlInput1" class="form-label">ชื่อบทความรีวิว</a>
-        <input type="email" class="form-control" id="exampleFormControlInput1">
-    </div>
-    <div class="mb-3" style="width:300px;">
-        <a for="exampleFormControlInput1" class="form-label">ชื่อหนัง</a>
-        <input type="email" class="form-control" id="exampleFormControlInput2">
-    </div>
-
-    <div class="mb-3" style="width:300px;">
-        <a for="formFile" class="form-label">รูปภาพ</a>
-        <input class="form-control" type="file" id="formFile" onchange="preview()">
-    </div>
-    <img id="frame" src="" class="img-fluid" style="width:200px;" />
-
-    <script>
-        function preview() {
-            frame.src = URL.createObjectURL(event.target.files[0]);
-        }
-    </script>
-
-    <div class="mb-3" style="width:500px;">
-        <a for="exampleFormControlTextarea1" class="form-label">เพิ่มเนื้อหา</a>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-
-    <a class="label">ตัวอย่างหนัง</a><br /><br />
-
-    <div class="input-group mb-3" style="width:300px;">
-        <span class="input-group-text" id="basic-addon1">URL</span>
-        <input type="text" class="form-control" aria-describedby="basic-addon1">
-    </div>
-
-    <a class="label">คะแนนหนัง</a><br /><br />
-
-    <select class="form-select" aria-label="Default select example" style="width:300px;">
-        <option selected>Star Rating</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-    </select><br />
-
-    <a class="label">ประเภทหนัง</a><br /><br />
-
-    <select class="form-select" aria-label="Default select example" style="width:300px;">
-        <option selected>เลือกประเภทหนัง</option>
-        <option value="1">Movie</option>
-        <option value="2">Series</option>
-        <option value="3">Animation</option>
-        <option value="4">Anime(Japan)</option>
-        <option value="5">TV Show</option>
-    </select><br />
-
-    <a class="label">หมวดหมู่หนัง</a><br /><br />
-
-    <select class="form-select" aria-label="Default select example" style="width:300px;">
-        <option selected>เลือกประเภทหนัง</option>
-        <option value="1">Movie</option>
-        <option value="2">Series</option>
-        <option value="3">Animation</option>
-        <option value="4">Anime(Japan)</option>
-        <option value="5">TV Show</option>
-    </select><br />
-
-    <a class="label">แท็กเพิ่มเติม</a>
-    <br />
-    <div class="container">
-        <div class="tag-container" style="width:300px;">
-            <span class="tag">CSS<span class="material-icons">close</span></span>
-            <span class="tag">Javascript<span class="material-icons">close</span></span>
-            <span class="tag">Html<span class="material-icons">close</span></span>
-
-            <input  />
+<form name="createAtc" th:action="@{/articles/create}" method="POST">
+    <div class="container p-5 my-5 text-white">
+        <div class="mb-3" style="width:300px;">
+            <a for="exampleFormControlInput1" class="form-label">ชื่อบทความรีวิว</a>
+            <input type="email" class="form-control" id="atcNameInput" name="atcName">
         </div>
+        <div class="mb-3" style="width:300px;">
+            <a for="exampleFormControlInput1" class="form-label">ชื่อหนัง</a>
+            <input type="email" class="form-control" id="movieNameInput" name="movieName">
+        </div>
+
+        <div class="mb-3" style="width:300px;">
+            <a for="formFile" class="form-label">รูปภาพ</a>
+            <input class="form-control" type="file" id="pictureInput" onchange="preview()" name="coverPath">
+        </div>
+        <img id="frame" src="" class="img-fluid" style="width:200px;" />
+
+        <script>
+            function preview() {
+                frame.src = URL.createObjectURL(event.target.files[0]);
+            }
+        </script>
+
+        <div class="mb-3" style="width:500px;">
+            <a for="exampleFormControlTextarea1" class="form-label">เพิ่มเนื้อหา</a>
+            <textarea class="form-control" id="contentInput" rows="3" name="content"></textarea>
+        </div>
+
+        <a class="label">ตัวอย่างหนัง</a><br /><br />
+
+        <div class="input-group mb-3" style="width:300px;">
+            <span class="input-group-text" id="urlInput">URL</span>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" name="teaserLink">
+        </div>
+
+        <a class="label">คะแนนหนัง</a><br /><br />
+
+        <select class="form-select" aria-label="Default select example" style="width:300px;" name="starRate">
+            <option selected>Star Rating</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select><br />
+
+        <a class="label">ประเภทหนัง</a><br /><br />
+
+        <select class="form-select" aria-label="Default select example" style="width:300px;" name="type">
+            <option selected>เลือกประเภทหนัง</option>
+            <option value="1">Movie</option>
+            <option value="2">Series</option>
+            <option value="3">Animation</option>
+            <option value="4">Anime(Japan)</option>
+            <option value="5">TV Show</option>
+        </select><br />
+
+        <a class="label">หมวดหมู่หนัง</a><br />
+
+        <div class="container">
+            <div class="tag-container" style="width:300px;" name="genreName">
+<!--                <span class="tag">CSS<span class="material-icons">close</span></span>-->
+<!--                <span class="tag">Javascript<span class="material-icons">close</span></span>-->
+<!--                <span class="tag">Html<span class="material-icons">close</span></span>-->
+
+                <input  />
+            </div>
+        </div>
+
+        <a class="label">แท็กเพิ่มเติม</a>
+        <br />
+        <div class="container">
+            <div class="tag-container" style="width:300px;" name="nameTag">
+<!--                <span class="tag">CSS<span class="material-icons">close</span></span>-->
+<!--                <span class="tag">Javascript<span class="material-icons">close</span></span>-->
+<!--                <span class="tag">Html<span class="material-icons">close</span></span>-->
+
+                <input  />
+            </div>
+        </div>
+
+        <a class="label">แพลตฟอร์มดูหนัง</a><br />
+
+        <div class="container">
+            <div class="tag-container" style="width:300px;" name="platformName">
+<!--                <span class="tag">CSS<span class="material-icons">close</span></span>-->
+<!--                <span class="tag">Javascript<span class="material-icons">close</span></span>-->
+<!--                <span class="tag">Html<span class="material-icons">close</span></span>-->
+
+                <input  />
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+        <div class="d-grid gap-2 col-2 mx-auto">
+            <btn class="btn btn-outline-light" type="button">เผยแพร่</btn>
+        </div>
+
     </div>
-
-    <a class="label">แพลตฟอร์มดูหนัง</a><br /><br />
-
-    <select class="form-select" aria-label="Default select example" style="width:300px;">
-        <option selected>เลือกประเภทหนัง</option>
-        <option value="1">Movie</option>
-        <option value="2">Series</option>
-        <option value="3">Animation</option>
-        <option value="4">Anime(Japan)</option>
-        <option value="5">TV Show</option>
-    </select><br />
-
-    <br />
-    <br />
-
-    <div class="d-grid gap-2 col-2 mx-auto">
-        <btn class="btn btn-outline-light" type="button">เผยแพร่</btn>
-    </div>
-
-</div>
-
+</form>
 
 </body>
 </html>
