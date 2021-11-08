@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import th.ac.ku.viewraidee.model.Account;
 import th.ac.ku.viewraidee.model.Article;
 import th.ac.ku.viewraidee.model.Comment;
@@ -54,14 +55,19 @@ public class AccountController {
         }
     }
 
-    @GetMapping("{username}")
-    public String getOtherAccount(Model model, @ModelAttribute Account sendingAccount) throws Exception {
+    @GetMapping("{sendingAccount}")
+    public String getOtherAccount(Model model, @PathVariable String sendingAccount) throws Exception {
         Account account = authenticationService.getCurrentAccount();
-        model.addAttribute("user",account.getUsername());
-        if(account.getRole().equals("admin")){
-            model.addAttribute("role", account.getRole());
+        if(account!=null){
+            model.addAttribute("user",account.getUsername());
+            if(account.getRole().equals("admin")){
+                model.addAttribute("role", account.getRole());
+            }
         }
-        Account otherAcc = accountService.getById(sendingAccount.getUsername());
+        else{
+            model.addAttribute("user","ผู้เยี่ยมชม");
+        }
+        Account otherAcc = accountService.getById(sendingAccount);
         model.addAttribute("account",otherAcc);
         List<Article> onwArticle = articleController.getOwnArticles(otherAcc.getUsername());
         model.addAttribute("ownArticle", onwArticle);
@@ -159,6 +165,13 @@ public class AccountController {
         articleService.deleteCommentByUsername(otherAccount.getUsername());
         articleService.deleteArticleByUsername(otherAccount.getUsername());
         return "redirect:/";
+    }
+
+    @RequestMapping("/plus-heart/{username}")
+    public String plusHeartOtherAcc(@PathVariable String username, RedirectAttributes redirectAttrs) {
+        accountService.plusHeartUser(username);
+        redirectAttrs.addAttribute("id", username);
+        return "redirect:/account/{id}";
     }
 
 

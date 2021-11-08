@@ -16,8 +16,8 @@
     <img class="profile-pic" th:src="*{photo}" th:width="120">
     <div class="margin-left--35">
         <div class="aboutMeBox">
-            <a class="link-profile break-word" style="padding-left: 0px; font-size: medium; color: black;" th:text="'Link: ' + ${link}" th:href="${link}"></a>
-            <p class="text-left break-word" th:text="${aboutMe}"></p>
+            <a class="link-profile break-word" style="padding-left: 0px; font-size: medium; color: black;" th:text="'Link: ' + *{link}" th:href="${link}"></a>
+            <p class="text-left break-word" th:text="*{aboutMe}"></p>
         </div>
 
         <button th:if="${user}==*{username}" type="submit" class="btn button btn-account" onclick="window.location.href='/account/edit'">แก้ไข</button>
@@ -27,7 +27,8 @@
             <p class="text-left margin-left--20" th:text="*{countArticle}"></p>
         </span>
         <span class="display-flex padding-top--10">
-            <img th:src="@{/images/heart.png}" width="30" height="30">
+            <a th:if="${user}!=*{username} and ${user}!='ผู้เยี่ยมชม'" th:href="@{/account/plus-heart/{username}(username=${account.username})}" style="padding: 0px"><img th:src="@{/images/heart.png}" style="width: 30px; height: 30px; padding: 0px"></a>
+            <img th:if="${user}==*{username} or ${user}=='ผู้เยี่ยมชม'" th:src="@{/images/heart.png}" width="30" height="30">
             <p class="text-left margin-left--20" th:text="*{countHeart}"></p>
         </span>
         <div class="line"></div>

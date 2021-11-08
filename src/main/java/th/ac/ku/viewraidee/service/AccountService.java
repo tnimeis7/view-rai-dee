@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import th.ac.ku.viewraidee.model.Account;
+import th.ac.ku.viewraidee.model.Article;
 
 import java.util.Arrays;
 import java.util.List;
@@ -86,6 +87,11 @@ public class AccountService {
 
     public boolean checkMatch(String password, String hashedPassword){
         return passwordEncoder.matches(password, hashedPassword);
+    }
+
+    public void plusHeartUser(String username){
+        String url = "http://localhost:8090/Account/heart/" + username;
+        restTemplate.postForObject(url, username, Account.class);
     }
 
 
