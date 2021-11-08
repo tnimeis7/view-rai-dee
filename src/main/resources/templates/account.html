@@ -11,27 +11,32 @@
 
 <div th:insert="fragments/header :: header"></div>
 
-<div class="sidenav">
-    <p class="text-left font--25" th:text="${username}" align="center"></p>
-    <img class="profile-pic" th:src="${photo}" th:width="120">
+<div class="sidenav" th:object="${account}">
+    <p class="text-left font--25" th:text="*{username}" align="center"></p>
+    <img class="profile-pic" th:src="*{photo}" th:width="120">
     <div class="margin-left--35">
         <div class="aboutMeBox">
             <a class="link-profile break-word" style="padding-left: 0px; font-size: medium; color: black;" th:text="'Link: ' + ${link}" th:href="${link}"></a>
             <p class="text-left break-word" th:text="${aboutMe}"></p>
         </div>
 
-        <button type="submit" class="btn button btn-account" onclick="window.location.href='/account/edit'">แก้ไข</button>
+        <button th:if="${user}==*{username}" type="submit" class="btn button btn-account" onclick="window.location.href='/account/edit'">แก้ไข</button>
         <div class="line"></div>
         <span class="display-flex">
             <img th:src="@{/images/pencil.png}" width="30" height="30">
-            <p class="text-left margin-left--20" th:text="${articleCount}"></p>
+            <p class="text-left margin-left--20" th:text="*{countArticle}"></p>
         </span>
         <span class="display-flex padding-top--10">
             <img th:src="@{/images/heart.png}" width="30" height="30">
-            <p class="text-left margin-left--20" th:text="${heartCount}"></p>
+            <p class="text-left margin-left--20" th:text="*{countHeart}"></p>
         </span>
         <div class="line"></div>
-        <button class="btn button btn-logout" onclick="window.location.href='/logout'">ออกจากระบบ</button>
+        <button th:if="${user}==*{username}" class="btn button btn-logout" onclick="window.location.href='/logout'">ออกจากระบบ</button>
+        <form th:if="${role}!=null" th:action="|@{/account/delete/${account.username}}|" method="POST">
+            <input type="hidden" class="form-control" id="usernameField" th:field="*{username}">
+            <button class="btn button btn-logout">ลบ Account</button>
+        </form>
+
     </div>
 
 </div>
@@ -40,7 +45,7 @@
     <div class="container" style="padding: 10px;">
         <div class="grid-container" >
             <div class="grid-item" th:each="article : ${ownArticle}">
-                <img id="coverImg" th:src="${article.coverPath}" class="card-img rounded-vrd-1">
+                <img id="coverImg" th:src="*{article.coverPath}" class="card-img rounded-vrd-1">
                 <div class="textIMG">
                     <a th:href="@{/articles/{id}(id=${article.id})}"><h5 th:text="${article.movieName}"></h5></a>
                     <p  th:text="${article.atcName}"></p>
@@ -49,7 +54,10 @@
             </div>
         </div>
     </div>
-    <a type="button" class="btn btn-add margin-right--20 margin-bottom--20" id="fixedBTN" th:href="@{/article/add}">+</a>
+    <div class="container" th:object="${account}" >
+        <a type="button" th:if="*{username}==${user}" class="btn btn-add margin-right--20 margin-bottom--20" id="fixedBTN" onclick="window.location.href='/article/add'">+</a>
+    </div>
+
 </div>
 </body>
 </html>

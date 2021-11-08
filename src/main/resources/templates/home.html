@@ -5,6 +5,7 @@
     <title>ViewRaidee</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/check-field.js}"></script>
 </head>
 <body>
 <div th:insert="fragments/header :: header"></div>
@@ -13,6 +14,12 @@
     <h1 class="display-6">Welcome</h1>
 
     <p th:text="|${greeting}, ${user}|"></p>
+
+    <form th:if="${user}!='ผู้เยี่ยมชม'" th:action="@{/feedback/add}" method="POST">
+        <label for="feedback">ส่ง feedback ให้เรา</label>
+        <textarea class="form-control" id="feedback" name="fbContent" rows="5"></textarea><br>
+        <button type="submit" class="btn btn-primary" onclick="return checkFeedback()">ส่ง</button>
+    </form>
 </div>
 
 

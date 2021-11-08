@@ -19,7 +19,6 @@ function checkFieldLogin() {
     username = document.login.username.value;
     password = document.login.password.value;
 
-
     if(username == "" || password == "") {
         alert("\nกรอกข้อมูลไม่ครบ กรุณาตรวจสอบใหม่อีกครั้ง")
         return false;
@@ -38,12 +37,25 @@ function checkPassword() {
     console.log(confirm);
 
     if(current == "" || password == "" || confirm == "") {
-        alert("กรุณากรอกข้อมูลให้ครบ");
+        alert("\nกรุณากรอกข้อมูลให้ครบ");
         return false;
     }else if(password != confirm) {
-        alert("รหัสผ่านไม่ตรงกัน โปรดตรวจสอบอีกครั้ง");
+        alert("\nรหัสผ่านไม่ตรงกัน โปรดตรวจสอบอีกครั้ง");
         return false;
     }else {
+        return true;
+    }
+}
+
+function checkFeedback() {
+    feedback = document.getElementById("feedback").value;
+
+    console.log("asdasc0"+feedback);
+    if(feedback == "") {
+        alert("\nกรุณากรอกข้อความก่อนส่ง");
+        return false;
+    }else {
+        alert("\nส่ง feedback ให้ผู้พัฒนาแล้ว");
         return true;
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import th.ac.ku.viewraidee.model.Account;
 import th.ac.ku.viewraidee.model.Article;
+import th.ac.ku.viewraidee.model.Comment;
 import th.ac.ku.viewraidee.service.AccountService;
 import th.ac.ku.viewraidee.service.ArticleService;
 import th.ac.ku.viewraidee.service.AuthenticationService;
@@ -40,13 +41,29 @@ public class AccountController {
     public String getAccountPage(Model model) throws Exception {
         Account account = authenticationService.getCurrentAccount();
         model.addAttribute("user",account.getUsername());
-        model.addAttribute("username", account.getUsername());
-        model.addAttribute("photo", account.getPhoto());
-        model.addAttribute("link", account.getLink());
-        model.addAttribute("aboutMe", account.getAboutMe());
-        model.addAttribute("articleCount", "จำนวนบทความรีวิว: " + account.getCountArticle());
-        model.addAttribute("heartCount", "จำนวนหัวใจที่ได้รับ: " + account.getCountHeart());
-        List<Article> onwArticle = articleController.getOwnArticles(account.getUsername());
+        model.addAttribute("role", null);
+        model.addAttribute("account",account);
+        if(account.getRole().equals("user")){
+            List<Article> onwArticle = articleController.getOwnArticles(account.getUsername());
+            model.addAttribute("ownArticle", onwArticle);
+            return "account";
+        }
+        else{
+
+            return "admin";
+        }
+    }
+
+    @GetMapping("{username}")
+    public String getOtherAccount(Model model, @ModelAttribute Account sendingAccount) throws Exception {
+        Account account = authenticationService.getCurrentAccount();
+        model.addAttribute("user",account.getUsername());
+        if(account.getRole().equals("admin")){
+            model.addAttribute("role", account.getRole());
+        }
+        Account otherAcc = accountService.getById(sendingAccount.getUsername());
+        model.addAttribute("account",otherAcc);
+        List<Article> onwArticle = articleController.getOwnArticles(otherAcc.getUsername());
         model.addAttribute("ownArticle", onwArticle);
         return "account";
     }
@@ -66,6 +83,8 @@ public class AccountController {
         setStaticInfo(account, currentAccount);
         if(!(account.getUsername().equals(currentAccount.getUsername()))){ //change username
             accountService.createAccount(account);
+            articleService.setUsernameOfComment(currentAccount.getUsername(), account.getUsername());
+            articleService.setUsernameOfArticle(currentAccount.getUsername(), account.getUsername());
             if(currentAccount.getPassword()==null){ //social account
                 account.setEmail(currentAccount.getEmail()); //เพราะ email โดนให้แก้ไขไม่ได้
                 account.setPassword(null);
@@ -126,10 +145,22 @@ public class AccountController {
     public String delete(HttpServletRequest request) {
         String currentUsername = authenticationService.getCurrentUsername();
         accountService.delete(currentUsername);
+        articleService.deleteCommentByUsername(currentUsername);
+        articleService.deleteArticleByUsername(currentUsername);
         while(accountService.isUsernameAvailable(currentUsername)){};
         authenticationService.preAuthenticate(currentUsername, "", request);
         return "redirect:/";
     }
+
+    @PostMapping("/delete/{username}")
+    public String deleteOtherAcc(HttpServletRequest request, @ModelAttribute Account otherAccount) {
+        Account deleteAcc = accountService.getById(otherAccount.getUsername());
+        accountService.delete(deleteAcc.getUsername());
+        articleService.deleteCommentByUsername(otherAccount.getUsername());
+        articleService.deleteArticleByUsername(otherAccount.getUsername());
+        return "redirect:/";
+    }
+
 
     public void setStaticInfo(Account account, Account currentAccount){
         account.setCountArticle(currentAccount.getCountArticle());
