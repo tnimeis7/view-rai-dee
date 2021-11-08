@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <title>ViewRaidee</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/article-blog.css}">
+<!--    <link th:rel="stylesheet" th:href="@{/scss/decorate.scss}">-->
 <!--    <link th:rel="stylesheet" th:href="@{/scss/decorate.scss}">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script th:src="@{/js/bootstrap.min.js}"></script>
+<!--    <script th:src="@{/js/blog.js}"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <style>
         .checked{
             color: orange;
@@ -34,11 +39,19 @@
             opacity: 80%;
             background-color: black;
         }
+        .genre-name {
+            -webkit-text-fill-color: #F7F7F7;
+            position: relative;
+            bottom: 0;
+            left: 5px;
+        }
     </style>
 
 </head>
 <body style="background-color: #F7F7F7;">
 <div th:insert="fragments/header :: header"></div>
+
+<!-- start Slideshow -->
 <div class="frame-vrd" style="width:100%; background-color: black; position: inherit;padding-top: 56px;">
     <div class="container">
         <!--    <h1 class="display-6">Welcome</h1>-->
@@ -117,12 +130,15 @@
 
     </div>
 </div>
+<!-- End Slide Show -->
+
     <div class="d-flex bd-highlight justify-content-center" style="padding-top: 10px;">
-        <button class="btn-type">ภาพยนตร์</button>
-        <button class="btn-type">ซีรี่ส์</button>
-        <button class="btn-type">รายการทีวี</button>
-        <button class="btn-type">อนิเมชัน</button>
-        <button class="btn-type">อนิเมะญี่ปุ่น</button>
+        <button id="movie" onclick="clicked()" th:onclick="|window.location.href='/pop-by-type/Movie'|" class="btn-type">ภาพยนตร์</button>
+        <button id="series" onclick="clicked()" th:onclick="|window.location.href='/pop-by-type/Series'|" class="btn-type">ซีรี่ส์</button>
+        <button id="tvShow" onclick="clicked()" th:onclick="|window.location.href='/pop-by-type/TVShow'|" class="btn-type">รายการทีวี</button>
+        <button id="animation" onclick="clicked()" th:onclick="|window.location.href='/pop-by-type/Animation'|" class="btn-type">อนิเมชัน</button>
+        <button id="animeJp" onclick="clicked()" th:onclick="|window.location.href='/pop-by-type/AnimeJp'|" class="btn-type">อนิเมะญี่ปุ่น</button>
+
         <div class="d-flex" style="padding-left: 50px;" >
             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                    aria-describedby="search-addon" style="width: 300px;"/>
@@ -134,20 +150,73 @@
 
     <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;padding-top: 15px;">
         <div class="frame-vrd" style="background-color: #94a7ae; height: 400px;">
-            <h4 style="padding-left: 15px; padding-top: 15px;">บทความที่ได้รับความนิยมสูงสุด</h4>
+            <h4 style="padding-left: 15px; padding-top: 15px;">บทความรีวิว<span th:text="${type}"></span>ที่ได้รับความนิยมสูงสุด</h4>
             <div class="d-flex justify-content-around" style="padding-top: 20px;">
-                 <span th:each="mostPop: ${mostPopular}">
-                    <img th:src="${mostPop.coverPath}" class="img-sqr">
-                </span>
+                <div th:each="mostPopT : ${mostPopularType}">
+                    <a th:href="@{'/articles/' + ${mostPopT.id}}">
+                        <img th:src="${mostPopT.coverPath}" class="img-sqr">
+                    </a>
+                </div>
+
                 <div class="card more-box align-content-center" style="background-color: black;" >
                     <h5 class="card-title" style="color: #F7F7F7">ดูเพิ่มเติม</h5>
                 </div>
             </div>
+            <h4 style="padding-left: 15px; padding-top: 30px;">Top 3 นักเขียนยอดนิยม</h4>
         </div>
     </div>
+
+<!-- Top 3 reviewer -->
+<div class="container" style="position: relative; top: -100px;">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3" th:each="i: ${#numbers.sequence(0, 2)}">
+            <div class="our-team" style="max-width: 250px; max-height: 320px;">
+                <div class="picture">
+                    <img class="img-fluid" th:src="${popularAccount[i].photo}">
+                </div>
+                <div class="team-content" >
+                    <h4 class="name" th:text="${popularAccount[i].username}"></h4>
+                    <h5>Top <span th:text="${i+1}"></span></h5>
+                </div>
+                <div class="social d-inline-flex justify-content-center" style="padding-top: 0.25rem;color: #F7F7F7;">
+                    <h4 th:text="${popularAccount[i].countHeart}"></h4>
+                    <h4 style="padding-left: 0.5rem;">LIKES</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Genre -->
+<div class="container" style="padding-top: 10px;position: relative;">
+    <h4>หมวดหมู่หนัง</h4>
+    <center>
+        <div class="genreBox">
+            <div th:each="genreName : ${allGenre}">
+                <div class="row mt-3 justify-content-around">
+                    <div class="col-7 rounded card-genre">
+                        <h2 th:text="${genreName}" class="genre-name"></h2>
+                    </div>
+                    <div class="col-5 rounded card-genre" style="width: 250px;">
+                        <h2 class="genre-name">col5</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </center>
+</div>
+
+<!-- Streaming Platform -->
 
 
 
 </body>
+<script>
+    function clicked() {
+        document.getElementById("movie").style.backgroundColor = "#94a7ae";
+        // Element.setAttribute([[${mostPopular}]], )
+    }
+</script>
 
 </html>

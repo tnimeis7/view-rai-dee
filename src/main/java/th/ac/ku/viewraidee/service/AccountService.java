@@ -88,6 +88,12 @@ public class AccountService {
         return passwordEncoder.matches(password, hashedPassword);
     }
 
+    public List<Account> getPopularAccount() {
+        String url = "http://localhost:8090/Account/most-popular-account";
+        ResponseEntity<Account[]> response = restTemplate.getForEntity(url, Account[].class);
+        Account[] accounts = response.getBody();
+        return Arrays.asList(accounts);
 
+    }
 
 }

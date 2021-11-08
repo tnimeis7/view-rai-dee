@@ -41,6 +41,13 @@ public class ArticleService {
         return Arrays.asList(articles);
     }
 
+    public List<Article> getMostPopularArticlesByType(String type) {
+        String url = "http://localhost:8090/Article/MostPopular/" + type;
+        ResponseEntity<Article[]> response = restTemplate.getForEntity(url, Article[].class);
+        Article[] articles = response.getBody();
+        return Arrays.asList(articles);
+    }
+
     // ทำไมไม่สีเหลือง!!!!!
 //    public void deleteArticle(Article article) {
 //        String url = "http://localhost:8090/Article";
