@@ -12,6 +12,8 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -36,6 +38,11 @@ public class ArticleController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private StreamingPlatformService streamingPlatformService;
+
+    private List<Article> articlesList;
+
     @GetMapping
     public String getArticles(Model model){
         String username = authenticationService.getCurrentUsername();
@@ -44,20 +51,52 @@ public class ArticleController {
         }else{
             model.addAttribute("user","ผู้เยี่ยมชม");
         }
-        model.addAttribute("atcNewest", sortArticles(1));
-        model.addAttribute("atcOldest", sortArticles(0));
+        if (articlesList==null) articlesList = sortArticles(1);
+//        model.addAttribute("atcNewest", sortArticles(1));
+//        model.addAttribute("atcOldest", sortArticles(0));
+        model.addAttribute("articles", articlesList);
+        model.addAttribute("platform", streamingPlatformService.getAll());
+        model.addAttribute("genres", genreService.getAllGenreName());
         return "articles";
     }
 
-    private List<Article> sortArticles(int order){
-        List<Article> newest = service.getAll().stream().sorted(Comparator.comparing(Article::getPublishDate))
-                .collect(Collectors.toList());
-        List<Article> oldest = newest;
-        if(order == 1) return newest; // 1 is sorting list from newest
-        else{ // 0 is sorting List from oldest
-            Collections.reverse(oldest);
-            return oldest;
+    @GetMapping("/filter/platform/{pfName}")
+    public String filterPlatform(@PathVariable String pfName){
+        articlesList = new ArrayList<>();
+        List<String> atcId = articleStreamService.getAtcIdByPf(pfName);
+        for(String id : atcId){
+            articlesList.add(service.getById(id));
         }
+        return "redirect:/articles";
+    }
+
+    @GetMapping("/filter/genre/{genreName}")
+    public String filterGenreName(@PathVariable String genreName) {
+            /*ส่ง articlesList ไปให้ service แล้วส่งให้ backend query*/
+        articlesList = new ArrayList<>();
+        List<String> atcId = genreService.getAtcIdByGenreName(genreName);
+        for(String id : atcId){
+            articlesList.add(service.getById(id));
+        }
+        return "redirect:/articles";
+    }
+
+    @GetMapping("/filter/date/{dateIp}")
+    public String filterDate(@PathVariable String dateIp) {
+        /*ส่ง articlesList ไปให้ service แล้วส่งให้ backend query*/
+        if(dateIp.equals("newest")) articlesList = sortArticles(1);
+        else articlesList = sortArticles(0);
+        return "redirect:/articles";
+    }
+
+    private List<Article> sortArticles(int order){
+        List<Article> atcDate = service.getAll();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        // old
+        Collections.sort(atcDate, (o1, o2) -> LocalDateTime.parse(o1.getPublishDate(), formatter)
+                .compareTo(LocalDateTime.parse(o2.getPublishDate(), formatter)));
+        if(order == 1) Collections.reverse(atcDate); // new
+        return atcDate;
     }
 
 

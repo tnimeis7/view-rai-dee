@@ -28,4 +28,11 @@ public class GenreService {
         return Arrays.asList(genres);
     }
 
+    public List<String> getAtcIdByGenreName(String genreName) {
+        String url = "http://localhost:8090/Genre/" + genreName + "/article";
+        ResponseEntity<String[]> response = restTemplate.getForEntity(url, String[].class);
+        String[] atcId = response.getBody();
+        return Arrays.asList(atcId);
+    }
+
 }

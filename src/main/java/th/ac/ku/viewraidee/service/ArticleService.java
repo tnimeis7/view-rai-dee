@@ -57,6 +57,7 @@ public class ArticleService {
     public void createReport(Report report) {
         String url = "http://localhost:8090/Report";
         restTemplate.postForObject(url, report, Report.class);
+    }
 
     public List<Article> getMostPopularArticles() {
         String url = "http://localhost:8090/Article/MostPopular";

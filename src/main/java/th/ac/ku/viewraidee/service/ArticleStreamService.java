@@ -55,5 +55,12 @@ public class ArticleStreamService {
         return Arrays.asList(streamingPlatforms);
     }
 
+    public List<String> getAtcIdByPf(String platform) {
+        String url = "http://localhost:8090/ArticleStream/" + platform + "/article";
+        ResponseEntity<String[]> response = restTemplate.getForEntity(url, String[].class);
+        String[] atcId = response.getBody();
+        return Arrays.asList(atcId);
+    }
+
 
 }
