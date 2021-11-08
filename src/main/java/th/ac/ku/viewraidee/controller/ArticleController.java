@@ -19,17 +19,21 @@ public class ArticleController {
     @GetMapping
     public String getArticles(Model model){
         model.addAttribute("articles", service.getAll());
+        System.out.println("public String getArticles");
         return "articles";
     }
 
     @GetMapping("/create")
     public String getAddPage(){
+        System.out.println("public String getAddPage()");
         return "article-create";
     }
 
     @PostMapping("/create")
     public String addArticle(@ModelAttribute Article article, Model model){
         service.addArticle(article);
+        System.out.println("public String addArticle");
         return "redirect:/articles";
+
     }
 }
