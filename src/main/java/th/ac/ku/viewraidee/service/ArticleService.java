@@ -36,6 +36,7 @@ public class ArticleService {
         return article;
     }
 
+
     public void addComment(Comment comment) {
         String url = "http://localhost:8090/Comment";
         restTemplate.postForObject(url, comment, Comment.class);
@@ -56,6 +57,20 @@ public class ArticleService {
     public void createReport(Report report) {
         String url = "http://localhost:8090/Report";
         restTemplate.postForObject(url, report, Report.class);
+
+    public List<Article> getMostPopularArticles() {
+        String url = "http://localhost:8090/Article/MostPopular";
+        ResponseEntity<Article[]> response = restTemplate.getForEntity(url, Article[].class);
+        Article[] articles = response.getBody();
+        return Arrays.asList(articles);
+    }
+
+    public List<Article> getMostPopularArticlesByType(String type) {
+        String url = "http://localhost:8090/Article/MostPopular/" + type;
+        ResponseEntity<Article[]> response = restTemplate.getForEntity(url, Article[].class);
+        Article[] articles = response.getBody();
+        return Arrays.asList(articles);
+
     }
 
     // ทำไมไม่สีเหลือง!!!!!

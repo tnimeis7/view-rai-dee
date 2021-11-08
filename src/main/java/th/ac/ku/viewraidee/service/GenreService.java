@@ -21,4 +21,11 @@ public class GenreService {
         return Arrays.asList(genres);
     }
 
+    public List<String> getAllGenreName() {
+        String url = "http://localhost:8090/Genre/";
+        ResponseEntity<String[]> response = restTemplate.getForEntity(url, String[].class);
+        String[] genres = response.getBody();
+        return Arrays.asList(genres);
+    }
+
 }
