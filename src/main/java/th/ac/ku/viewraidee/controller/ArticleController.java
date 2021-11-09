@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Controller
@@ -44,6 +45,9 @@ public class ArticleController {
 
     private List<Article> articlesList;
     private String sort = "All";
+
+    @Autowired
+    private ReportService reportService;
 
     @GetMapping
     public String getArticles(Model model){
@@ -193,8 +197,10 @@ public class ArticleController {
         List<Article> articles = service.getAll();
         List<Article> ownArticles = new ArrayList<>();
         for (Article article : articles) {
-            if(article.getAuthorName().equals(username)){
-                ownArticles.add(article);
+            if(article!=null){
+                if(article.getAuthorName().equals(username)) {
+                    ownArticles.add(article);
+                }
             }
         }
         return ownArticles;
@@ -217,7 +223,6 @@ public class ArticleController {
     @PostMapping("/report/{id}")
     public String report(@PathVariable String id, RedirectAttributes redirectAttrs, @ModelAttribute Report report){
         report.setId(report.generateUUID());
-        System.out.println(report.toString());
         service.createReport(report);
         redirectAttrs.addAttribute("id", id);
         return "redirect:/articles/{id}";
@@ -237,5 +242,28 @@ public class ArticleController {
         return "redirect:/articles/{id}";
     }
 
+    @RequestMapping("/manage-report-comment/{id}")
+    public String mangeReportComment(@ModelAttribute Report report, @PathVariable String id){
+//        ลบ report ออกจาก firebase
+//        if(report.getReportContent()ลบ){
+//            เรียก method ลบ comment
+//        }
+        reportService.deleteReport(id);
+        if(report.getReportContent().equals("ลบ")){
+            Report report2 = reportService.getReport(id);
+            service.deleteComment(report2.getMentionedId());
+        }
+        return "redirect:/account";
+    }
+
+    @RequestMapping("/manage-report-article/{id}")
+    public String mangeReportArticle(@ModelAttribute Report report, @PathVariable String id){
+        reportService.deleteReport(id);
+        if(report.getReportContent().equals("ลบ")){
+            Report report2 = reportService.getReport(id);
+            service.deleteAtc(report2.getMentionedId());
+        }
+        return "redirect:/account";
+    }
 
 }

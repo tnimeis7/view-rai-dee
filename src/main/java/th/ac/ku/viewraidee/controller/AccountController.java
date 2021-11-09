@@ -14,8 +14,12 @@ import th.ac.ku.viewraidee.model.Comment;
 import th.ac.ku.viewraidee.service.AccountService;
 import th.ac.ku.viewraidee.service.ArticleService;
 import th.ac.ku.viewraidee.service.AuthenticationService;
+import th.ac.ku.viewraidee.model.*;
+import th.ac.ku.viewraidee.service.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +42,12 @@ public class AccountController {
     @Autowired
     private ArticleController articleController;
 
+    @Autowired
+    private ReportService reportService;
+
+    @Autowired
+    private FeedbackService feedbackService;
+
     @GetMapping()
     public String getAccountPage(Model model) throws Exception {
         Account account = authenticationService.getCurrentAccount();
@@ -50,7 +60,41 @@ public class AccountController {
             return "account";
         }
         else{
+            List<Report> reports = reportService.getAllReport();
+            List<Report> comment = new ArrayList<>();
+            List<Report> article = new ArrayList<>();
+            for (Report report : reports) {
+                if(report.getType().equals("comment")) {
+                    comment.add(report);
+                }else {
+                    article.add(report);
+                }
+            }
 
+            LinkedHashMap<Report, Comment> reportComments = new LinkedHashMap<>();
+            if(reports!=null) {
+                for(Report var: comment) {
+                    Comment reportCm = articleService.getCommentById(var.getMentionedId());
+                    reportComments.put(var, reportCm);
+                }
+            }
+
+            LinkedHashMap<Report, Article> reportArticles = new LinkedHashMap<>();
+            if(reports!=null) {
+                for(Report var: article) {
+                    Article reportAtc = articleService.getById(var.getMentionedId());
+                    reportArticles.put(var, reportAtc);
+                }
+            }
+
+            model.addAttribute("commentCount", comment.size());
+            model.addAttribute("articleCount", article.size());
+            model.addAttribute("articleReport", reportArticles);
+            model.addAttribute("commentReport", reportComments);
+
+            List<Feedback> feedbacks = feedbackService.getAllFeedback();
+            model.addAttribute("feedbackCount", feedbacks.size());
+            model.addAttribute("feedbacks", feedbacks);
             return "admin";
         }
     }
@@ -185,4 +229,5 @@ public class AccountController {
     public String[] splitField(String fieldValue){
         return fieldValue.split(",");
     }
+
 }

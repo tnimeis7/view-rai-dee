@@ -47,16 +47,36 @@
         border-radius: 5%;
     }
 
+    .card-info {
+        width: 514px;
+        height: 356px;
+        background-color: #86b7fe;
+    }
+
     .grid-container {
         display: grid;
         grid-template-columns: auto auto auto;
         padding: 10px;
+        background-color: white;
     }
 
     .grid-item{
         margin-bottom: 30px !important;
         margin-left: 50px !important;
         width: 240px;
+        background-color: #C4C4C4;
+        position: relative;
+        border-radius: 5%;
+    }
+
+    #reportContent{
+        width: 200px;
+    }
+
+    .grid-item-admin{
+        /*margin-bottom: 30px ;*/
+        /*margin-left: 50px ;*/
+        width: 120px;
         background-color: #1a1e21;
         position: relative;
         border-radius: 5%;
@@ -200,6 +220,7 @@
         color: white;
     }
 
+
     .aboutMeBox{
         margin-bottom: 5px;
         height: 190px;
@@ -229,3 +250,45 @@
     /*    text-underline: black;*/
     /*}*/
 
+
+    .square {
+        width: 200px;
+        height: 200px;
+        margin: 48px;
+        background-color: #E8D1D1;
+        border-radius: 4px;
+    }
+
+    .text-center {
+        font-size: 70px;
+        text-align: center;
+        transform: translate(0,-10px);
+    }
+
+    .square-top {
+        width: 80px;
+        height: 80px;
+        z-index: auto;
+        background-color: #D4DCDC;
+        border-radius: 10px;
+        transform: translate(60px,-25px);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .fb-box {
+        width: 400px;
+        height: 200px;
+        margin: 35px;
+        border-radius: 40px;
+        background-color: #D4DCDC;
+    }
+
+    .triangle-left {
+        width: 0;
+        height: 0;
+        border-top: 200px solid transparent;
+        border-right: 400px solid #555;
+        border-bottom: 0px solid transparent;
+        border-radius: 50px;
+        z-index: auto;
+    }

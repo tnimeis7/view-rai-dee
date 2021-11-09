@@ -13,31 +13,107 @@
 
 <div class="row" style="margin-top: 55px">
     <div class="col-4" style="background-color: #D4DCDC" th:object="${account}">
-        <div style="background-color: white; width: 120px; height: 55px"><h5 style="padding: 15px; text-align: center">ADMIN</h5></div>
+        <div style="background-color: white; width: 120px; height: 55px; border-radius: 50px"><h5 style="padding: 15px; text-align: center">ADMIN</h5></div>
         <center><img th:src="@{/images/admin-ui.png}" style="width: 80px"><br><br>
         <p th:text="*{username}"></p>
         <p th:text="*{email}"></p><br>
         </center>
     </div>
-    <div class="col-2 px-md-5">
-        2 of 4
+    <div class="col-2">
+        <div class="square">
+            <div class="square-top">
+                <p class="text-center" style="font-size: 15px; transform: translate(0,27px)">บทความ</p>
+            </div>
+            <p class="text-center" th:text="${articleCount}"></p>
+        </div>
     </div>
-    <div class="col-2 px-md-5">
-        3 of 4
+    <div class="col-2">
+        <div class="square">
+            <div class="square-top">
+                <p class="text-center" style="font-size: 15px; transform: translate(0,27px)">ความคิดเห็น</p>
+            </div>
+            <p class="text-center" th:text="${commentCount}"></p>
+        </div>
     </div>
     <div class="col-4 px-md-5">
-        4 of 4
+        <div class="fb-box">
+            <p>feedback</p>
+            <div class="triangle-left">
+                <p th:text="${feedbackCount}"></p>
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-4 px-md-5">
-        1 of 3
+    <div class="col-4 px-md-5 card-info">
+<!--        <p th:each="article : ${articleReport}"></p>-->
+<!--        <div class="container" style="padding: 30px;">-->
+<!--            <div class="grid-container" >-->
+<!--                <div class="grid-item-admin" th:each="article : ${articleReport}">-->
+<!--                    <img id="coverImg" th:src="${article.value.getCoverPath()}" class="card-img rounded-vrd-1">-->
+<!--                    <div class="textIMG">-->
+<!--                        <a th:href="@{/articles/{id}(id=${article.value.getId()})}"><h5 th:text="${article.value.getMovieName()}"></h5></a>-->
+<!--                        <p  th:text="${article.key.getReportContent()}"></p>-->
+<!--                        <img class="star" th:src="@{/images/star.png}" th:text="${article.value.getStarRate()}">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="container" style="margin: 30px;">
+            <div class="grid-container" >
+                <div class="grid-item" th:each="article : ${articleReport}">
+                    <a th:href="@{/articles/{id}(id=${article.value.getId()})}"><p th:text="${article.value.getMovieName()}"></p></a>
+                    <p th:text="${article.value.atcName}"></p>
+                    <p th:text="${article.key.getReportContent()}"></p>
+                    <form th:action="@{/articles/manage-report-article/{id}(id=${article.key.id})}" method="POST">
+                        <select th:name="reportContent" class="form-select" aria-label="Default select example">
+                            <option style="display:none;"></option>
+                            <option>ลบ</option>
+                            <option>ไม่สนใจ</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">report</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-4 px-md-5">
-        2 of 3
+        <div class="container" style="padding: 30px;">
+            <div class="grid-container" >
+                <div class="grid-item" th:each="comment : ${commentReport}">
+                    <p th:text="${comment.value.username}"></p>
+                    <p th:text="${comment.key.getReportContent()}"></p>
+                    <form th:action="@{/articles/manage-report-comment/{id}(id=${comment.key.id})}" method="POST">
+                            <select th:name="reportContent" class="form-select" aria-label="Default select example">
+                                <option style="display:none;"></option>
+                                <option>ลบ</option>
+                                <option>ไม่สนใจ</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">report</button>
+                        </form>
+                    <p class="justify-content-center" th:text="${comment.value.commentContent}"></p>
+                    <p th:text="${comment.value.commentDate}"></p>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-4 px-md-5">
-        3 of 3
+        <div class="grid-container" >
+            <div class="grid-item" th:each="feedback : ${feedbacks}">
+                <p th:text="${feedback.fbBy}"></p>
+                <p th:text="${feedback.fbStatus}"></p>
+                <p th:text="${feedback.fbContent}"></p>
+                <form th:action="@{/feedback/manage-feedback/{id}(id=${feedback.id})}" method="POST">
+                    <select th:name="FbStatus" class="form-select" aria-label="Default select example">
+                        <option style="display:none;"></option>
+                        <option>กำลังดำเนินการ</option>
+                        <option>เสร็จแล้ว</option>
+                        <option>ไม่สนใจ</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">report</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
