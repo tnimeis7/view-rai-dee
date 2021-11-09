@@ -59,6 +59,11 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #1e2125;
         }
+        .popular-atc{
+            height: 450px;
+            object-fit: cover;
+            filter: brightness(60%);
+        }
     </style>
 
 </head>
@@ -80,7 +85,7 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img th:src="${mostPopular.get(0).coverPath}" class="d-block w-100" style="height: 450px; object-fit: cover;" >
+                    <img th:src="${mostPopular.get(0).coverPath}" class="d-block w-100 popular-atc">
                     <div class="carousel-caption d-none d-md-block">
                         <h2>Top #1</h2>
                         <h1 th:text="${mostPopular.get(0).movieName}"></h1>
@@ -93,12 +98,16 @@
                             <span class="fa fa-star"></span>
                         </span>
                         </th:block>
-                        <p>ผู้เขียนรีวิว <br> <span th:text="${mostPopular.get(0).authorName}"> </span>
-                        </p>
+                        <p>ผู้เขียนรีวิว <br> <span th:text="${mostPopular.get(0).authorName}"> </span></p>
+                        <div class="d-flex justify-content-center" style="padding-left: -20px;">
+                            <div class="fa fa-heart" aria-hidden="true" style="font-size: 40px;"></div>
+                            <h4 th:text="${mostPopular.get(0).heart}"></h4>
+                        </div>
                     </div>
+
                 </div>
                 <div class="carousel-item">
-                    <img th:src="${mostPopular.get(1).coverPath}" class="d-block w-100" style="height: 450px; object-fit: cover;" >
+                    <img th:src="${mostPopular.get(1).coverPath}" class="d-block w-100 popular-atc">
                     <div class="carousel-caption d-none d-md-block">
                         <h2>Top #2</h2>
                         <h1 th:text="${mostPopular.get(1).movieName}"></h1>
@@ -112,10 +121,14 @@
                         </span>
                         </th:block>
                         <p>ผู้เขียนรีวิว <br> <span th:text="${mostPopular.get(1).authorName}"> </span></p>
+                        <div class="d-flex justify-content-center" style="padding-left: -20px;">
+                            <div class="fa fa-heart" aria-hidden="true" style="font-size: 40px;"></div>
+                            <h4 th:text="${mostPopular.get(1).heart}"></h4>
+                        </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img th:src="${mostPopular.get(2).coverPath}" class="d-block w-100" style="height: 450px; object-fit: cover;" >
+                    <img th:src="${mostPopular.get(2).coverPath}" class="d-block w-100 popular-atc">
                     <div class="carousel-caption d-none d-md-block">
                         <h2>Top #3></h2>
                         <h1 th:text="${mostPopular.get(2).movieName}"></h1>
@@ -129,6 +142,10 @@
                         </span>
                         </th:block>
                         <p>ผู้เขียนรีวิว <br> <span th:text="${mostPopular.get(2).authorName}"> </span></p>
+                        <div class="d-flex justify-content-center" style="padding-left: -20px;">
+                            <div class="fa fa-heart" aria-hidden="true" style="font-size: 40px;"></div>
+                            <h4 th:text="${mostPopular.get(2).heart}"></h4>
+                        </div>
                     </div>
                 </div>
             </div>
