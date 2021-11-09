@@ -1,6 +1,10 @@
 package th.ac.ku.viewraidee.model;
 
+
 import com.google.cloud.Timestamp;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Article implements BlockComponents{
 
@@ -15,7 +19,7 @@ public class Article implements BlockComponents{
     private String authorName;
     private int heart;
     private double starRate;
-    private String publishDate;
+    private Date publishDate;
 
     public String getAtcId() {
         return atcId;
@@ -95,9 +99,17 @@ public class Article implements BlockComponents{
         this.starRate = starRate;
     }
 
-    public String getPublishDate() { return publishDate;}
+    public String getPublishDate() {
+        if(publishDate != null){
+            SimpleDateFormat simpDate = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            return simpDate.format(publishDate);
+        }
+        return null;
+    }
 
-//    public void setPublishDate(Timestamp timestamp) { this.publishDate = timestamp; }
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
+    }
 
     @Override
     public String getId() {
