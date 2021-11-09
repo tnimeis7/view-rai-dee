@@ -81,11 +81,18 @@ public class ArticleController {
         return "redirect:/articles";
     }
 
+    @GetMapping("/filter/type/{type}")
+    public String filterType(@PathVariable String type) {
+        articlesList = service.getArticlesByType(type);
+        return "redirect:/articles";
+    }
+
     @GetMapping("/filter/date/{dateIp}")
     public String filterDate(@PathVariable String dateIp) {
         /*ส่ง articlesList ไปให้ service แล้วส่งให้ backend query*/
         if(dateIp.equals("newest")) articlesList = sortArticles(1);
-        else articlesList = sortArticles(0);
+        else if(dateIp.equals("oldest")) articlesList = sortArticles(0);
+        else if(dateIp.equals("popular")) articlesList= service.getMostPopularArticles();
         return "redirect:/articles";
     }
 

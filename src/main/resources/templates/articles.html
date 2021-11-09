@@ -30,8 +30,13 @@
             <option class="dropdown-item-vrd" value="oldest">เก่าสุด</option>
             <option class="dropdown-item-vrd" value="popular">หัวใจมากที่สุด</option>
         </select>
-        <select id="typeSort" onchange="window.location.href='articles/filter/date/' + this.value" class="btn btn-vrd-sort">
+        <select id="typeSort" onchange="window.location.href='articles/filter/type/' + this.value" class="btn btn-vrd-sort">
             <option class="dropdown-item-vrd" value="allType" selected>--ทุกประเภท--</option>
+            <option class="dropdown-item-vrd" value="Movie">ภาพยนตร์</option>
+            <option class="dropdown-item-vrd" value="Series">ซีรี่ส์</option>
+            <option class="dropdown-item-vrd" value="TVShow">รายการทีวี</option>
+            <option class="dropdown-item-vrd" value="Animation">อนิเมชัน</option>
+            <option class="dropdown-item-vrd" value="Anime">อนิเมะญี่ปุ่น</option>
 <!--            <option class="dropdown-item-vrd" th:each="typeM : ${}" value="newest">ล่าสุด</option>-->
         </select>
         <select id="genreSort" onchange="window.location.href='articles/filter/genre/' + this.value" class="btn btn-vrd-sort">
