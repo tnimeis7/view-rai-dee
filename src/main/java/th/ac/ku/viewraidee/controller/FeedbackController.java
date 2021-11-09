@@ -41,9 +41,7 @@ public class FeedbackController {
 
     @PostMapping("/manage-feedback/{id}")
     public String mangeFeedback(@ModelAttribute Feedback feedback, @PathVariable String id){
-        System.out.println("111222" + feedback);
         if(feedback.getFbStatus().equals("กำลังดำเนินการ")){
-            System.out.println(feedback);
             Feedback feedback2 = feedbackService.getFeedback(id);
             feedback2.setFbStatus("กำลังดำเนินการ");
             feedbackService.updateFeedback(feedback2);

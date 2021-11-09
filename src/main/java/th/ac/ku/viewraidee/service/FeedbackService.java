@@ -41,7 +41,6 @@ public class FeedbackService {
     }
 
     public void updateFeedback(Feedback feedback){
-        System.out.println("fbId"+feedback.getId());
         String url = "http://localhost:8090/Feedback/"+ feedback.getId();
         restTemplate.put(url, feedback, Feedback.class);
     }

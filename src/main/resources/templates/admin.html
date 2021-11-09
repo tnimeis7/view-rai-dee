@@ -13,25 +13,34 @@
 
 <div class="row" style="margin-top: 55px">
     <div class="col-4" style="background-color: #D4DCDC" th:object="${account}">
-        <div style="background-color: white; width: 120px; height: 55px"><h5 style="padding: 15px; text-align: center">ADMIN</h5></div>
+        <div style="background-color: white; width: 120px; height: 55px; border-radius: 50px"><h5 style="padding: 15px; text-align: center">ADMIN</h5></div>
         <center><img th:src="@{/images/admin-ui.png}" style="width: 80px"><br><br>
         <p th:text="*{username}"></p>
         <p th:text="*{email}"></p><br>
         </center>
     </div>
-    <div class="col-2 px-md-5">
+    <div class="col-2">
         <div class="square">
-            <p th:text="${articleCount}"></p>
+            <div class="square-top">
+                <p class="text-center" style="font-size: 15px; transform: translate(0,27px)">บทความ</p>
+            </div>
+            <p class="text-center" th:text="${articleCount}"></p>
         </div>
     </div>
-    <div class="col-2 px-md-5">
+    <div class="col-2">
         <div class="square">
-            <p th:text="${commentCount}"></p>
+            <div class="square-top">
+                <p class="text-center" style="font-size: 15px; transform: translate(0,27px)">ความคิดเห็น</p>
+            </div>
+            <p class="text-center" th:text="${commentCount}"></p>
         </div>
     </div>
     <div class="col-4 px-md-5">
-        <div class="square">
-            <p th:text="${feedbackCount}"></p>
+        <div class="fb-box">
+            <p>feedback</p>
+            <div class="triangle-left">
+                <p th:text="${feedbackCount}"></p>
+            </div>
         </div>
     </div>
 </div>
@@ -50,7 +59,7 @@
 <!--                </div>-->
 <!--            </div>-->
 <!--        </div>-->
-        <div class="container" style="padding: 30px;">
+        <div class="container" style="margin: 30px;">
             <div class="grid-container" >
                 <div class="grid-item" th:each="article : ${articleReport}">
                     <a th:href="@{/articles/{id}(id=${article.value.getId()})}"><p th:text="${article.value.getMovieName()}"></p></a>
