@@ -164,7 +164,7 @@
     </div>
 
     <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;padding-top: 15px;">
-        <div class="frame-vrd" style="background-color: #94a7ae; height: 400px;">
+        <div class="frame-vrd" style="background-color: #94a7ae; height: 400px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);">
             <h4 style="padding-left: 15px; padding-top: 15px;">บทความรีวิว<span th:text="${type}"></span>ที่ได้รับความนิยมสูงสุด</h4>
             <div class="d-flex justify-content-around" style="padding-top: 20px;">
                 <div th:each="mostPopT : ${mostPopularType}">
@@ -182,11 +182,11 @@
     </div>
 
 <!-- Top 3 reviewer -->
-<div class="container" style="position: relative; top: -100px;">
+<div class="container" style="position: relative; top: -100px; ">
     <div class="row">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3" th:each="i: ${#numbers.sequence(0, 2)}">
             <a th:href="@{'/account/' + ${popularAccount[i].username}}">
-                <div class="our-team" style="max-width: 250px; max-height: 320px;">
+                <div class="our-team" style="max-width: 250px; max-height: 320px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);">
                     <div class="picture">
                         <img class="img-fluid" th:src="${popularAccount[i].photo}">
                     </div>
@@ -247,7 +247,7 @@
     <form th:if="${user}!='ผู้เยี่ยมชม'" th:action="@{/feedback/add}" method="POST">
         <label for="feedback">ส่ง feedback ให้เรา</label>
         <textarea class="form-control" id="feedback" name="fbContent" rows="5"></textarea><br>
-        <button type="submit" class="btn btn-primary" onclick="return checkFeedback()">ส่ง</button>
+        <button type="submit" class="btn btn-dark" onclick="return checkFeedback()">ส่ง</button>
     </form>
 </div>
 
