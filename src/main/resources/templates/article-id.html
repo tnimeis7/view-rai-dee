@@ -24,9 +24,9 @@
         }
     </style>
 </head>
-<body style="background-color: #1E1E1E;">
+<body style="background-color: #ffffff;">
     <div th:insert="fragments/header :: header"></div>
-    <div class="frame-vrd" style="background-color: #F7F7F7; position: inherit; margin-top: 100px;">
+    <div class="frame-vrd" style="background-color: #D4DCDC; position: inherit; margin-top: 100px;">
         <!-- star -->
         <div class="top-right">
             <th:block th:each="i: ${#numbers.sequence(1, 5)}">
@@ -40,38 +40,40 @@
         </div>
         <div class="container align-items-center">
             <center>
-                <h1 th:text="${article.atcName}" style="padding-top: 50px; padding-bottom: 20px;"></h1>
+                <h3 th:text="${article.atcName}" style="padding-top: 50px; padding-bottom: 20px;"></h3>
                 <img th:src="${article.coverPath}" class="poster rounded-vrd-1">
             </center>
-            <h4>เรื่อง: <span th:text="${article.movieName}"></span></h4>
-            <h4>ประเภท: <span th:text="${article.type}"></span></h4>
-            <h4>หมวดหมู่หนัง:
-                <div class="space-between-inline" th:each="genre : ${genres}">
-                    <h4 th:text="${genre.getGenreName()}"></h4>
-                </div>
-            </h4>
-            <p class="justify-content-center" th:text="${article.content}"></p>
+            <div class="container" style="width:800px; margin-top: 50px; margin-left: 280px;">
+                <h6>เรื่อง: <span th:text="${article.movieName}"></span></h6><br>
+                <h6>ประเภท: <span th:text="${article.type}"></span></h6><br>
+                <h6>หมวดหมู่หนัง:
+                    <div class="space-between-inline" th:each="genre : ${genres}">
+                        <h6 th:text="${genre.getGenreName()}"></h6>
+                    </div>
+                </h6><br>
+                <p class="justify-content-center" th:text="${article.content}"></p>
+            </div>
             <!--โซน video teaser จนถึง ดูที่-->
             <div class="d-block" style="margin-top: 50px;">
                 <div class="d-flex justify-content-center">
                     <iframe th:src="${article.teaserLink}" width="640px" height="395px"></iframe>
                 </div>
 
-                <div class="container" style="width:800px; margin-top: 50px;">
-                    <h4 class="space-between-inline">
-                        รีวิวโดย <span th:text="${article.authorName}"></span>
-                        วันที่ <span th:text="${article.publishDate}"></span></span>
-                    </h4>
+                <div class="container" style="width:600px; margin-top: 50px; margin-left: 330px;">
+                    <h6 class="space-between-inline">
+                        รีวิวโดย <a th:href="@{/account/{sendingAccount}(sendingAccount=${article.authorName})}"><span th:text="${article.authorName}"></span></a>
+                        วันที่ <span th:text="${article.publishDate}"></span>
+                    </h6><br>
 
-                    <h4>แท็ก
+                    <br><h6>แท็ก
                         <div th:each="tag : ${tags}" class="space-between-inline">
                             <div class="tag-box">
-                                <h5>#<span th:text="${tag.getNameTag()}"></span></h5>
+                                <h7>#<span th:text="${tag.getNameTag()}"></span></h7>
                             </div>
                         </div>
-                    </h4>
+                    </h6><br>
 
-                    <h4>ดูที่</h4>
+                    <h6>ดูที่</h6>
                     <div th:each="streamPf : ${streamPlatforms}" class="space-between-inline" style="padding-top:10px;">
                         <img th:src="${streamPf.getPicPath()}" class="platformLogo">
                     </div>
@@ -82,14 +84,14 @@
 
         </div>
         <!-- Show Heart Count and Report -->
-        <div class="d-flex justify-content-between" style="margin-top: 150px; padding-bottom: 20px;">
+        <div class="d-flex justify-content-between" style="margin-top: 150px; padding-bottom: 20px; padding-left: 20px">
             <div>
                 <a th:if="${user}!='ผู้เยี่ยมชม'" th:href="@{/articles/heart/{id}(id=${article.id})}"><img src="https://sv1.picz.in.th/images/2021/11/05/unGzrl.png" alt="unGzrl.png" class="heart-icon"></a>
                 <img th:if="${user}=='ผู้เยี่ยมชม'" src="https://sv1.picz.in.th/images/2021/11/05/unGzrl.png" alt="unGzrl.png" class="heart-icon">
                 <span th:text="${article.getHeart()}" style="font-size: 30px; font-weight: bold;"></span>
             </div>
             <div th:if="${user}!='ผู้เยี่ยมชม'">
-                <a th:if="${user}==${article.authorName} or ${admin}!=null" href="#" type="button" class="btn btn-danger btn-report">ลบบทความ</a>
+                <a th:if="${user}==${article.authorName} or ${admin}!=null" th:href="@{/articles/delete/article/{id}(id=${article.id})}" type="button" class="btn btn-dark" style="margin-top: 50px">ลบ</a>
                 <form th:if="${user}!=${article.authorName} and ${admin}==null" th:action="@{/articles/report/{id}(id=${article.id})}" method="POST">
                     <select th:name="reportContent" class="form-select" aria-label="Default select example">
                         <option selected>report</option>
@@ -102,50 +104,64 @@
                     <input type="hidden" class="form-control" th:name="reportBy" th:value="${user}">
                     <input type="hidden" class="form-control" th:name="mentionedId" th:value="${article.id}">
                     <input type="hidden" class="form-control" th:name="type" value="article">
-                    <button type="submit" class="btn btn-primary">report</button>
+                    <button type="submit" class="btn btn-dark">report</button>
                 </form>
             </div>
         </div>
     </div>
 
     <!-- new section comment -->
-    <div class="frame-vrd" style="background-color: #F7F7F7; margin-top: 20px;">
+    <div class="frame-vrd" style="background-color: #D4DCDC; margin-top: 20px;">
         <form th:if="${user}!='ผู้เยี่ยมชม'" th:action="@{/articles/comment/add}" method="POST">
-            <p>แสดงความคิดเห็น</p>
-            <br><img th:src="${loginUser.getPhoto()}" width="50px"><p th:text="${loginUser.getUsername()}"></p>
-            <input type="hidden" class="form-control" id="ArticleIdField" name="articleId" th:field="${article.id}">
-            <input type="text" class="form-control" id="ContentField" name="commentContent">
-            <button type="submit" class="btn btn-primary" onclick="return checkComment()">แสดงความคิดเห็น</button>
+            <p style="padding: 30px 30px 0px 30px">แสดงความคิดเห็น</p>
+            <div class="container" style="padding: 0px 30px 30px 30px; background-color: #ffffff;">
+                <br><img th:if="${loginUser.getPhoto()}!=''" th:src="${loginUser.getPhoto()}" class="platformLogo">
+                <img th:if="${loginUser.getPhoto()}==''" th:src="@{/images/account.png}" style="padding-bottom: 20px" class="platformLogo">
+                <span th:text="${loginUser.getUsername()}"></span>
+                <br><textarea type="text" style="margin-left: 75px; width: 1150px" class="form-control col-10" id="ContentField" name="commentContent"></textarea>
+                <input type="hidden" class="form-control" id="ArticleIdField" name="articleId" th:field="${article.id}">
+            </div>
+            <button type="submit" class="btn btn-dark" style="margin-left: 1200px; margin-top: 20px" onclick="return checkComment()">แสดงความคิดเห็น</button>
             <br>
         </form>
-        <p>ความคิดเห็นทั้งหมด</p>
-        <div class="container" style="padding: 30px;">
-            <div class="grid-container" >
+        <p style="padding: 30px 30px 0px 30px">ความคิดเห็นทั้งหมด</p>
+        <div class="commentBox">
+            <div class="container" style="padding: 0px 30px 30px 30px;">
                 <div class="grid-item" th:each="comment : ${comments}">
-                    <img th:src="${comment.value}" width="50px">
-                    <p th:text="${comment.key.username}"></p>
-                    <div th:if="${user}!='ผู้เยี่ยมชม'">
-                        <a th:if="${user}==${comment.key.username} or ${admin}!=null" href="#" type="button" class="btn btn-danger btn-report">ลบบทความ</a>
-                        <form th:if="${user}!=${comment.key.username} and ${admin}==null" th:action="@{/articles/report/{id}(id=${article.id})}" method="POST">
-                            <select th:name="reportContent" class="form-select" aria-label="Default select example">
-                                <option selected>report</option>
-                                <option>เนื้อหาหยาบคาย</option>
-                                <option>ลามกอนาจาร</option>
-                                <option>หมิ่นประมาททำให้ผู้อื่นเสื่อมเสียชื่อเสียง</option>
-                                <option>ยุยงให้เกิดการทะเลาะวิวาท</option>
-                                <option>เนื้อหาคุกคามและกลั่นแกล้ง</option>
-                            </select>
-                            <input type="hidden" class="form-control" th:name="reportBy" th:value="${user}">
-                            <input type="hidden" class="form-control" th:name="mentionedId" th:value="${comment.key.id}">
-                            <input type="hidden" class="form-control" th:name="type" value="comment">
-                            <button type="submit" class="btn btn-primary">report</button>
-                        </form>
-                    </div>
-                    <p class="justify-content-center" th:text="${comment.key.commentContent}"></p>
-                    <p th:text="${comment.key.commentDate}"></p>
+                    <div style="background-color: #ffffff; padding: 15px">
+                        <div class="row">
+                            <div class="col-8">
+                                <img th:if="${comment.value}!=''" class="platformLogo" th:src="${comment.value}">
+                                <img th:if="${comment.value}==''" class="platformLogo" th:src="@{/images/account.png}">
+                                <a th:href="@{/account/{sendingAccount}(sendingAccount=${comment.key.username})}"><span th:text="${comment.key.username}" style="padding-left: 5px"></span></a>
+                            </div>
+                            <div class="col-3" th:if="${user}!='ผู้เยี่ยมชม'">
+                                <a th:if="${user}==${comment.key.username} or ${admin}!=null" th:href="@{/articles/delete/comment/{id}(id=${comment.key.id})}" type="button" class="btn btn-dark btn-report" style="margin-left: 290px">ลบ</a>
+                                <form th:if="${user}!=${comment.key.username} and ${admin}==null" th:action="@{/articles/report/{id}(id=${article.id})}" method="POST">
+                                    <select th:name="reportContent" class="form-select" aria-label="Default select example" >
+                                        <option selected>report</option>
+                                        <option>เนื้อหาหยาบคาย</option>
+                                        <option>ลามกอนาจาร</option>
+                                        <option>หมิ่นประมาททำให้ผู้อื่นเสื่อมเสียชื่อเสียง</option>
+                                        <option>ยุยงให้เกิดการทะเลาะวิวาท</option>
+                                        <option>เนื้อหาคุกคามและกลั่นแกล้ง</option>
+                                    </select>
+                                    <input type="hidden" class="form-contro" th:name="reportBy" th:value="${user}">
+                                    <input type="hidden" class="form-control" th:name="mentionedId" th:value="${comment.key.id}">
+                                    <input type="hidden" class="form-control" th:name="type" value="comment">
+                                    <button type="submit" class="btn btn-dark" style="transform: translate(315px, -39px)">report</button>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <p style="margin-left: 80px; padding-top: 10px; overflow-wrap: break-word; max-width: 1090px;" th:text="${comment.key.commentContent}"></p>
+                        <p style="margin-left: 1120px; margin-bottom: -10px; margin-right: -10px; font-size: small;" th:text="${comment.key.commentDate}"></p>
+                    </div><br>
                 </div>
             </div>
         </div>
+
     </div><br>
 
 </body>

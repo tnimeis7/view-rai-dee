@@ -16,11 +16,11 @@
     padding-left: var(--bs-gutter-x, 0.75rem);
     margin-right: auto;
     margin-left: auto;
-    border-radius: 0.25rem;
+    /*border-radius: 0.25rem;*/
 }
 
 .rounded-vrd-1 {
-    border-radius: 1rem !important;
+    /*border-radius: 1rem !important;*/
 }
 
 .dropdown-item-vrd {
@@ -61,8 +61,8 @@ select selected{
 }
 
 .poster{
-    width: 480px;
-    height: 640px;
+    width: 300px;
+    height: 450px;
     object-fit: cover;
 }
 
@@ -97,8 +97,8 @@ selectvrd {
 }
 
 .platformLogo {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
 }
 
@@ -109,12 +109,12 @@ selectvrd {
 
 .space-between-inline{
     display: inline-block;
-    padding-right: 20px;
+    padding-right: 10px;
 }
 .tag-box{
     width: auto;
     height: 30px;
-    background-color: #94a7ae;
+    background-color: #ffffff;
     border-radius: 20px;
 }
 
@@ -241,25 +241,25 @@ selectvrd {
     height: 420px;
 }
 
-/* Scrollbar styles */
-::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-}
+/*!* Scrollbar styles *!*/
+/*::-webkit-scrollbar {*/
+/*    width: 12px;*/
+/*    height: 12px;*/
+/*}*/
 
-::-webkit-scrollbar-track {
-    border: 1px solid #3a4147;
-    border-radius: 10px;
-}
+/*::-webkit-scrollbar-track {*/
+/*    border: 1px solid #3a4147;*/
+/*    border-radius: 10px;*/
+/*}*/
 
-::-webkit-scrollbar-thumb {
-    background: #3a4147;
-    border-radius: 10px;
-}
+/*::-webkit-scrollbar-thumb {*/
+/*    background: #3a4147;*/
+/*    border-radius: 10px;*/
+/*}*/
 
-::-webkit-scrollbar-thumb:hover {
-    background: #1e2125;
-}
+/*::-webkit-scrollbar-thumb:hover {*/
+/*    background: #1e2125;*/
+/*}*/
 
 .card-genre {
     width: 800px;
@@ -267,6 +267,31 @@ selectvrd {
     background-color: #1e2125;
 }
 
+.commentBox{
+    height: 600px;
+    width: 1370px;
+    overflow: auto;
+}
 
+::-webkit-scrollbar {
+    width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+    background: #D4DCDC;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #4f5965;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #3a4147;
+}
+/*.link-profile:hover{*/
+/*    text-underline: black;*/
+/*}*/
 

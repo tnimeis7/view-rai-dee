@@ -22,7 +22,7 @@
     <form th:action="@{/account/changeImg}" method="POST">
         <div class="row mb-3 form-group field-input padding-top--50">
             <div class="profile-pic-div img-center">
-                <img th:src="*{photo}" id="photo" ><br>
+                <img th:src="*{photo}" id="photo"><br>
                 <input type="file" id="fileBtn" name="file" value="editPhoto">
                 <label for="fileBtn" id="uploadBtn">แก้ไขรูป</label>
                 <button type="submit" id="submitChangeImg" class="btn btn-x" style="display: none;"></button>
