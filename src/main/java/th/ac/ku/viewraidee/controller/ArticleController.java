@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.viewraidee.model.Article;
+import th.ac.ku.viewraidee.model.Tag;
 import th.ac.ku.viewraidee.service.ArticleService;
 
 @Controller
@@ -30,12 +31,14 @@ public class ArticleController {
     }
 
     @PostMapping("/create")
-    public String addArticle(@ModelAttribute Article article, Model model){
+    public String addArticle(@ModelAttribute Article article,Model model) throws InterruptedException{
+        System.out.println(article.toString());
         article.setAtcId(article.generateUUID());
         article.setPublishDate(null);
         service.addArticle(article);
         System.out.println("public String addArticle");
         return "redirect:/articles";
-
     }
+
+
 }

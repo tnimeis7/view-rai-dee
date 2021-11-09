@@ -116,6 +116,24 @@ public class Article implements BlockComponents{
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "atcId='" + atcId + '\'' +
+                ", atcName='" + atcName + '\'' +
+                ", movieName='" + movieName + '\'' +
+                ", type='" + type + '\'' +
+                ", teaserLink='" + teaserLink + '\'' +
+                ", content='" + content + '\'' +
+                ", coverPath='" + coverPath + '\'' +
+                ", authorName='" + authorName + '\'' +
+                ", heart=" + heart +
+                ", starRate=" + starRate +
+                ", publishDate=" + publishDate +
+                '}';
+    }
+
     @Override
     public String getId() {
         return getAtcId();

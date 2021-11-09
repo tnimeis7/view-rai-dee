@@ -49,126 +49,68 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
+<div th:insert="fragments/header :: header"></div>
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">-->
 
-    <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">ViewRaiDee</a>
+<!--    <div class="container-fluid">-->
+<!--        <a class="navbar-brand" th:href="@{/}">ViewRaiDee</a>-->
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">ประเภทหนัง</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">หมวดหมู่หนัง</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">ดูได้ที่</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Feedback</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/}">ประเภทหนัง</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/}">หมวดหมู่หนัง</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/}">ดูได้ที่</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/}">Feedback</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
 
 
     <div class="container p-5 my-5 text-white">
-        <form name="article-create" th:action="@{/articles/create}" method="POST">
+<!--        <form th:action="@{/articles/create}" method="POST">-->
+<!--            <div class="d-grid gap-2 col-2 mx-auto">-->
+<!--                <button class="btn btn-primary" type="submit">เผยแพร่</button>-->
+<!--            </div>-->
+<!--        </form>-->
+        <form th:action="@{/articles/create}" method="POST">
             <div class="mb-3" style="width:300px;">
-    <!--            <a for="exampleFormControlInput1" class="form-label">ชื่อบทความรีวิว</a>-->
                 <label for="atcNameInput">ชื่อบทความรีวิว</label>
-                <input type="email" class="form-control" id="atcNameInput" name="atcName">
+                <input type="text" class="form-control" id="atcNameInput" name="atcName">
             </div>
             <div class="mb-3" style="width:300px;">
-    <!--            <a for="exampleFormControlInput1" class="form-label">ชื่อหนัง</a>-->
                 <label for="movieNameInput">ชื่อหนัง</label>
-                <input type="email" class="form-control" id="movieNameInput" name="movieName">
+                <input type="text" class="form-control" id="movieNameInput" name="movieName">
             </div>
 
             <div class="mb-3" style="width:300px;">
-    <!--            <a for="formFile" class="form-label">รูปภาพ</a>-->
                 <label for="pictureInput">รูปภาพ</label>
-                <input class="form-control" type="file" id="pictureInput" onchange="preview()" name="coverPath">
+                <input class="form-control" type="file" id="pictureInput" accept="image/*"@change="handleChange" onchange="preview()" name="coverPath">
             </div>
             <img id="frame" src="" class="img-fluid" style="width:200px;"  alt=""/>
 
-            <script>
-                function preview() {
-                    frame.src = URL.createObjectURL(event.target.files[0]);
-                }
-            </script>
-            <script type="module" th:inline="javascript" >
-                import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
-                import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-storage.js";
-                const firebaseConfig = {
-                    apiKey: "AIzaSyAEGZeJ2_eGLmUxbnicwTjYxuBml3jN4tg",
-                    authDomain: "viewraideeweb.firebaseapp.com",
-                    databaseURL: "https://viewraideeweb-default-rtdb.firebaseio.com",
-                    projectId: "viewraideeweb",
-                    storageBucket: "viewraideeweb.appspot.com",
-                    messagingSenderId: "927678633451",
-                    appId: "1:927678633451:web:2e9b6edd7a2ad6962f75ae",
-                    measurementId: "G-DN9RQLGSDD"
-                };
-
-                const app = initializeApp(firebaseConfig);
-                const storage = getStorage();
-
-                const imgDiv = document.querySelector('.profile-pic-div');
-                const fileBtn = document.querySelector('#fileBtn');
-                const showImg = document.querySelector('#photo');
-                const uploadBtn = document.querySelector('#uploadBtn');
-                var currentImgUrl = document.querySelector('#photo').getAttribute('src');
-                const desertRef = ref(storage, currentImgUrl);
-                const newImgUrl = document.querySelector('#imgUrl');
-
-
-                imgDiv.addEventListener('mouseover', function(e){
-                    uploadBtn.style.display = "block"
-                });
-
-                imgDiv.addEventListener('mouseout', function(e) {
-                    uploadBtn.style.display = "none"
-                });
-                fileBtn.addEventListener('change', function(e){
-                    var file = e.target.files[0];
-                    var storageRef = ref(storage, "images/" + file.name);
-                    uploadBytes(storageRef, file).then((snapshot) => {
-                        getDownloadURL(snapshot.ref).then((url) => {
-                            console.log("New Image url: " + url);
-                            showImg.setAttribute('src', url);
-                            newImgUrl.setAttribute('value', url);
-                            deleteObject(desertRef).then(() => {
-                                console.log("Delete Current Image");
-                            }).catch((error) => {
-                                console.log("Can't Delete Current Image")
-                            });
-                            document.getElementById('submitChangeImg').click();
-                        })
-                    });
-                });
-            </script>
-
-
             <div class="mb-3" style="width:500px;">
-    <!--            <a for="exampleFormControlTextarea1" class="form-label">เพิ่มเนื้อหา</a>-->
                 <label for="contentInput">เพิ่มเนื้อหา</label>
                 <textarea class="form-control" id="contentInput" rows="3" name="content"></textarea>
             </div>
 
             <div class="mb-3" style="width:300px;">
-                    <!--            <a for="exampleFormControlInput1" class="form-label">ชื่อบทความรีวิว</a>-->
-               <label for="linkInput">ตัวอย่างหนัง</label><br />
-               <input type="email" class="form-control" id="linkInput" name="teaserLink">
+                <label for="linkInput">ตัวอย่างหนัง</label><br />
+                <input type="text" class="form-control" id="linkInput" name="teaserLink">
             </div>
 
-    <!--        <a class="label">คะแนนหนัง</a><br /><br />-->
             <label for="rateInput">คะแนนหนัง</label>
             <select class="form-select" aria-label="Default select example" style="width:300px;" id="rateInput" name="starRate">
                 <option selected>Star Rating</option>
@@ -179,58 +121,158 @@
                 <option value="5">5</option>
             </select><br />
 
-    <!--        <a class="label">ประเภทหนัง</a><br /><br />-->
             <label for="typeInput">ประเภทหนัง</label>
             <select class="form-select" aria-label="Default select example" style="width:300px;" id="typeInput" name="type">
                 <option selected>เลือกประเภทหนัง</option>
-                <option value="1">Movie</option>
-                <option value="2">Series</option>
-                <option value="3">Animation</option>
-                <option value="4">Anime(Japan)</option>
-                <option value="5">TV Show</option>
+                <option value="Movie">Movie</option>
+                <option value="Series">Series</option>
+                <option value="Animation">Animation</option>
+                <option value="Anime(Japan)">Anime(Japan)</option>
+                <option value="TV Show">TV Show</option>
             </select>
 
-    <!--        <a class="label">หมวดหมู่หนัง</a><br />-->
-
-            <div class="container">
-                <label for="genreInput">หมวดหมู่หนัง</label>
-                <div class="tag-container" style="width:300px;" >
-    <!--                <span class="tag">CSS<span class="material-icons">close</span></span>-->
-    <!--                <span class="tag">Javascript<span class="material-icons">close</span></span>-->
-    <!--                <span class="tag">Html<span class="material-icons">close</span></span>-->
-                        <input  id="genreInput" name="genreName"/>
-                </div>
-            </div>
-
-    <!--        <a class="label">แท็กเพิ่มเติม</a>-->
-    <!--        <br />-->
-            <div class="container">
+            <div class="mb-3" style="width:300px;">
                 <label for="tagInput">แท็กเพิ่มเติม</label>
-                <div class="tag-container" style="width:300px;" >
-    <!--                <span class="tag">CSS<span class="material-icons">close</span></span>-->
-    <!--                <span class="tag">Javascript<span class="material-icons">close</span></span>-->
-    <!--                <span class="tag">Html<span class="material-icons">close</span></span>-->
-                        <input  id="tagInput" name="nameTag"/>
-                </div>
-            </div>
-
-    <!--        <a class="label">แพลตฟอร์มดูหนัง</a><br />-->
-
-            <div class="container">
-                <label for="platformInput">แพลตฟอร์มดูหนัง</label>
-                <div class="tag-container" style="width:300px;" >
-    <!--                <span class="tag">CSS<span class="material-icons">close</span></span>-->
-    <!--                <span class="tag">Javascript<span class="material-icons">close</span></span>-->
-    <!--                <span class="tag">Html<span class="material-icons">close</span></span>-->
-                        <input id="platformInput" name="platform" />
-                </div>
+                <input type="text" class="form-control" id="tagInput" name="nameTag">
             </div>
 
             <div class="d-grid gap-2 col-2 mx-auto">
-                <button class="btn btn-outline-light" type="submit">เผยแพร่</button>
+                <button class="btn btn-primary" type="submit" id="uploadBtn">เผยแพร่</button>
             </div>
         </form>
+
     </div>
 
+<!--                        <script type="module" th:inline="javascript" >-->
+<!--                import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";-->
+<!--                import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-storage.js";-->
+<!--                const firebaseConfig = {-->
+<!--                    apiKey: "AIzaSyAEGZeJ2_eGLmUxbnicwTjYxuBml3jN4tg",-->
+<!--                    authDomain: "viewraideeweb.firebaseapp.com",-->
+<!--                    databaseURL: "https://viewraideeweb-default-rtdb.firebaseio.com",-->
+<!--                    projectId: "viewraideeweb",-->
+<!--                    storageBucket: "viewraideeweb.appspot.com",-->
+<!--                    messagingSenderId: "927678633451",-->
+<!--                    appId: "1:927678633451:web:2e9b6edd7a2ad6962f75ae",-->
+<!--                    measurementId: "G-DN9RQLGSDD"-->
+<!--                };-->
+
+<!--                const app = initializeApp(firebaseConfig);-->
+<!--                const storage = getStorage();-->
+
+<!--                const imgDiv = document.querySelector('.profile-pic-div');-->
+<!--                const fileBtn = document.querySelector('#fileBtn');-->
+<!--                const showImg = document.querySelector('#photo');-->
+<!--                const uploadBtn = document.querySelector('#uploadBtn');-->
+<!--                var currentImgUrl = document.querySelector('#photo').getAttribute('src');-->
+<!--                const desertRef = ref(storage, currentImgUrl);-->
+<!--                const newImgUrl = document.querySelector('#imgUrl');-->
+
+
+<!--                imgDiv.addEventListener('mouseover', function(e){-->
+<!--                    uploadBtn.style.display = "block"-->
+<!--                });-->
+
+<!--                imgDiv.addEventListener('mouseout', function(e) {-->
+<!--                    uploadBtn.style.display = "none"-->
+<!--                });-->
+<!--                fileBtn.addEventListener('change', function(e){-->
+<!--                    var file = e.target.files[0];-->
+<!--                    var storageRef = ref(storage, "images/" + file.name);-->
+<!--                    uploadBytes(storageRef, file).then((snapshot) => {-->
+<!--                        getDownloadURL(snapshot.ref).then((url) => {-->
+<!--                            console.log("New Image url: " + url);-->
+<!--                            showImg.setAttribute('src', url);-->
+<!--                            newImgUrl.setAttribute('value', url);-->
+<!--                            deleteObject(desertRef).then(() => {-->
+<!--                                console.log("Delete Current Image");-->
+<!--                            }).catch((error) => {-->
+<!--                                console.log("Can't Delete Current Image")-->
+<!--                            });-->
+<!--                            document.getElementById('submitChangeImg').click();-->
+<!--                        })-->
+<!--                    });-->
+<!--                });-->
+<!--            </script>-->
+
+<!--            <div class="mb-3" style="width:500px;">-->
+<!--                <label for="contentInput">เพิ่มเนื้อหา</label>-->
+<!--                <textarea class="form-control" id="contentInput" rows="3" name="content"></textarea>-->
+<!--            </div>-->
+
+<!--            <div class="mb-3" style="width:300px;">-->
+<!--               <label for="linkInput">ตัวอย่างหนัง</label><br />-->
+<!--               <input type="email" class="form-control" id="linkInput" name="teaserLink">-->
+<!--            </div>-->
+
+<!--            <label for="rateInput">คะแนนหนัง</label>-->
+<!--            <select class="form-select" aria-label="Default select example" style="width:300px;" id="rateInput" name="starRate">-->
+<!--                <option selected>Star Rating</option>-->
+<!--                <option value="1">1</option>-->
+<!--                <option value="2">2</option>-->
+<!--                <option value="3">3</option>-->
+<!--                <option value="4">4</option>-->
+<!--                <option value="5">5</option>-->
+<!--            </select><br />-->
+
+<!--            <label for="typeInput">ประเภทหนัง</label>-->
+<!--            <select class="form-select" aria-label="Default select example" style="width:300px;" id="typeInput" name="type">-->
+<!--                <option selected>เลือกประเภทหนัง</option>-->
+<!--                <option value="1">Movie</option>-->
+<!--                <option value="2">Series</option>-->
+<!--                <option value="3">Animation</option>-->
+<!--                <option value="4">Anime(Japan)</option>-->
+<!--                <option value="5">TV Show</option>-->
+<!--            </select>-->
+
+<!--            <div class="container">-->
+<!--                <label for="genreInput">หมวดหมู่หนัง</label>-->
+<!--                <div class="tag-container" style="width:300px;" >-->
+<!--    &lt;!&ndash;                <span class="tag">CSS<span class="material-icons">close</span></span>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <span class="tag">Javascript<span class="material-icons">close</span></span>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <span class="tag">Html<span class="material-icons">close</span></span>&ndash;&gt;-->
+<!--                        <input  id="genreInput" name="genreName"/>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="container">-->
+<!--                <label for="tagInput">แท็กเพิ่มเติม</label>-->
+<!--                <div class="tag-container" style="width:300px;" >-->
+<!--    &lt;!&ndash;                <span class="tag">CSS<span class="material-icons">close</span></span>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <span class="tag">Javascript<span class="material-icons">close</span></span>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <span class="tag">Html<span class="material-icons">close</span></span>&ndash;&gt;-->
+<!--                        <input  id="tagInput" name="nameTag"/>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="container">-->
+<!--                <label for="platformInput">แพลตฟอร์มดูหนัง</label>-->
+<!--                <div class="tag-container" style="width:300px;" >-->
+<!--    &lt;!&ndash;                <span class="tag">CSS<span class="material-icons">close</span></span>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <span class="tag">Javascript<span class="material-icons">close</span></span>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <span class="tag">Html<span class="material-icons">close</span></span>&ndash;&gt;-->
+<!--                        <input id="platformInput" name="platform" />-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="d-grid gap-2 col-2 mx-auto">-->
+<!--                <button class="btn btn-primary" type="submit">เผยแพร่</button>-->
+<!--            </div>-->
+<!--        </form>-->
+
+<!--    </div>-->
+
 </body>
+<script>
+    function handleChangeO(event) {
+        this.form_o.order_image = event.target.files[0];
+    }
+</script>
+<script>
+    function preview() {
+        frame.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
+
+
 </html>
