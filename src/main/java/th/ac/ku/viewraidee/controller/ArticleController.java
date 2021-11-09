@@ -34,11 +34,14 @@ public class ArticleController {
     public String addArticle(@ModelAttribute Article article,Model model) throws InterruptedException{
         System.out.println(article.toString());
         article.setAtcId(article.generateUUID());
+        article.setAuthorName(article.getAtcName());
         article.setPublishDate(null);
         service.addArticle(article);
         System.out.println("public String addArticle");
         return "redirect:/articles";
     }
+
+
 
 
 }
