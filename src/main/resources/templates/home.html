@@ -154,13 +154,13 @@
         <button id="animation" onclick="clicked()" th:onclick="|window.location.href='/pop-by-type/Animation'|" class="btn-type">อนิเมชัน</button>
         <button id="animeJp" onclick="clicked()" th:onclick="|window.location.href='/pop-by-type/AnimeJp'|" class="btn-type">อนิเมะญี่ปุ่น</button>
 
-        <div class="d-flex" style="padding-left: 50px;" >
-            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                   aria-describedby="search-addon" style="width: 300px;"/>
-            <span class="input-group-text border-0" id="search-addon">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </span>
-        </div>
+<!--        <div class="d-flex" style="padding-left: 50px;" >-->
+<!--            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"-->
+<!--                   aria-describedby="search-addon" style="width: 300px;"/>-->
+<!--            <span class="input-group-text border-0" id="search-addon">-->
+<!--                <i class="fa fa-search" aria-hidden="true"></i>-->
+<!--            </span>-->
+<!--        </div>-->
     </div>
 
     <div class="container-fluid" style="padding-left: 30px; padding-right: 30px;padding-top: 15px;">
@@ -172,10 +172,12 @@
                         <img th:src="${mostPopT.coverPath}" class="img-sqr">
                     </a>
                 </div>
+                <a th:href="@{'/articles'}">
+                    <div class="card more-box align-items-center" style="background-color: black;" >
+                        <h5 class="card-title" style="color: #F7F7F7; padding-top: 25%;">ดูเพิ่มเติม</h5>
+                    </div>
+                </a>
 
-                <div class="card more-box align-items-center" style="background-color: black;" >
-                    <h5 class="card-title" style="color: #F7F7F7; padding-top: 25%;">ดูเพิ่มเติม</h5>
-                </div>
             </div>
             <h4 style="padding-left: 15px; padding-top: 30px;">Top 3 นักเขียนยอดนิยม</h4>
         </div>
@@ -213,13 +215,9 @@
                 <div class="d-flex mt-3 justify-content-around">
                     <a th:href="@{'/articles'}">
                         <div class="col-4 rounded card-genre">
-                            <h2 th:text="${genreName}" class="genre-name" style="padding-top: 16%;padding-left: 15px;"></h2>
+                            <h1 th:text="${genreName}" class="genre-name" style="padding-top: 16%;padding-left: 15px;"></h1>
                         </div>
                     </a>
-                    <div class="col-4 rounded card-genre " style="width: 250px;">
-<!--                        <img th:src="${bestOfGenre}">-->
-                        <h2 class="genre-name">col5</h2>
-                    </div>
                 </div>
             </div>
 
