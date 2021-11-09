@@ -6,7 +6,7 @@ describe('Login', () => {
     })
 
     it('Go Login Page', () => {
-        cy.get('[class="btn btn-primary"]')
+        cy.get('[class="btn btn-outline-light"]')
             .contains('Login')
             .click()
     })
