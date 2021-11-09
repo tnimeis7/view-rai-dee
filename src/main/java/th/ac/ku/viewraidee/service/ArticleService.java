@@ -60,6 +60,7 @@ public class ArticleService {
     public void createReport(Report report) {
         String url = "http://localhost:8090/Report";
         restTemplate.postForObject(url, report, Report.class);
+    }
 
     public List<Article> getMostPopularArticles() {
         String url = "http://localhost:8090/Article/MostPopular";
@@ -68,7 +69,7 @@ public class ArticleService {
         return Arrays.asList(articles);
     }
 
-    public List<Article> getMostPopularArticlesByType(String type) {
+    public List<Article> getMostPopularArticlesByType (String type){
         String url = "http://localhost:8090/Article/MostPopular/" + type;
         ResponseEntity<Article[]> response = restTemplate.getForEntity(url, Article[].class);
         Article[] articles = response.getBody();
@@ -76,38 +77,38 @@ public class ArticleService {
 
     }
 
-    public void deleteAtc(String atcId){
+    public void deleteAtc (String atcId){
         String url = "http://localhost:8090/Article/" + atcId;
         restTemplate.delete(url);
     }
 
-    public void deleteComment(String commentId){
+    public void deleteComment (String commentId){
         String url = "http://localhost:8090/Comment/" + commentId;
         restTemplate.delete(url);
     }
 
-    public Comment getCommentById(String id){
+    public Comment getCommentById (String id){
         String url = "http://localhost:8090/Comment/" + id;
         ResponseEntity<Comment> response = restTemplate.getForEntity(url, Comment.class);
         Comment comment = response.getBody();
         return comment;
     }
 
-    public List<Comment> getCommentByUsername(String username){
+    public List<Comment> getCommentByUsername (String username){
         String url = "http://localhost:8090/Comment/username/" + username;
         ResponseEntity<Comment[]> response = restTemplate.getForEntity(url, Comment[].class);
         Comment[] comment = response.getBody();
         return Arrays.asList(comment);
     }
 
-    public List<Article> getArticleByUsername(String username){
+    public List<Article> getArticleByUsername (String username){
         String url = "http://localhost:8090/Article/author/" + username;
         ResponseEntity<Article[]> response = restTemplate.getForEntity(url, Article[].class);
         Article[] articles = response.getBody();
         return Arrays.asList(articles);
     }
 
-    public void setUsernameOfComment(String username, String newUsername){
+    public void setUsernameOfComment (String username, String newUsername){
         String url = "http://localhost:8090/Comment/setUsername/" + username + "/" + newUsername;
         MultiValueMap<String, String> parametersMap = new LinkedMultiValueMap<>();
         parametersMap.add("username", username);
@@ -115,7 +116,7 @@ public class ArticleService {
         restTemplate.postForObject(url, parametersMap, Comment.class, newUsername);
     }
 
-    public void setUsernameOfArticle(String username,  String newUsername){
+    public void setUsernameOfArticle (String username, String newUsername){
         String url = "http://localhost:8090/Article/setUsername/" + username + "/" + newUsername;
         List<String> list = new ArrayList<>();
         MultiValueMap<String, String> parametersMap = new LinkedMultiValueMap<>();
@@ -124,17 +125,17 @@ public class ArticleService {
         restTemplate.postForObject(url, parametersMap, Article.class, newUsername);
     }
 
-    public void deleteCommentByUsername(String username){
+    public void deleteCommentByUsername (String username){
         String url = "http://localhost:8090/Comment/delete/" + username;
         restTemplate.postForObject(url, username, Comment.class);
     }
 
-    public void deleteArticleByUsername(String username){
+    public void deleteArticleByUsername (String username){
         String url = "http://localhost:8090/Article/delete/" + username;
         restTemplate.postForObject(url, username, Article.class);
     }
 
-    // ทำไมไม่สีเหลือง!!!!!
+        // ทำไมไม่สีเหลือง!!!!!
 //    public void deleteArticle(Article article) {
 //        String url = "http://localhost:8090/Article";
 //        restTemplate.delete(url, article, Article.class);
