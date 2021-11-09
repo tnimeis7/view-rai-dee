@@ -181,6 +181,7 @@ public class AccountController {
     @PostMapping("/changeImg")
     public String changeImg(@ModelAttribute Account account){
         String newPh = account.getPhoto();
+        System.out.println(account.getPhoto());
         Account currentAccount = authenticationService.getCurrentAccount();
         currentAccount.setPhoto(newPh);
         accountService.update(currentAccount);
