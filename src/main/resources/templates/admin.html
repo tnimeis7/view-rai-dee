@@ -45,7 +45,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-4 px-md-5 card-info">
+<!--    <div class="col-4 px-md-5 card-info">-->
 <!--        <p th:each="article : ${articleReport}"></p>-->
 <!--        <div class="container" style="padding: 30px;">-->
 <!--            <div class="grid-container" >-->
@@ -59,20 +59,25 @@
 <!--                </div>-->
 <!--            </div>-->
 <!--        </div>-->
-        <div class="container" style="margin: 30px;">
-            <div class="grid-container" >
-                <div class="grid-item" th:each="article : ${articleReport}">
-                    <a th:href="@{/articles/{id}(id=${article.value.getId()})}"><p th:text="${article.value.getMovieName()}"></p></a>
-                    <p th:text="${article.value.atcName}"></p>
-                    <p th:text="${article.key.getReportContent()}"></p>
-                    <form th:action="@{/articles/manage-report-article/{id}(id=${article.key.id})}" method="POST">
-                        <select th:name="reportContent" class="form-select" aria-label="Default select example">
-                            <option style="display:none;"></option>
-                            <option>ลบ</option>
-                            <option>ไม่สนใจ</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">report</button>
-                    </form>
+    <div class="col-4 card-info">
+        <div style="margin: 30px;">
+            <div class="grid-container-admin">
+                <div class="scroll-bar">
+                    <div class="grid-item-admin" th:each="article : ${articleReport}">
+                        <a th:href="@{/articles/{id}(id=${article.value.getId()})}" style="font-size: 25px;"><p th:text="${article.value.getMovieName()}"></p></a>
+                        <p th:text="${article.value.atcName}"></p>
+                        <p th:text="${article.key.getReportContent()}"></p>
+                        <form th:action="@{/articles/manage-report-article/{id}(id=${article.key.id})}" method="POST">
+                            <select th:name="reportContent" class="width-200" aria-label="Default select example">
+                                <option style="display:none;"></option>
+                                <option>ลบ</option>
+                                <option>ไม่สนใจ</option>
+                            </select>
+                            <span>
+                                <button type="submit" class="btn btn-dark" style="margin-bottom: 10px">report</button>
+                            </span>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
