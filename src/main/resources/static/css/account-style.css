@@ -49,7 +49,7 @@
 
     .card-info {
         width: 514px;
-        height: 356px;
+        height: 354px;
         background-color: #86b7fe;
     }
 
@@ -76,10 +76,46 @@
     .grid-item-admin{
         /*margin-bottom: 30px ;*/
         /*margin-left: 50px ;*/
-        width: 120px;
-        background-color: #1a1e21;
+        width: 350px;
+        background-color: white;
         position: relative;
         border-radius: 5%;
+        margin-bottom: 15px;
+        margin-left: 5px;
+    }
+
+    .grid-container-admin {
+        display: grid;
+        width: 430px;
+        height: 300px;
+        /*grid-template-columns: auto auto auto;*/
+        padding: 10px;
+        background-color: #C4C4C4;
+        border-radius: 40px;
+
+    }
+
+    .width-200 {
+        width: 200px;
+        height: 35px;
+    }
+
+    .scroll-bar {
+        overflow-y: scroll;
+        margin-right: 8px;
+        /*transform: translate(-8px,0);*/
+    }
+
+    .row-b:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .col-b {
+        float: left;
+        width: 33.33%;
+        padding: 15px;
     }
 
     .textIMG{
