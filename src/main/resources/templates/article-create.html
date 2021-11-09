@@ -97,35 +97,13 @@
                 <input type="text" class="form-control" id="movieNameInput" name="movieName">
             </div>
 
-<!--            <div class="mb-3" style="width:300px;">-->
-<!--                <label for="fileBtn">รูปภาพ</label>-->
-<!--                <input class="form-control" type="file" id="fileBtn" accept="image/*"@change="handleChange" onchange="preview()" name="coverPath">-->
-<!--            </div>-->
-<!--            <img id="frame" src="" class="img-fluid" style="width:200px;"  alt=""/>-->
-
-<!--            <input type="file" id="image" accept="image/*"><br><br>-->
-<!--            <button type="button" onclick="upload()">upload</button>-->
-
             <div class="mb-3" style="width:300px;">
                 <label for="pictureInput">รูปภาพ</label>
-                <input class="form-control" type="file" id="pictureInput" accept="image/*"@change="handleChange" onchange="preview()" name="coverPath">
+                <input class="form-control" type="file" id="pictureInput" accept="image/*"@change="handleChange" onchange="preview()">
+                <input type="hidden" id="picIp" th:value="coverPath" name="coverPath">
             </div>
             <img id="frame" src="" class="img-fluid" style="width:200px;" alt=""/>
 
-<!--            <img th:src="*{coverPath}" id="photo"><br>-->
-<!--            <label for="coverImg" id="upload">เลือกรูปภาพ</label>-->
-<!--            <input type="file" id="coverImg">-->
-<!--            <progress id="progress_bar" value="0" max="100"></progress>-->
-<!--            <img src="" alt="" id="image"/>-->
-<!--            <button type="submit" id="">อัปโหลดรูปภาพ</button>-->
-
-<!--            <button type="submit" id="submitAddImg" class="btn btn-x"></button>-->
-
-<!--            <div class="mb-3" style="width:300px;">-->
-<!--                <label for="pictureInput">รูปภาพ</label>-->
-<!--                <input class="form-control" type="file" id="pictureInput" accept="image/*"@change="handleChange" onchange="preview()" name="coverPath">-->
-<!--            </div>-->
-<!--            <img id="frame" src="" class="img-fluid" style="width:200px;"  alt=""/>-->
 
             <div class="mb-3" style="width:500px;">
                 <label for="contentInput">เพิ่มเนื้อหา</label>
@@ -249,11 +227,11 @@
         console.log(file);
         // toFirebase();
     }
-</script
+</script>
 
 <script type="module" th:inline="javascript" >
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-storage.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyBIrhIYOrp24rE2dfz48F3_gdDqQUi0j5U",
@@ -269,6 +247,7 @@
     const storage = getStorage();
 
     const fileBtn = document.querySelector('#pictureInput');
+    const pic = document.querySelector('#picIp');
 
     fileBtn.addEventListener('change', function(){
         var file = event.target.files[0];
@@ -277,13 +256,13 @@
             getDownloadURL(snapshot.ref).then((url) => {
                 console.log("New Image url: " + url);
                 // showImg.setAttribute('src', url);
-                // newImgUrl.setAttribute('value', url);
-                deleteObject(desertRef).then(() => {
-                    console.log("Delete Current Image");
-                }).catch((error) => {
-                    console.log("Can't Delete Current Image")
-                });
-                document.getElementById('submitChangeImg').click();
+                pic.setAttribute('value', url);
+                // deleteObject(desertRef).then(() => {
+                //     console.log("Delete Current Image");
+                // }).catch((error) => {
+                //     console.log("Can't Delete Current Image")
+                // });
+                // document.getElementById('submitChangeImg').click();
             })
         });
     });
