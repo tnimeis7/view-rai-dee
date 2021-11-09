@@ -187,7 +187,7 @@ public class ArticleController {
         article.setId(article.generateUUID());
 //        article.setAuthorName(article.getAtcName());
         article.setPublishDate(null);
-//        article.setCoverPath(article.getCoverPath());
+        article.setCoverPath(article.getCoverPath());
         article.setAuthorName(authenticationService.getCurrentAccount().getUsername());
         System.out.println("username" + authenticationService.getCurrentAccount().getUsername());
         service.addArticle(article);
