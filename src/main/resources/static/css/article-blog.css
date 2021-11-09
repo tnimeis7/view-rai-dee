@@ -241,6 +241,16 @@ selectvrd {
     height: 420px;
 }
 
+.platformBox{
+    border: none;
+    padding: 5px;
+    font: 24px/36px sans-serif;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 1250px;
+    height: auto;
+}
+
 /* Scrollbar styles */
 ::-webkit-scrollbar {
     width: 12px;

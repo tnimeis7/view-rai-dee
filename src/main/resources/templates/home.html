@@ -210,6 +210,21 @@
 </div>
 
 <!-- Streaming Platform -->
+<div class="container" style="padding-top: 50px;">
+    <h4>ดูที่</h4>
+        <div class="platformBox " >
+            <div class="d-inline-flex ">
+                <div th:each="pf : ${platforms}" style="margin: 15px;">
+                    <a th:href="@{'/articles/filter/platform/' + ${pf.id}}">
+                        <img th:src="${pf.picPath}" class="platformLogo">
+                    </a>
+
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- Report-->
 <div class="container" style="padding-top: 50px; padding-bottom: 50px;">
     <form th:if="${user}!='ผู้เยี่ยมชม'" th:action="@{/feedback/add}" method="POST">
         <label for="feedback">ส่ง feedback ให้เรา</label>
