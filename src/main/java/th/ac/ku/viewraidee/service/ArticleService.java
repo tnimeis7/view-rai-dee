@@ -51,6 +51,13 @@ public class ArticleService {
         return Arrays.asList(comment);
     }
 
+    public Comment getCommentById(String id){
+        String url = "http://localhost:8090/Comment/{commentId}";
+        ResponseEntity<Comment> response = restTemplate.getForEntity(url, Comment.class, id);
+        Comment comment = response.getBody();
+        return comment;
+    }
+
     public void plusHeart(String id) {
         String url = "http://localhost:8090/Article/heart/" + id;
         restTemplate.postForObject(url, id, Article.class);
@@ -69,13 +76,6 @@ public class ArticleService {
     public void deleteComment(String commentId){
         String url = "http://localhost:8090/Comment/" + commentId;
         restTemplate.delete(url);
-    }
-
-    public Comment getCommentById(String id){
-        String url = "http://localhost:8090/Comment/" + id;
-        ResponseEntity<Comment> response = restTemplate.getForEntity(url, Comment.class);
-        Comment comment = response.getBody();
-        return comment;
     }
 
     public List<Comment> getCommentByUsername(String username){
