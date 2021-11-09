@@ -217,8 +217,8 @@
 }
 
 .break-word {
-    max-width: 330px;
-    width: min-content;
+    max-width: 400px;
+    /*width: min-content;*/
     overflow-wrap: break-word;
 
 }
@@ -293,4 +293,30 @@
     border-radius: 50px;
     z-index: auto;
     background-color: #020202;
+}
+
+.aboutMeBox{
+    margin-bottom: 5px;
+    height: 190px;
+    width: 440px;
+    overflow: auto;"
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #D4DCDC;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #4f5965;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #3a4147;
 }
