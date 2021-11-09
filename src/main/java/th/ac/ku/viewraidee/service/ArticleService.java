@@ -77,6 +77,7 @@ public class ArticleService {
 
     }
 
+
     public void deleteAtc (String atcId){
         String url = "http://localhost:8090/Article/" + atcId;
         restTemplate.delete(url);
@@ -101,12 +102,20 @@ public class ArticleService {
         return Arrays.asList(comment);
     }
 
-    public List<Article> getArticleByUsername (String username){
+    public List<Article> getArticleByUsername (String username) {
         String url = "http://localhost:8090/Article/author/" + username;
         ResponseEntity<Article[]> response = restTemplate.getForEntity(url, Article[].class);
         Article[] articles = response.getBody();
         return Arrays.asList(articles);
     }
+
+    public List<Article> getArticlesByType(String type) {
+        String url = "http://localhost:8090/Article/type/" + type;
+        ResponseEntity<Article[]> response = restTemplate.getForEntity(url, Article[].class);
+        Article[] articles = response.getBody();
+        return Arrays.asList(articles);
+    }
+
 
     public void setUsernameOfComment (String username, String newUsername){
         String url = "http://localhost:8090/Comment/setUsername/" + username + "/" + newUsername;
@@ -135,7 +144,8 @@ public class ArticleService {
         restTemplate.postForObject(url, username, Article.class);
     }
 
-        // ทำไมไม่สีเหลือง!!!!!
+
+    // ทำไมไม่สีเหลือง!!!!!
 //    public void deleteArticle(Article article) {
 //        String url = "http://localhost:8090/Article";
 //        restTemplate.delete(url, article, Article.class);

@@ -12,27 +12,37 @@
 <body style="background-color: #F7F7F7;">
 
 <div th:insert="fragments/header :: header"></div>
-<div class="frame-vrd" style="padding-top: 1rem;">
+<div class="frame-vrd" style="padding-top: 70px;">
 
-    <div class="d-inline-flex">
-        <div class="dropdown" style="padding-bottom: 10px; left: -12px;">
-            <button class="btn btn-vrd-sort dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-bs-toggle="dropdown">
-                วันที่รีวิว</button>
-            <ul class="dropdown-menu" style="background-color:#2c3034; border:0;" aria-labelledby="dropdownMenuButton">
-                <li><label class="dropdown-item-vrd" href="#" selected>เรียงจากล่าสุด</label></li>
-                <li><label class="dropdown-item-vrd" href="#">เรียงจากเก่าสุด</label></li>
-            </ul>
-        </div>
-        <select id="sort" class="btn btn-vrd-sort">
-            <option class="dropdown-item-vrd" value="newest" selected >ล่าสุด</option>
+    <div class="d-inline-flex" style="padding-bottom: 15px;">
+        <select id="sort" onchange="window.location.href='articles/filter/date/' + this.value" class="btn btn-vrd-sort">
+            <option class="dropdown-item-vrd" value="dateUnOrder" selected>--เรียงจาก--</option>
+            <option class="dropdown-item-vrd" value="newest">ล่าสุด</option>
             <option class="dropdown-item-vrd" value="oldest">เก่าสุด</option>
+            <option class="dropdown-item-vrd" value="popular">หัวใจมากที่สุด</option>
         </select>
+        <select id="typeSort" onchange="window.location.href='articles/filter/type/' + this.value" class="btn btn-vrd-sort">
+            <option class="dropdown-item-vrd" value="allType" selected>--ทุกประเภท--</option>
+            <option class="dropdown-item-vrd" value="Movie">ภาพยนตร์</option>
+            <option class="dropdown-item-vrd" value="Series">ซีรี่ส์</option>
+            <option class="dropdown-item-vrd" value="TVShow">รายการทีวี</option>
+            <option class="dropdown-item-vrd" value="Animation">อนิเมชัน</option>
+            <option class="dropdown-item-vrd" value="Anime">อนิเมะญี่ปุ่น</option>
+        </select>
+        <select id="genreSort" onchange="window.location.href='articles/filter/genre/' + this.value" class="btn btn-vrd-sort">
+            <option class="dropdown-item-vrd" value="allGenre" selected>--ทุกหมวดหมู่--</option>
+            <option class="dropdown-item-vrd" th:each="gName : ${genres}" th:text="${gName}" th:value="${gName}">ล่าสุด</option>
+        </select>
+        <select id="platFormSort" onchange="window.location.href='articles/filter/platform/' + this.value" class="btn btn-vrd-sort">
+            <option class="dropdown-item-vrd" value="allPlatform" selected>--ทุกแพลตฟอร์ม--</option>
+            <option class="dropdown-item-vrd" th:each="pfName : ${platform}" th:text="${pfName.id}" th:value="${pfName.id}">ล่าสุด</option>
+        </select>
+
     </div>
 </div>
 <div class="frame-vrd" style="background-color: #2c3034;">
     <div class="container" style="padding: 30px;">
-        <div class="row mt-2" th:each="article : ${atcOldest}">
+        <div class="row mt-2" th:each="article : ${articles}">
             <div class="card flex-row rounded-vrd-1 align-items-center" style="background-color: #F7F7F7;">
                 <div class="col-auto">
                     <h5 style="margin-left: 15px; margin-top: 15px;" th:text="${article.movieName}"></h5>
@@ -51,11 +61,12 @@
 </div>
 
 </body>
-<!--<script>-->
-<!--    var input;-->
-<!--    if(input == newest){-->
-<!--        atcSort =-->
-<!--    }-->
-<!--</script>-->
+<script>
+    function selectOption(ip) {
+        var value = ip.value;
+
+
+    }
+</script>
 
 </html>

@@ -241,25 +241,24 @@ selectvrd {
     height: 420px;
 }
 
-/*!* Scrollbar styles *!*/
-/*::-webkit-scrollbar {*/
-/*    width: 12px;*/
-/*    height: 12px;*/
-/*}*/
 
-/*::-webkit-scrollbar-track {*/
-/*    border: 1px solid #3a4147;*/
-/*    border-radius: 10px;*/
-/*}*/
+.platformBox{
+    border: none;
+    padding: 5px;
+    font: 24px/36px sans-serif;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 1250px;
+    height: auto;
+}
 
-/*::-webkit-scrollbar-thumb {*/
-/*    background: #3a4147;*/
-/*    border-radius: 10px;*/
-/*}*/
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
 
-/*::-webkit-scrollbar-thumb:hover {*/
-/*    background: #1e2125;*/
-/*}*/
+
 
 .card-genre {
     width: 800px;

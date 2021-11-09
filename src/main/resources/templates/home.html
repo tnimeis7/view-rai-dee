@@ -42,6 +42,9 @@
             bottom: 0;
             left: 5px;
         }
+        a{
+            text-decoration: none;
+        }
     </style>
 
 </head>
@@ -156,8 +159,8 @@
                     </a>
                 </div>
 
-                <div class="card more-box align-content-center" style="background-color: black;" >
-                    <h5 class="card-title" style="color: #F7F7F7">ดูเพิ่มเติม</h5>
+                <div class="card more-box align-items-center" style="background-color: black;" >
+                    <h5 class="card-title" style="color: #F7F7F7; padding-top: 25%;">ดูเพิ่มเติม</h5>
                 </div>
             </div>
             <h4 style="padding-left: 15px; padding-top: 30px;">Top 3 นักเขียนยอดนิยม</h4>
@@ -188,30 +191,47 @@
 <!-- Genre -->
 <div class="container" style="padding-top: 10px;position: relative;">
     <h4>หมวดหมู่หนัง</h4>
-    <center>
-        <div class="genreBox">
+        <div class="genreBox align-items-center">
             <div th:each="genreName : ${allGenre}">
-                <div class="row mt-3 justify-content-around">
-                    <div class="col-7 rounded card-genre">
-                        <h2 th:text="${genreName}" class="genre-name"></h2>
-                    </div>
-                    <div class="col-5 rounded card-genre" style="width: 250px;">
-                        <h2 class="genre-name">col5</h2>
+                <div class="d-flex mt-3 justify-content-around">
+                    <a th:href="@{'/articles'}">
+                        <div class="col-4 rounded card-genre">
+                            <h2 th:text="${genreName}" class="genre-name" style="padding-top: 16%;padding-left: 15px;"></h2>
+                        </div>
+                    </a>
+                    <div class="col-4 rounded card-genre " style="width: 250px;">
+                        <h2 class="genre-name" >col5</h2>
                     </div>
                 </div>
             </div>
 
         </div>
-    </center>
+
 </div>
 
 <!-- Streaming Platform -->
-<form th:if="${user}!='ผู้เยี่ยมชม'" th:action="@{/feedback/add}" method="POST">
-    <label for="feedback">ส่ง feedback ให้เรา</label>
-    <textarea class="form-control" id="feedback" name="fbContent" rows="5"></textarea><br>
-    <button type="submit" class="btn btn-primary" onclick="return checkFeedback()">ส่ง</button>
-</form>
+<div class="container" style="padding-top: 50px;">
+    <h4>ดูที่</h4>
+        <div class="platformBox " >
+            <div class="d-inline-flex ">
+                <div th:each="pf : ${platforms}" style="margin: 15px;">
+                    <a th:href="@{'/articles/filter/platform/' + ${pf.id}}">
+                        <img th:src="${pf.picPath}" class="platformLogo">
+                    </a>
 
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- Report-->
+<div class="container" style="padding-top: 50px; padding-bottom: 50px;">
+    <form th:if="${user}!='ผู้เยี่ยมชม'" th:action="@{/feedback/add}" method="POST">
+        <label for="feedback">ส่ง feedback ให้เรา</label>
+        <textarea class="form-control" id="feedback" name="fbContent" rows="5"></textarea><br>
+        <button type="submit" class="btn btn-primary" onclick="return checkFeedback()">ส่ง</button>
+    </form>
+</div>
 
 </body>
 <script>

@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import th.ac.ku.viewraidee.model.Account;
-import th.ac.ku.viewraidee.service.AccountService;
-import th.ac.ku.viewraidee.service.ArticleService;
-import th.ac.ku.viewraidee.service.AuthenticationService;
-import th.ac.ku.viewraidee.service.GenreService;
+import th.ac.ku.viewraidee.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.stream.Collectors;
@@ -36,6 +33,9 @@ public class HomeController {
     @Autowired
     private GenreService genreService;
 
+    @Autowired
+    private StreamingPlatformService streamingPlatformService;
+
     private String typeM = "Movie";
 
     @GetMapping
@@ -46,6 +46,7 @@ public class HomeController {
         model.addAttribute("greeting", "to our website");
         model.addAttribute("mostPopular", articleService.getMostPopularArticles());
         model.addAttribute("mostPopularType", articleService.getMostPopularArticlesByType(typeM).stream().limit(3).collect(Collectors.toList()));
+        model.addAttribute("platforms", streamingPlatformService.getAll());
         if(typeM.equals("Movie")) model.addAttribute("type", "ภาพยนตร์");
         else if(typeM.equals("TVShow")) model.addAttribute("type", "รายการทีวี");
         else if(typeM.equals("Series")) model.addAttribute("type", "ซีรี่ส์");

@@ -2,15 +2,12 @@ package th.ac.ku.viewraidee.model;
 
 public class StreamingPlatform implements BlockComponents {
 
-    private String platformName;
+    private String id;
     private String picPath;
 
-    public String getPlatformName() {
-        return platformName;
-    }
 
-    public void setPlatformName(String platformName) {
-        this.platformName = platformName;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getPicPath() {
@@ -23,6 +20,6 @@ public class StreamingPlatform implements BlockComponents {
 
     @Override
     public String getId() {
-        return getPlatformName();
+        return id;
     }
 }
