@@ -35,7 +35,7 @@
         </select>
         <select id="platFormSort" onchange="window.location.href='articles/filter/platform/' + this.value" class="btn btn-vrd-sort" style="margin-right: 6px;">
             <option class="dropdown-item-vrd" value="allPlatform" selected>--ทุกแพลตฟอร์ม--</option>
-            <option class="dropdown-item-vrd" th:each="pfName : ${platform}" th:text="${pfName.id}" th:value="${pfName.id}">ล่าสุด</option>
+            <option class="dropdown-item-vrd" th:each="pfName : ${platform}" th:text="${pfName.id}" th:value="${pfName.id}"></option>
         </select>
 
     </div>

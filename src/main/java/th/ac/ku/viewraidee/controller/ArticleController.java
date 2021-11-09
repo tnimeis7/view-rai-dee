@@ -10,15 +10,12 @@ import th.ac.ku.viewraidee.model.*;
 import th.ac.ku.viewraidee.service.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -176,23 +173,48 @@ public class ArticleController {
     }
 
     @GetMapping("/create")
-    public String getAddPage(){
+    public String getAddPage(Model model){
         System.out.println("public String getAddPage()");
+        model.addAttribute("platform", streamingPlatformService.getAll());
         return "article-create";
     }
 
     @PostMapping("/create")
-    public String addArticle(@ModelAttribute Article article,@ModelAttribute Tag tagList,RedirectAttributes redirectAttributes) throws InterruptedException{
+    public String addArticle(@ModelAttribute Article article,@ModelAttribute Tag tagList,
+            @ModelAttribute Genre genreList, @ModelAttribute ArticleStream atcStrList, RedirectAttributes redirectAttributes) throws InterruptedException{
         System.out.println(article.toString());
-        article.setId(article.generateUUID());
+        String atcId = article.generateUUID();
+        article.setId(atcId);
 //        article.setAuthorName(article.getAtcName());
         article.setPublishDate(null);
         article.setCoverPath(article.getCoverPath());
-        System.out.println(tagList);
-        String[] array = tagList.getNameTag().split("#");
-        for(int i=0; i< array.length; i++){
-            System.out.println(array[i]);
+        System.out.println(genreList);
+        String[] tagArray = tagList.getNameTag().split("#");
+        for(int i=1; i< tagArray.length; i++){
+            System.out.println(tagArray[i]);
+            tagList.setNameTag(tagArray[i]);
+            tagList.setAtcId(atcId);
+            tagService.addTag(tagList);
         }
+        System.out.println("objectgenre : " + genreList);
+        String[] genreArray = genreList.getGenreName().split(",");
+        for(int i=0; i< genreArray.length;i++){
+            System.out.println(genreArray[i]);
+            genreList.setGenreName(genreArray[i]);
+            genreList.setAtcId(atcId);
+            genreService.addGenreWithId(genreList);
+        }
+        String[] pfArray = atcStrList.getPlatform().split(",");
+        System.out.println("objectPf : " + atcStrList);
+        for(int i=0; i< pfArray.length;i++){
+            System.out.println(pfArray[i]);
+            atcStrList.setPlatform(pfArray[i]);
+            atcStrList.setAtcId(atcId);
+            articleStreamService.addArticleStream(atcStrList);
+        }
+
+
+//        for(int i=0; i<)
         article.setAuthorName(authenticationService.getCurrentAccount().getUsername());
         System.out.println("username" + authenticationService.getCurrentAccount().getUsername());
         service.addArticle(article);

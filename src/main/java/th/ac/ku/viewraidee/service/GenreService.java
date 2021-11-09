@@ -35,4 +35,9 @@ public class GenreService {
         return Arrays.asList(atcId);
     }
 
+    public void addGenreWithId(Genre genre) {
+        String url = "http://localhost:8090/Genre";
+        restTemplate.postForObject(url, genre, Genre.class);
+    }
+
 }

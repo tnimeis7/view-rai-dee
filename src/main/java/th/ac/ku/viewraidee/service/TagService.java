@@ -21,4 +21,9 @@ public class TagService {
         return Arrays.asList(tags);
     }
 
+    public void addTag(Tag tag){
+        String url = "http://localhost:8090/Tag";
+        restTemplate.postForObject(url, tag, Tag.class);
+    }
+
 }
