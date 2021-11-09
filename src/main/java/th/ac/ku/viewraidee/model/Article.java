@@ -5,6 +5,7 @@ import com.google.cloud.Timestamp;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 public class Article implements BlockComponents{
 
@@ -111,6 +112,10 @@ public class Article implements BlockComponents{
         this.publishDate = publishDate;
     }
 
+    public String generateUUID(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
+    }
     @Override
     public String getId() {
         return getAtcId();

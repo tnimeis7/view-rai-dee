@@ -31,6 +31,8 @@ public class ArticleController {
 
     @PostMapping("/create")
     public String addArticle(@ModelAttribute Article article, Model model){
+        article.setAtcId(article.generateUUID());
+        article.setPublishDate(null);
         service.addArticle(article);
         System.out.println("public String addArticle");
         return "redirect:/articles";
