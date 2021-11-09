@@ -1,7 +1,10 @@
 package th.ac.ku.viewraidee.model;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.google.cloud.Timestamp;
+import java.util.UUID;
 
 public class Article {
 
@@ -101,7 +104,32 @@ public class Article {
         return simpDate.format(publishDate);
     }
 
-    public void setPublishDate(Date date) { this.publishDate = date; }
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
+    }
+
+    public String generateUUID(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "atcId='" + id + '\'' +
+                ", atcName='" + atcName + '\'' +
+                ", movieName='" + movieName + '\'' +
+                ", type='" + type + '\'' +
+                ", teaserLink='" + teaserLink + '\'' +
+                ", content='" + content + '\'' +
+                ", coverPath='" + coverPath + '\'' +
+                ", authorName='" + authorName + '\'' +
+                ", heart=" + heart +
+                ", starRate=" + starRate +
+                ", publishDate=" + publishDate +
+                '}';
+    }
+
 
 //    @Override
 //    public String getId() {

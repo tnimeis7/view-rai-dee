@@ -1,8 +1,11 @@
 package th.ac.ku.viewraidee.model;
 
+import java.util.List;
+
 public class Tag implements BlockComponents {
     private String nameTag;
     private String atcId;
+    private List<String[]> tagList;
 
     public String getNameTag() {
         return nameTag;
@@ -18,6 +21,11 @@ public class Tag implements BlockComponents {
 
     public void setAtcId(String atcId) {
         this.atcId = atcId;
+    }
+
+    public List<String[]> splitTag(){
+        tagList.add(nameTag.split("#"));
+        return tagList;
     }
 
     @Override
