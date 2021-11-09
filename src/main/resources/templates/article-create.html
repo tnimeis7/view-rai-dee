@@ -103,21 +103,64 @@
                     frame.src = URL.createObjectURL(event.target.files[0]);
                 }
             </script>
+            <script type="module" th:inline="javascript" >
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+                import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-storage.js";
+                const firebaseConfig = {
+                    apiKey: "AIzaSyAEGZeJ2_eGLmUxbnicwTjYxuBml3jN4tg",
+                    authDomain: "viewraideeweb.firebaseapp.com",
+                    databaseURL: "https://viewraideeweb-default-rtdb.firebaseio.com",
+                    projectId: "viewraideeweb",
+                    storageBucket: "viewraideeweb.appspot.com",
+                    messagingSenderId: "927678633451",
+                    appId: "1:927678633451:web:2e9b6edd7a2ad6962f75ae",
+                    measurementId: "G-DN9RQLGSDD"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const storage = getStorage();
+
+                const imgDiv = document.querySelector('.profile-pic-div');
+                const fileBtn = document.querySelector('#fileBtn');
+                const showImg = document.querySelector('#photo');
+                const uploadBtn = document.querySelector('#uploadBtn');
+                var currentImgUrl = document.querySelector('#photo').getAttribute('src');
+                const desertRef = ref(storage, currentImgUrl);
+                const newImgUrl = document.querySelector('#imgUrl');
+
+
+                imgDiv.addEventListener('mouseover', function(e){
+                    uploadBtn.style.display = "block"
+                });
+
+                imgDiv.addEventListener('mouseout', function(e) {
+                    uploadBtn.style.display = "none"
+                });
+                fileBtn.addEventListener('change', function(e){
+                    var file = e.target.files[0];
+                    var storageRef = ref(storage, "images/" + file.name);
+                    uploadBytes(storageRef, file).then((snapshot) => {
+                        getDownloadURL(snapshot.ref).then((url) => {
+                            console.log("New Image url: " + url);
+                            showImg.setAttribute('src', url);
+                            newImgUrl.setAttribute('value', url);
+                            deleteObject(desertRef).then(() => {
+                                console.log("Delete Current Image");
+                            }).catch((error) => {
+                                console.log("Can't Delete Current Image")
+                            });
+                            document.getElementById('submitChangeImg').click();
+                        })
+                    });
+                });
+            </script>
+
 
             <div class="mb-3" style="width:500px;">
     <!--            <a for="exampleFormControlTextarea1" class="form-label">เพิ่มเนื้อหา</a>-->
                 <label for="contentInput">เพิ่มเนื้อหา</label>
                 <textarea class="form-control" id="contentInput" rows="3" name="content"></textarea>
             </div>
-
-    <!--        <a class="label">ตัวอย่างหนัง</a><br /><br />-->
-
-    <!--        <div class="input-group mb-3" style="width:300px;">-->
-    <!--            <span class="input-group-text" id="urlInput">URL</span>-->
-    <!--                <label for="linkInput">ตัวอย่างหนัง</label>-->
-    <!--                <input type="text" class="form-control" aria-describedby="basic-addon1" id="linkInput" name="teaserLink">-->
-
-    <!--        </div>-->
 
             <div class="mb-3" style="width:300px;">
                     <!--            <a for="exampleFormControlInput1" class="form-label">ชื่อบทความรีวิว</a>-->
@@ -184,7 +227,7 @@
             </div>
 
             <div class="d-grid gap-2 col-2 mx-auto">
-                <btn class="btn btn-outline-light" type="button">เผยแพร่</btn>
+                <button class="btn btn-outline-light" type="submit">เผยแพร่</button>
             </div>
         </form>
     </div>
