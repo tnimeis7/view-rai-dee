@@ -53,16 +53,16 @@
 
     <div class="container p-5 my-5 text-white">
         <form th:action="@{/articles/create}" method="POST">
-            <div class="mb-3" style="width:300px;">
+            <div class="mb-3" style="width:300px; margin-left: 460px;">
                 <label for="atcNameInput">ชื่อบทความรีวิว</label>
                 <input type="text" class="form-control" id="atcNameInput" name="atcName">
             </div>
-            <div class="mb-3" style="width:300px;">
+            <div class="mb-3" style="width:300px; margin-left: 460px;">
                 <label for="movieNameInput">ชื่อหนัง</label>
                 <input type="text" class="form-control" id="movieNameInput" name="movieName">
             </div>
 
-            <div class="mb-3" style="width:300px;">
+            <div class="mb-3" style="width:300px; margin-left: 460px;">
                 <label for="pictureInput">รูปภาพ</label>
                 <input class="form-control" type="file" id="pictureInput" accept="image/*"@change="handleChange" onchange="preview()">
                 <input type="hidden" id="picIp" th:value="coverPath" name="coverPath">
@@ -70,18 +70,18 @@
             <img id="frame" src="" class="img-fluid" style="width:200px;" alt=""/>
 
 
-            <div class="mb-3" style="width:500px;">
+            <div class="mb-3" style="width:500px; margin-left: 360px;">
                 <label for="contentInput">เพิ่มเนื้อหา</label>
                 <textarea class="form-control" id="contentInput" rows="3" name="content"></textarea>
             </div>
 
-            <div class="mb-3" style="width:300px;">
+            <div class="mb-3" style="width:300px; margin-left: 460px;">
                 <label for="linkInput">ตัวอย่างหนัง</label><br />
                 <input type="text" class="form-control" id="linkInput" name="teaserLink">
             </div>
 
-            <label for="rateInput">คะแนนหนัง</label>
-            <select class="form-select" aria-label="Default select example" style="width:300px;" id="rateInput" name="starRate">
+            <label for="rateInput" style="margin-left: 460px;">คะแนนหนัง</label>
+            <select class="form-select" aria-label="Default select example" style="width:300px; margin-left: 460px;" id="rateInput" name="starRate">
                 <option selected>Star Rating</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -90,18 +90,18 @@
                 <option value="5">5</option>
             </select><br/>
 
-            <label for="typeInput">ประเภทหนัง</label>
-            <select class="form-select" aria-label="Default select example" style="width:300px;" id="typeInput" name="type">
+            <label for="typeInput" style="margin-left: 460px;">ประเภทหนัง</label>
+            <select class="form-select" aria-label="Default select example" style="width:300px; margin-left: 460px;" id="typeInput" name="type">
                 <option selected>เลือกประเภทหนัง</option>
                 <option value="Movie">Movie</option>
                 <option value="Series">Series</option>
                 <option value="Animation">Animation</option>
                 <option value="Anime(Japan)">Anime(Japan)</option>
                 <option value="TV Show">TV Show</option>
-            </select>
+            </select><br/>
 
-            <label for="genreInput">หมวดหมู่หนัง</label>
-            <select class="form-select" aria-label="Default select example" style="width:300px;" id="genreInput" name="genreName" multiple>
+            <label for="genreInput" style="margin-left: 460px;">หมวดหมู่หนัง</label>
+            <select class="form-select" aria-label="Default select example" style="width:300px; margin-left: 460px;" id="genreInput" name="genreName" multiple>
                 <option selected>เลือกหมวดหมู่หนัง</option>
                 <option value="Romantic">โรแมนติก</option>
                 <option value="SciFi">ไซไฟ</option>
@@ -112,18 +112,18 @@
                 <option value="Thriller">ระทึกขวัญ</option>
                 <option value="Fantasy">แฟนตาซี</option>
                 <option value="Crime">อาชญากรรม</option>
-            </select>
+            </select><br/>
 
-            <label for="atcStrInput">ช่องทางการดู</label>
-            <select class="form-select" aria-label="Default select example" style="width:300px;" id="atcStrInput" name="platform" multiple>
+            <label for="atcStrInput" style="margin-left: 460px;">ช่องทางการดู</label>
+            <select class="form-select" aria-label="Default select example" style="width:300px; margin-left: 460px;" id="atcStrInput" name="platform" multiple>
                 <option selected>เลือกช่องทางการดู</option>
                 <option  th:each="pfName : ${platform}" th:text="${pfName.id}" th:value="${pfName.id}"></option>
-            </select>
+            </select><br/>
 
-            <div class="mb-3" style="width:300px;">
+            <div class="mb-3" style="width:300px; margin-left: 460px;">
                 <label for="tagInput">แท็กเพิ่มเติม</label>
                 <input type="text" class="form-control" id="tagInput" name="nameTag">
-            </div>
+            </div><br/>
 
             <div class="d-grid gap-2 col-2 mx-auto">
                 <button class="btn btn-primary" type="submit" id="uploadBtn">เผยแพร่</button>
