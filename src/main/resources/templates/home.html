@@ -184,19 +184,22 @@
 <div class="container" style="position: relative; top: -100px;">
     <div class="row">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3" th:each="i: ${#numbers.sequence(0, 2)}">
-            <div class="our-team" style="max-width: 250px; max-height: 320px;">
-                <div class="picture">
-                    <img class="img-fluid" th:src="${popularAccount[i].photo}">
+            <a th:href="@{'/account/' + ${popularAccount[i].username}}">
+                <div class="our-team" style="max-width: 250px; max-height: 320px;">
+                    <div class="picture">
+                        <img class="img-fluid" th:src="${popularAccount[i].photo}">
+                    </div>
+                    <div class="team-content" >
+                        <h4 class="name" th:text="${popularAccount[i].username}"></h4>
+                        <h5>Top <span th:text="${i+1}"></span></h5>
+                    </div>
+                    <div class="social d-inline-flex justify-content-center" style="padding-top: 0.25rem;color: #F7F7F7;">
+                        <h4 th:text="${popularAccount[i].countHeart}"></h4>
+                        <h4 style="padding-left: 0.5rem;">LIKES</h4>
+                    </div>
                 </div>
-                <div class="team-content" >
-                    <h4 class="name" th:text="${popularAccount[i].username}"></h4>
-                    <h5>Top <span th:text="${i+1}"></span></h5>
-                </div>
-                <div class="social d-inline-flex justify-content-center" style="padding-top: 0.25rem;color: #F7F7F7;">
-                    <h4 th:text="${popularAccount[i].countHeart}"></h4>
-                    <h4 style="padding-left: 0.5rem;">LIKES</h4>
-                </div>
-            </div>
+            </a>
+
         </div>
     </div>
 </div>
@@ -213,7 +216,8 @@
                         </div>
                     </a>
                     <div class="col-4 rounded card-genre " style="width: 250px;">
-                        <h2 class="genre-name" >col5</h2>
+<!--                        <img th:src="${bestOfGenre}">-->
+                        <h2 class="genre-name">col5</h2>
                     </div>
                 </div>
             </div>
@@ -229,7 +233,7 @@
             <div class="d-inline-flex ">
                 <div th:each="pf : ${platforms}" style="margin: 15px;">
                     <a th:href="@{'/articles/filter/platform/' + ${pf.id}}">
-                        <img th:src="${pf.picPath}" class="platformLogo">
+                        <img th:src="${pf.picPath}" class="platformLogo" style="width: 100px; height:100px;">
                     </a>
 
                 </div>

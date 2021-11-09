@@ -43,6 +43,7 @@ public class ArticleController {
     private StreamingPlatformService streamingPlatformService;
 
     private List<Article> articlesList;
+    private String sort = "All";
 
     @GetMapping
     public String getArticles(Model model){
@@ -58,6 +59,7 @@ public class ArticleController {
         model.addAttribute("articles", articlesList);
         model.addAttribute("platform", streamingPlatformService.getAll());
         model.addAttribute("genres", genreService.getAllGenreName());
+        model.addAttribute("sort", sort);
         return "articles";
     }
 
@@ -68,6 +70,7 @@ public class ArticleController {
         for(String id : atcId){
             articlesList.add(service.getById(id));
         }
+        sort = pfName;
         return "redirect:/articles";
     }
 
@@ -79,21 +82,24 @@ public class ArticleController {
         for(String id : atcId){
             articlesList.add(service.getById(id));
         }
+        sort = genreName;
         return "redirect:/articles";
     }
 
     @GetMapping("/filter/type/{type}")
     public String filterType(@PathVariable String type) {
         articlesList = service.getArticlesByType(type);
+        sort = type;
         return "redirect:/articles";
     }
 
     @GetMapping("/filter/date/{dateIp}")
     public String filterDate(@PathVariable String dateIp) {
         /*ส่ง articlesList ไปให้ service แล้วส่งให้ backend query*/
-        if(dateIp.equals("newest")) articlesList = sortArticles(1);
-        else if(dateIp.equals("oldest")) articlesList = sortArticles(0);
-        else if(dateIp.equals("popular")) articlesList= service.getMostPopularArticles();
+        if(dateIp.equals("Newest")) articlesList = sortArticles(1);
+        else if(dateIp.equals("Oldest")) articlesList = sortArticles(0);
+        else if(dateIp.equals("Popular")) articlesList= service.getMostPopularArticles();
+        sort = dateIp;
         return "redirect:/articles";
     }
 

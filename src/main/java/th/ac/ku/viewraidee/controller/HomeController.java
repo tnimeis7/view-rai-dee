@@ -47,6 +47,7 @@ public class HomeController {
         model.addAttribute("mostPopular", articleService.getMostPopularArticles());
         model.addAttribute("mostPopularType", articleService.getMostPopularArticlesByType(typeM).stream().limit(3).collect(Collectors.toList()));
         model.addAttribute("platforms", streamingPlatformService.getAll());
+//        model.addAttribute("bestOfGenre", genreService.getAtcIdByGenreName())
         if(typeM.equals("Movie")) model.addAttribute("type", "ภาพยนตร์");
         else if(typeM.equals("TVShow")) model.addAttribute("type", "รายการทีวี");
         else if(typeM.equals("Series")) model.addAttribute("type", "ซีรี่ส์");
