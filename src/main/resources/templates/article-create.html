@@ -5,7 +5,7 @@
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
 
-    <script th:src="@{/js/tags-input.js}"></script>
+<!--    <script th:src="@{/js/tags-input.js}"></script>-->
     <link th:rel="stylesheet" th:href="@{/css/styles.css}">
 
 <!--    <script src="tags-input.js"></script>-->
@@ -95,11 +95,19 @@
                 <input type="text" class="form-control" id="movieNameInput" name="movieName">
             </div>
 
-            <div class="mb-3" style="width:300px;">
-                <label for="pictureInput">รูปภาพ</label>
-                <input class="form-control" type="file" id="pictureInput" accept="image/*"@change="handleChange" onchange="preview()" name="coverPath">
-            </div>
-            <img id="frame" src="" class="img-fluid" style="width:200px;"  alt=""/>
+<!--            <img th:src="*{coverPath}" id="photo"><br>-->
+            <label for="coverImg" id="upload">เลือกรูปภาพ</label>
+            <input type="file" id="coverImg">
+            <img id="image"/>
+            <button onclick="uploadImg()">อัปโหลดรูปภาพ</button>
+
+<!--            <button type="submit" id="submitAddImg" class="btn btn-x"></button>-->
+
+<!--            <div class="mb-3" style="width:300px;">-->
+<!--                <label for="pictureInput">รูปภาพ</label>-->
+<!--                <input class="form-control" type="file" id="pictureInput" accept="image/*"@change="handleChange" onchange="preview()" name="coverPath">-->
+<!--            </div>-->
+<!--            <img id="frame" src="" class="img-fluid" style="width:200px;"  alt=""/>-->
 
             <div class="mb-3" style="width:500px;">
                 <label for="contentInput">เพิ่มเนื้อหา</label>
@@ -263,16 +271,53 @@
 <!--    </div>-->
 
 </body>
+<!--<script>-->
+<!--    function handleChangeO(event) {-->
+<!--        this.form_o.order_image = event.target.files[0];-->
+<!--    }-->
+<!--</script>-->
+<!--<script>-->
+<!--    function preview() {-->
+<!--        frame.src = URL.createObjectURL(event.target.files[0]);-->
+<!--    }-->
+<!--</script>-->
+<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-storage.js"></script>
 <script>
-    function handleChangeO(event) {
-        this.form_o.order_image = event.target.files[0];
+    var firebaseConfig = {
+        apiKey: "AIzaSyAEGZeJ2_eGLmUxbnicwTjYxuBml3jN4tg",
+        authDomain: "viewraideeweb.firebaseapp.com",
+        databaseURL: "https://viewraideeweb-default-rtdb.firebaseio.com",
+        projectId: "viewraideeweb",
+        storageBucket: "viewraideeweb.appspot.com",
+        messagingSenderId: "927678633451",
+        appId: "1:927678633451:web:2e9b6edd7a2ad6962f75ae",
+        // measurementId: "G-DN9RQLGSDD"
+    };
+    firebase.initializeApp(firebaseConfig);
+    console.log(firebaseConfig)
+
+    function uploadImg() {
+        const ref = firebase.storage().ref()
+        const file = document.querySelector("#coverImg").files[0]
+        const name = new Date() + '-' + file.name
+        const metadata = {
+            contentType:file.type
+        }
+        const task = ref.child(name).put(file, metadata)
+
+        task
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+            console.log(url)
+            alert("Cover Image Upload Successful")
+            const image = document.querySelector('#image')
+            image.src = url
+        })
+
     }
 </script>
-<script>
-    function preview() {
-        frame.src = URL.createObjectURL(event.target.files[0]);
-    }
-</script>
+
 
 
 </html>

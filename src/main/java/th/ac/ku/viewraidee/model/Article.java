@@ -100,8 +100,11 @@ public class Article {
     }
 
     public String getPublishDate() {
-        SimpleDateFormat simpDate = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        return simpDate.format(publishDate);
+        if(publishDate!=null){
+            SimpleDateFormat simpDate = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            return simpDate.format(publishDate);
+        }
+        return null;
     }
 
     public void setPublishDate(Date publishDate) {

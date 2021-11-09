@@ -172,13 +172,17 @@ public class ArticleController {
     }
 
     @PostMapping("/create")
-    public String addArticle(@ModelAttribute Article article,Model model) throws InterruptedException{
+    public String addArticle(@ModelAttribute Article article,RedirectAttributes redirectAttributes) throws InterruptedException{
         System.out.println(article.toString());
         article.setId(article.generateUUID());
-        article.setAuthorName(article.getAtcName());
+//        article.setAuthorName(article.getAtcName());
         article.setPublishDate(null);
+//        article.setCoverPath(article.getCoverPath());
+        article.setAuthorName(authenticationService.getCurrentAccount().getUsername());
+        System.out.println("username" + authenticationService.getCurrentAccount().getUsername());
         service.addArticle(article);
-        System.out.println("public String addArticle");
+        articlesList = service.getAll();
+//        System.out.println("public String addArticle");
         return "redirect:/articles";
     }
 
